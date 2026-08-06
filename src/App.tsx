@@ -5,6 +5,7 @@ import { saveSession } from "./firebase/sessions";
 import { WelcomeScreen } from "./components/WelcomeScreen";
 import { QuestionCard } from "./components/QuestionCard";
 import { FortuneCard } from "./components/FortuneCard";
+import { ThemeToggle } from "./components/ThemeToggle";
 import "./App.css";
 
 type Screen = "welcome" | "quiz" | "fortune";
@@ -109,6 +110,8 @@ function App() {
           />
         )}
       </div>
+
+      <ThemeToggle />
 
       {/* Print-only receipt layout */}
       <div className="print-receipt" aria-hidden="true">
