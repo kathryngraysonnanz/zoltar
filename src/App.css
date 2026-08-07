@@ -13,6 +13,31 @@
   --text-muted: #a09cc0;
   --radius: 1.25rem;
   --shadow: 0 8px 40px rgba(0,0,0,0.6);
+  
+  /* Kendo component backgrounds */
+  --kendo-component-bg: var(--surface);
+  --kendo-component-text: var(--text);
+  --kendo-component-border: rgba(192,132,252,0.2);
+  
+  /* Primary button colors */
+  --kendo-button-solid-primary-bg: var(--accent-dark);
+  --kendo-button-solid-primary-text: #fff;
+  --kendo-button-solid-primary-border: var(--accent-dark);
+  --kendo-button-solid-primary-hover-bg: var(--accent);
+  --kendo-button-solid-primary-active-bg: var(--accent-glow);
+  
+  /* Secondary/flat button colors */
+  --kendo-button-flat-text: var(--text);
+  --kendo-button-flat-hover-bg: rgba(192,132,252,0.12);
+  
+  /* Progress bar */
+  --kendo-progressbar-bg: var(--surface-raised);
+  --kendo-progressbar-value-bg: var(--accent);
+  
+  /* Card */
+  --kendo-card-bg: var(--surface);
+  --kendo-card-text: var(--text);
+  --kendo-card-border: rgba(192,132,252,0.2);
 }
 
 /* ─── Light theme ────────────────────────────────────────────────── */
@@ -27,6 +52,31 @@
   --text: #1e1b4b;
   --text-muted: #6b7280;
   --shadow: 0 8px 40px rgba(0,0,0,0.08);
+  
+  /* Kendo component backgrounds */
+  --kendo-component-bg: var(--surface);
+  --kendo-component-text: var(--text);
+  --kendo-component-border: rgba(147,51,234,0.15);
+  
+  /* Primary button colors */
+  --kendo-button-solid-primary-bg: var(--accent-dark);
+  --kendo-button-solid-primary-text: #fff;
+  --kendo-button-solid-primary-border: var(--accent-dark);
+  --kendo-button-solid-primary-hover-bg: var(--accent);
+  --kendo-button-solid-primary-active-bg: var(--accent-glow);
+  
+  /* Secondary/flat button colors */
+  --kendo-button-flat-text: var(--text);
+  --kendo-button-flat-hover-bg: rgba(147,51,234,0.08);
+  
+  /* Progress bar */
+  --kendo-progressbar-bg: var(--surface-raised);
+  --kendo-progressbar-value-bg: var(--accent);
+  
+  /* Card */
+  --kendo-card-bg: var(--surface);
+  --kendo-card-text: var(--text);
+  --kendo-card-border: rgba(147,51,234,0.15);
 }
 
 [data-theme="light"] .app {
