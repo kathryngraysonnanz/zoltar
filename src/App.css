@@ -364,6 +364,7 @@ html, body, #root {
   max-width: 620px;
   margin: 0 auto 2.5rem;
   font-style: italic;
+  text-align: center;
   animation: fortuneReveal 0.8s var(--ease-reveal) 0.5s both;
 }
 
@@ -441,11 +442,11 @@ html, body, #root {
   );
   border: 3px solid var(--brass);
   border-radius: var(--radius);
-  color: var(--text);
+  color: #ffffff;
   cursor: pointer;
   font-family: var(--font-body);
   font-size: 1.05rem;
-  font-weight: 400;
+  font-weight: 500;
   padding: 1.2rem 1rem;
   text-align: center;
   line-height: 1.4;
@@ -479,6 +480,42 @@ html, body, #root {
   box-shadow:
     inset 0 2px 4px rgba(0, 0, 0, 0.3),
     0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* ─── Theme toggle ─────────────────────────────────────────────── */
+.theme-toggle.k-button {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  padding: 0;
+  border: none;
+  background: var(--surface);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  z-index: 9999;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.theme-toggle.k-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+  background: var(--surface);
+}
+
+.theme-toggle.k-button:focus-visible {
+  outline: 2px solid var(--brass);
+  outline-offset: 2px;
+}
+
+@media print {
+  .theme-toggle.k-button { display: none; }
 }
 
 /* ─── Print receipt (hidden on screen) ─────────────────────────── */
