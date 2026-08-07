@@ -29,7 +29,6 @@ export function QuestionCard({ question, questionNumber, totalQuestions, onAnswe
           {question.answers.map((answer) => (
             <Button
               key={answer.id}
-              fillMode="flat"
               className="answer-btn"
               onClick={() => onAnswer(answer.id, answer.tags)}
             >

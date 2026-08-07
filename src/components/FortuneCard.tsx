@@ -27,9 +27,8 @@ export function FortuneCard({ fortune, onPrint, onRestart, isPrinting }: Props) 
             {isPrinting ? "Printing…" : "🖨 Print My Fortune"}
           </Button>
           <Button
-            themeColor="secondary"
-            fillMode="outline"
-            className="fortune-btn-secondary"
+            themeColor="primary"
+            className="fortune-btn"
             onClick={onRestart}
           >
             Start Over
