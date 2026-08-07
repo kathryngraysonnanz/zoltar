@@ -12,6 +12,12 @@
     "test:run": "vitest run"
   },
   "dependencies": {
+    "@progress/kendo-licensing": "^1.11.2",
+    "@progress/kendo-react-buttons": "^15.1.0",
+    "@progress/kendo-react-layout": "^15.1.0",
+    "@progress/kendo-react-progressbars": "^15.1.0",
+    "@progress/kendo-svg-icons": "^5.4.0",
+    "@progress/kendo-theme-default": "^14.4.0",
     "firebase": "^12.16.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8"
