@@ -2,106 +2,91 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg: #0d0b1a;
-  --surface: #1a1630;
-  --surface-raised: #231e42;
-  --accent: #c084fc;
-  --accent-glow: #a855f7;
-  --accent-dark: #7c3aed;
-  --gold: #fbbf24;
-  --text: #f1f0f7;
-  --text-muted: #a09cc0;
-  --radius: 1.25rem;
-  --shadow: 0 8px 40px rgba(0,0,0,0.6);
+  /* Background colors - dark mahogany cabinet */
+  --bg: #1a0f0a;
+  --bg-deep: #120a07;
+  --surface: #2d1810;
+  --surface-raised: #3d251a;
+  
+  /* Metal accents */
+  --brass: #b5a642;
+  --brass-light: #d4c86a;
+  --brass-dark: #8b7d32;
+  --gold: #c9a227;
+  --gold-glow: rgba(201, 162, 39, 0.4);
+  
+  /* Fabric colors */
+  --velvet: #4a1c1c;
+  --velvet-deep: #2d1111;
+  --crimson: #7c2d2d;
+  
+  /* Parchment for cards */
+  --parchment: #e8dcc4;
+  --parchment-dark: #d4c8a8;
+  
+  /* Accent colors */
+  --emerald: #2d5a3a;
+  --midnight: #1a1a2e;
+  
+  /* Text colors */
+  --text: #f5e6c8;
+  --text-muted: #c9b896;
+  --text-dark: #2d1810;
+  --text-gold: #c9a227;
+  
+  /* Effects */
+  --amber-glow: rgba(212, 163, 115, 0.3);
+  --warm-shadow: 0 8px 40px rgba(26, 15, 10, 0.8);
+  --brass-glow: 0 0 20px var(--gold-glow);
+  
+  /* Layout */
+  --radius: 0.5rem;
+  --radius-lg: 1rem;
+  --shadow: 0 8px 40px rgba(26, 15, 10, 0.8);
+  
+  /* Typography */
+  --font-display: 'Cinzel Decorative', 'Cinzel', Georgia, serif;
+  --font-heading: 'Cinzel', Georgia, serif;
+  --font-body: 'Crimson Text', Georgia, serif;
+  
+  /* Animation timing */
+  --ease-mechanical: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-reveal: cubic-bezier(0.16, 1, 0.3, 1);
   
   /* Kendo component backgrounds */
   --kendo-component-bg: var(--surface);
   --kendo-component-text: var(--text);
-  --kendo-component-border: rgba(192,132,252,0.2);
+  --kendo-component-border: rgba(181, 166, 66, 0.3);
   
   /* Primary button colors */
-  --kendo-button-solid-primary-bg: var(--accent-dark);
-  --kendo-button-solid-primary-text: #fff;
-  --kendo-button-solid-primary-border: var(--accent-dark);
-  --kendo-button-solid-primary-hover-bg: var(--accent);
-  --kendo-button-solid-primary-active-bg: var(--accent-glow);
+  --kendo-button-solid-primary-bg: var(--brass-dark);
+  --kendo-button-solid-primary-text: var(--text);
+  --kendo-button-solid-primary-border: var(--brass-dark);
+  --kendo-button-solid-primary-hover-bg: var(--brass);
+  --kendo-button-solid-primary-active-bg: var(--brass-light);
   
   /* Secondary/flat button colors */
   --kendo-button-flat-text: var(--text);
-  --kendo-button-flat-hover-bg: rgba(192,132,252,0.12);
+  --kendo-button-flat-hover-bg: rgba(181, 166, 66, 0.15);
   
   /* Progress bar */
   --kendo-progressbar-bg: var(--surface-raised);
-  --kendo-progressbar-value-bg: var(--accent);
+  --kendo-progressbar-value-bg: var(--brass);
   
   /* Card */
   --kendo-card-bg: var(--surface);
   --kendo-card-text: var(--text);
-  --kendo-card-border: rgba(192,132,252,0.2);
-}
-
-/* ─── Light theme ────────────────────────────────────────────────── */
-[data-theme="light"] {
-  --bg: #f8f7fc;
-  --surface: #ffffff;
-  --surface-raised: #f0eef8;
-  --accent: #9333ea;
-  --accent-glow: #a855f7;
-  --accent-dark: #7c3aed;
-  --gold: #d97706;
-  --text: #1e1b4b;
-  --text-muted: #6b7280;
-  --shadow: 0 8px 40px rgba(0,0,0,0.08);
-  
-  /* Kendo component backgrounds */
-  --kendo-component-bg: var(--surface);
-  --kendo-component-text: var(--text);
-  --kendo-component-border: rgba(147,51,234,0.15);
-  
-  /* Primary button colors */
-  --kendo-button-solid-primary-bg: var(--accent-dark);
-  --kendo-button-solid-primary-text: #fff;
-  --kendo-button-solid-primary-border: var(--accent-dark);
-  --kendo-button-solid-primary-hover-bg: var(--accent);
-  --kendo-button-solid-primary-active-bg: var(--accent-glow);
-  
-  /* Secondary/flat button colors */
-  --kendo-button-flat-text: var(--text);
-  --kendo-button-flat-hover-bg: rgba(147,51,234,0.08);
-  
-  /* Progress bar */
-  --kendo-progressbar-bg: var(--surface-raised);
-  --kendo-progressbar-value-bg: var(--accent);
-  
-  /* Card */
-  --kendo-card-bg: var(--surface);
-  --kendo-card-text: var(--text);
-  --kendo-card-border: rgba(147,51,234,0.15);
-}
-
-[data-theme="light"] .app {
-  background:
-    radial-gradient(ellipse at 20% 10%, rgba(147,51,234,0.08) 0%, transparent 60%),
-    radial-gradient(ellipse at 80% 90%, rgba(168,85,247,0.06) 0%, transparent 50%),
-    var(--bg);
-}
-
-[data-theme="light"] .welcome-title,
-[data-theme="light"] .fortune-title {
-  background: linear-gradient(135deg, #7c3aed 0%, var(--gold) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  --kendo-card-border: rgba(181, 166, 66, 0.3);
 }
 
 html, body, #root {
   height: 100%;
   background: var(--bg);
   color: var(--text);
-  font-family: 'Segoe UI', system-ui, sans-serif;
+  font-family: var(--font-body);
+  font-size: 16px;
   -webkit-font-smoothing: antialiased;
-  user-select: none; /* kiosk: prevent accidental text selection */
-  transition: background 0.25s ease, color 0.25s ease;
+  user-select: none;
 }
 
 /* ─── App shell ─────────────────────────────────────────────────── */
@@ -112,9 +97,20 @@ html, body, #root {
   justify-content: center;
   padding: 2rem;
   background:
-    radial-gradient(ellipse at 20% 10%, rgba(124,58,237,0.25) 0%, transparent 60%),
-    radial-gradient(ellipse at 80% 90%, rgba(192,132,252,0.15) 0%, transparent 50%),
-    var(--bg);
+    /* Ambient warm glow from center */
+    radial-gradient(ellipse at 50% 30%, var(--amber-glow) 0%, transparent 50%),
+    /* Subtle vignette darkening at edges */
+    radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(10, 5, 3, 0.4) 100%),
+    /* Wood grain vertical lines */
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      transparent 3px,
+      rgba(0, 0, 0, 0.02) 3px,
+      rgba(0, 0, 0, 0.02) 6px
+    ),
+    /* Base wood gradient */
+    linear-gradient(180deg, var(--surface) 0%, var(--bg) 30%, var(--bg-deep) 100%);
 }
 
 .app-inner {
@@ -125,7 +121,7 @@ html, body, #root {
 /* ─── KendoReact Card overrides ─────────────────────────────────── */
 .screen-card.k-card {
   background: var(--surface);
-  border: 1px solid rgba(192,132,252,0.2);
+  border: 1px solid rgba(181, 166, 66, 0.3);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   animation: fadeSlideUp 0.35s ease both;
@@ -134,11 +130,6 @@ html, body, #root {
 .screen-card-body.k-card-body {
   padding: 3.5rem 4rem;
   text-align: center;
-}
-
-/* Light theme card border */
-[data-theme="light"] .screen-card.k-card {
-  border-color: rgba(147,51,234,0.15);
 }
 
 @keyframes fadeSlideUp {
@@ -151,14 +142,14 @@ html, body, #root {
   font-size: 4.5rem;
   display: block;
   margin-bottom: 1.5rem;
-  filter: drop-shadow(0 0 24px var(--accent-glow));
+  filter: drop-shadow(0 0 24px var(--gold-glow));
   animation: pulse 3s ease-in-out infinite;
 }
 .crystal-ball.large { font-size: 7rem; }
 
 @keyframes pulse {
-  0%, 100% { transform: scale(1);    filter: drop-shadow(0 0 24px var(--accent-glow)); }
-  50%       { transform: scale(1.06); filter: drop-shadow(0 0 40px var(--accent)); }
+  0%, 100% { transform: scale(1);    filter: drop-shadow(0 0 24px var(--gold-glow)); }
+  50%       { transform: scale(1.06); filter: drop-shadow(0 0 40px var(--gold)); }
 }
 
 /* ─── Welcome ───────────────────────────────────────────────────── */
@@ -203,7 +194,7 @@ html, body, #root {
 }
 
 .quiz-progress.k-progressbar .k-selected {
-  background: linear-gradient(90deg, var(--accent-dark), var(--accent));
+  background: linear-gradient(90deg, var(--brass-dark), var(--brass));
   border-radius: 99px;
   transition: width 0.4s ease;
 }
@@ -265,11 +256,11 @@ html, body, #root {
   font-weight: 600;
   padding: 1.2rem 2.8rem;
   border-radius: 0.75rem;
-  box-shadow: 0 4px 24px rgba(124,58,237,0.5);
+  box-shadow: 0 4px 24px var(--brass-glow);
 }
 
 .welcome-btn.k-button:hover {
-  box-shadow: 0 8px 32px rgba(124,58,237,0.6);
+  box-shadow: 0 8px 32px var(--brass-glow);
   transform: translateY(-2px);
 }
 
@@ -283,22 +274,22 @@ html, body, #root {
 }
 
 .fortune-btn.k-button {
-  box-shadow: 0 4px 24px rgba(124,58,237,0.5);
+  box-shadow: 0 4px 24px var(--brass-glow);
 }
 
 .fortune-btn.k-button:hover:not(:disabled) {
-  box-shadow: 0 8px 32px rgba(124,58,237,0.6);
+  box-shadow: 0 8px 32px var(--brass-glow);
   transform: translateY(-2px);
 }
 
 .fortune-btn-secondary.k-button {
   background: var(--surface-raised);
   color: var(--text-muted);
-  border: 2px solid rgba(192,132,252,0.2);
+  border: 2px solid rgba(181, 166, 66, 0.3);
 }
 
 .fortune-btn-secondary.k-button:hover {
-  border-color: var(--accent);
+  border-color: var(--brass);
   color: var(--text);
   transform: translateY(-2px);
 }
@@ -322,9 +313,9 @@ html, body, #root {
 
 .answer-btn.k-button:hover,
 .answer-btn.k-button:focus-visible {
-  border-color: var(--accent);
-  background: rgba(192,132,252,0.12);
-  box-shadow: 0 0 0 4px rgba(192,132,252,0.15);
+  border-color: var(--brass);
+  background: rgba(181, 166, 66, 0.15);
+  box-shadow: 0 0 0 4px rgba(181, 166, 66, 0.2);
   outline: none;
   transform: translateY(-2px);
 }
@@ -361,7 +352,7 @@ html, body, #root {
 }
 
 .theme-toggle.k-button:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--brass);
   outline-offset: 2px;
 }
 
