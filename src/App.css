@@ -122,17 +122,23 @@ html, body, #root {
   max-width: 860px;
 }
 
-/* ─── Shared card ───────────────────────────────────────────────── */
-.welcome-screen,
-.question-card,
-.fortune-card {
+/* ─── KendoReact Card overrides ─────────────────────────────────── */
+.screen-card.k-card {
   background: var(--surface);
   border: 1px solid rgba(192,132,252,0.2);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
+  animation: fadeSlideUp 0.35s ease both;
+}
+
+.screen-card-body.k-card-body {
   padding: 3.5rem 4rem;
   text-align: center;
-  animation: fadeSlideUp 0.35s ease both;
+}
+
+/* Light theme card border */
+[data-theme="light"] .screen-card.k-card {
+  border-color: rgba(147,51,234,0.15);
 }
 
 @keyframes fadeSlideUp {
@@ -426,9 +432,7 @@ html, body, #root {
 
 /* ─── Responsive / touch adjustments ───────────────────────────── */
 @media (max-width: 640px) {
-  .welcome-screen,
-  .question-card,
-  .fortune-card {
+  .screen-card-body.k-card-body {
     padding: 2.5rem 1.75rem;
   }
   .answer-grid { grid-template-columns: 1fr; }
