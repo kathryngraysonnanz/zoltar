@@ -352,6 +352,7 @@ html, body, #root {
   text-shadow: 
     1px 1px 0 var(--brass-light),
     2px 2px 4px rgba(0, 0, 0, 0.2);
+  animation: fortuneReveal 0.8s var(--ease-reveal) 0.3s both;
 }
 
 .fortune-text {
@@ -363,6 +364,18 @@ html, body, #root {
   max-width: 620px;
   margin: 0 auto 2.5rem;
   font-style: italic;
+  animation: fortuneReveal 0.8s var(--ease-reveal) 0.5s both;
+}
+
+@keyframes fortuneReveal {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ─── Buttons ───────────────────────────────────────────────────── */
@@ -371,6 +384,7 @@ html, body, #root {
   gap: 1rem;
   justify-content: center;
   flex-wrap: wrap;
+  animation: fortuneReveal 0.8s var(--ease-reveal) 0.7s both;
 }
 
 /* ─── Welcome button override ───────────────────────────────────── */
@@ -467,42 +481,6 @@ html, body, #root {
     0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* ─── Theme toggle ─────────────────────────────────────────────── */
-.theme-toggle.k-button {
-  position: fixed;
-  bottom: 1.5rem;
-  right: 1.5rem;
-  width: 48px;
-  height: 48px;
-  min-width: 48px;
-  padding: 0;
-  border: none;
-  background: var(--surface);
-  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
-  font-size: 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  z-index: 9999;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.theme-toggle.k-button:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
-  background: var(--surface);
-}
-
-.theme-toggle.k-button:focus-visible {
-  outline: 2px solid var(--brass);
-  outline-offset: 2px;
-}
-
-@media print {
-  .theme-toggle.k-button { display: none; }
-}
-
 /* ─── Print receipt (hidden on screen) ─────────────────────────── */
 .print-receipt {
   display: none;
@@ -566,11 +544,55 @@ html, body, #root {
 
 /* ─── Responsive / touch adjustments ───────────────────────────── */
 @media (max-width: 640px) {
-  .screen-card-body.k-card-body {
-    padding: 2.5rem 1.75rem;
+  .app {
+    padding: 1rem;
   }
-  .answer-grid { grid-template-columns: 1fr; }
-  .welcome-title { font-size: 2.4rem; }
-  .question-text { font-size: 1.5rem; }
-  .fortune-title { font-size: 1.8rem; }
+  
+  .screen-card-body.k-card-body {
+    padding: 2rem 1.5rem;
+  }
+  
+  .screen-card.k-card::before,
+  .screen-card.k-card::after {
+    font-size: 1.2rem;
+  }
+  
+  .answer-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .welcome-title {
+    font-size: 2rem;
+  }
+  
+  .crystal-ball.large {
+    font-size: 4rem;
+  }
+  
+  .question-text {
+    font-size: 1.3rem;
+  }
+  
+  .fortune-title {
+    font-size: 1.5rem;
+  }
+  
+  .fortune-text {
+    font-size: 1rem;
+  }
+  
+  .welcome-btn.k-button {
+    width: 100%;
+    padding: 1rem 1.5rem;
+  }
+  
+  .fortune-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .fortune-btn.k-button,
+  .fortune-btn-secondary.k-button {
+    width: 100%;
+  }
 }
