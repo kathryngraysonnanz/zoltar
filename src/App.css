@@ -183,16 +183,20 @@ html, body, #root {
   margin-bottom: 0.5rem;
 }
 
-.progress-bar {
+/* ─── Kendo ProgressBar styling ─────────────────────────────────── */
+.quiz-progress.k-progressbar {
   height: 6px;
-  background: var(--surface-raised);
   border-radius: 99px;
-  overflow: hidden;
+  background: var(--surface-raised);
   margin-bottom: 2.5rem;
+  overflow: hidden;
 }
 
-.progress-fill {
-  height: 100%;
+.quiz-progress.k-progressbar .k-progress-status-wrap {
+  display: none; /* Hide default label */
+}
+
+.quiz-progress.k-progressbar .k-selected {
   background: linear-gradient(90deg, var(--accent-dark), var(--accent));
   border-radius: 99px;
   transition: width 0.4s ease;
