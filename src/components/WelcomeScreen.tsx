@@ -14,6 +14,11 @@ export function WelcomeScreen({ onStart }: Props) {
         <p className="welcome-subtitle">
           Answer five questions and discover what the future holds for you.
         </p>
+        <div className="decorative-divider" aria-hidden="true">
+          <span className="divider-star">✦</span>
+          <span className="divider-line"></span>
+          <span className="divider-star">✦</span>
+        </div>
         <Button
           themeColor="primary"
           size="large"

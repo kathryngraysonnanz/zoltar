@@ -113,9 +113,33 @@ html, body, #root {
     linear-gradient(180deg, var(--surface) 0%, var(--bg) 30%, var(--bg-deep) 100%);
 }
 
+/* Ambient celestial elements */
+.app::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  background-image:
+    /* Scattered small stars */
+    radial-gradient(1px 1px at 10% 20%, var(--brass) 50%, transparent 50%),
+    radial-gradient(1px 1px at 30% 70%, var(--brass) 50%, transparent 50%),
+    radial-gradient(1.5px 1.5px at 70% 15%, var(--gold) 50%, transparent 50%),
+    radial-gradient(1px 1px at 85% 45%, var(--brass) 50%, transparent 50%),
+    radial-gradient(1.5px 1.5px at 50% 85%, var(--gold) 50%, transparent 50%),
+    radial-gradient(1px 1px at 15% 55%, var(--brass) 50%, transparent 50%),
+    radial-gradient(1px 1px at 90% 75%, var(--brass) 50%, transparent 50%);
+  opacity: 0.4;
+  z-index: 0;
+}
+
 .app-inner {
+  position: relative;
   width: 100%;
   max-width: 860px;
+  z-index: 1;
 }
 
 /* ─── KendoReact Card overrides (vintage parchment) ─────────────── */
@@ -225,6 +249,34 @@ html, body, #root {
   opacity: 0.85;
   margin-bottom: 2.5rem;
   line-height: 1.7;
+}
+
+/* ─── Decorative divider ────────────────────────────────────────── */
+.decorative-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1.5rem 0 2rem;
+  color: var(--brass);
+}
+
+.divider-star {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.divider-line {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--brass) 20%,
+    var(--brass) 80%,
+    transparent 100%
+  );
+  border-radius: 1px;
 }
 
 /* ─── Progress bar (brass gauge) ────────────────────────────────── */

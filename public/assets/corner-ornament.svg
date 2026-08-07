@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60" fill="none">
+  <!-- Outer corner flourish -->
+  <path d="M5 55 Q5 5 55 5" stroke="currentColor" stroke-width="2" fill="none" opacity="0.8"/>
+  <path d="M10 50 Q10 10 50 10" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.6"/>
+  
+  <!-- Corner star -->
+  <circle cx="8" cy="8" r="3" fill="currentColor" opacity="0.7"/>
+  
+  <!-- Decorative dots -->
+  <circle cx="20" cy="8" r="1.5" fill="currentColor" opacity="0.5"/>
+  <circle cx="8" cy="20" r="1.5" fill="currentColor" opacity="0.5"/>
+  <circle cx="32" cy="6" r="1" fill="currentColor" opacity="0.4"/>
+  <circle cx="6" cy="32" r="1" fill="currentColor" opacity="0.4"/>
+</svg>
