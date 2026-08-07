@@ -1,3 +1,4 @@
+import { Button } from "@progress/kendo-react-buttons";
 import type { Question } from "../data/questions";
 
 interface Props {
@@ -22,14 +23,14 @@ export function QuestionCard({ question, questionNumber, totalQuestions, onAnswe
       <h2 className="question-text">{question.text}</h2>
       <div className="answer-grid">
         {question.answers.map((answer) => (
-          <button
+          <Button
             key={answer.id}
+            fillMode="flat"
             className="answer-btn"
             onClick={() => onAnswer(answer.id, answer.tags)}
-            type="button"
           >
             {answer.text}
-          </button>
+          </Button>
         ))}
       </div>
     </div>

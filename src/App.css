@@ -213,34 +213,6 @@ html, body, #root {
   gap: 1rem;
 }
 
-.answer-btn {
-  background: var(--surface-raised);
-  border: 2px solid transparent;
-  border-radius: var(--radius);
-  color: var(--text);
-  cursor: pointer;
-  font-size: 1.15rem;
-  font-weight: 500;
-  padding: 1.4rem 1.2rem;
-  text-align: center;
-  transition: border-color 0.15s, background 0.15s, transform 0.1s, box-shadow 0.15s;
-  line-height: 1.4;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.answer-btn:hover,
-.answer-btn:focus-visible {
-  border-color: var(--accent);
-  background: rgba(192,132,252,0.12);
-  box-shadow: 0 0 0 4px rgba(192,132,252,0.15);
-  outline: none;
-  transform: translateY(-2px);
-}
-
-.answer-btn:active {
-  transform: translateY(0) scale(0.97);
-}
-
 /* ─── Fortune ───────────────────────────────────────────────────── */
 .fortune-eyebrow {
   font-size: 0.85rem;
@@ -277,61 +249,92 @@ html, body, #root {
   flex-wrap: wrap;
 }
 
-.btn {
-  border: none;
-  border-radius: 0.75rem;
-  cursor: pointer;
-  font-size: 1.1rem;
-  font-weight: 600;
-  padding: 1rem 2rem;
-  transition: opacity 0.15s, transform 0.1s, box-shadow 0.15s;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.btn.large {
+/* ─── Welcome button override ───────────────────────────────────── */
+.welcome-btn.k-button {
   font-size: 1.3rem;
+  font-weight: 600;
   padding: 1.2rem 2.8rem;
-}
-
-.btn-primary {
-  background: linear-gradient(135deg, var(--accent-dark), var(--accent));
-  color: #fff;
+  border-radius: 0.75rem;
   box-shadow: 0 4px 24px rgba(124,58,237,0.5);
 }
 
-.btn-primary:hover:not(:disabled) {
-  opacity: 0.9;
-  transform: translateY(-2px);
+.welcome-btn.k-button:hover {
   box-shadow: 0 8px 32px rgba(124,58,237,0.6);
+  transform: translateY(-2px);
 }
 
-.btn-primary:active:not(:disabled) { transform: translateY(0) scale(0.97); }
-.btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+/* ─── Fortune action buttons ────────────────────────────────────── */
+.fortune-btn.k-button,
+.fortune-btn-secondary.k-button {
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 1rem 2rem;
+  border-radius: 0.75rem;
+}
 
-.btn-secondary {
+.fortune-btn.k-button {
+  box-shadow: 0 4px 24px rgba(124,58,237,0.5);
+}
+
+.fortune-btn.k-button:hover:not(:disabled) {
+  box-shadow: 0 8px 32px rgba(124,58,237,0.6);
+  transform: translateY(-2px);
+}
+
+.fortune-btn-secondary.k-button {
   background: var(--surface-raised);
   color: var(--text-muted);
   border: 2px solid rgba(192,132,252,0.2);
 }
 
-.btn-secondary:hover {
+.fortune-btn-secondary.k-button:hover {
   border-color: var(--accent);
   color: var(--text);
   transform: translateY(-2px);
 }
 
+/* ─── Answer buttons ────────────────────────────────────────────── */
+.answer-btn.k-button {
+  background: var(--surface-raised);
+  border: 2px solid transparent;
+  border-radius: var(--radius);
+  color: var(--text);
+  font-size: 1.15rem;
+  font-weight: 500;
+  padding: 1.4rem 1.2rem;
+  text-align: center;
+  transition: border-color 0.15s, background 0.15s, transform 0.1s, box-shadow 0.15s;
+  line-height: 1.4;
+  -webkit-tap-highlight-color: transparent;
+  height: auto;
+  white-space: normal;
+}
+
+.answer-btn.k-button:hover,
+.answer-btn.k-button:focus-visible {
+  border-color: var(--accent);
+  background: rgba(192,132,252,0.12);
+  box-shadow: 0 0 0 4px rgba(192,132,252,0.15);
+  outline: none;
+  transform: translateY(-2px);
+}
+
+.answer-btn.k-button:active {
+  transform: translateY(0) scale(0.97);
+}
+
 /* ─── Theme toggle ─────────────────────────────────────────────── */
-.theme-toggle {
+.theme-toggle.k-button {
   position: fixed;
   bottom: 1.5rem;
   right: 1.5rem;
   width: 48px;
   height: 48px;
+  min-width: 48px;
+  padding: 0;
   border: none;
-  border-radius: 50%;
   background: var(--surface);
   box-shadow: 0 4px 16px rgba(0,0,0,0.2);
-  cursor: pointer;
   font-size: 1.5rem;
   display: flex;
   align-items: center;
@@ -341,18 +344,19 @@ html, body, #root {
   -webkit-tap-highlight-color: transparent;
 }
 
-.theme-toggle:hover {
+.theme-toggle.k-button:hover {
   transform: scale(1.1);
   box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+  background: var(--surface);
 }
 
-.theme-toggle:focus-visible {
+.theme-toggle.k-button:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
 
 @media print {
-  .theme-toggle { display: none; }
+  .theme-toggle.k-button { display: none; }
 }
 
 /* ─── Print receipt (hidden on screen) ─────────────────────────── */

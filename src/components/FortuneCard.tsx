@@ -1,3 +1,4 @@
+import { Button } from "@progress/kendo-react-buttons";
 import type { Fortune } from "../data/fortunes";
 
 interface Props {
@@ -15,21 +16,22 @@ export function FortuneCard({ fortune, onPrint, onRestart, isPrinting }: Props) 
       <h2 className="fortune-title">{fortune.title}</h2>
       <p className="fortune-text">{fortune.text}</p>
       <div className="fortune-actions">
-        <button
-          className="btn btn-primary"
+        <Button
+          themeColor="primary"
+          className="fortune-btn"
           onClick={onPrint}
           disabled={isPrinting}
-          type="button"
         >
           {isPrinting ? "Printing…" : "🖨 Print My Fortune"}
-        </button>
-        <button
-          className="btn btn-secondary"
+        </Button>
+        <Button
+          themeColor="secondary"
+          fillMode="outline"
+          className="fortune-btn-secondary"
           onClick={onRestart}
-          type="button"
         >
           Start Over
-        </button>
+        </Button>
       </div>
     </div>
   );

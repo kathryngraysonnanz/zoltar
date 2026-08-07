@@ -1,3 +1,5 @@
+import { Button } from "@progress/kendo-react-buttons";
+
 interface Props {
   onStart: () => void;
 }
@@ -10,9 +12,14 @@ export function WelcomeScreen({ onStart }: Props) {
       <p className="welcome-subtitle">
         Answer five questions and discover what the future holds for you.
       </p>
-      <button className="btn btn-primary large" onClick={onStart} type="button">
+      <Button
+        themeColor="primary"
+        size="large"
+        className="welcome-btn"
+        onClick={onStart}
+      >
         Reveal My Fortune
-      </button>
+      </Button>
     </div>
   );
 }
