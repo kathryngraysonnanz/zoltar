@@ -60,7 +60,7 @@
   
   /* Primary button colors */
   --kendo-button-solid-primary-bg: var(--brass-dark);
-  --kendo-button-solid-primary-text: #1a0f0a;
+  --kendo-button-solid-primary-text: #000000;
   --kendo-button-solid-primary-border: var(--brass-dark);
   --kendo-button-solid-primary-hover-bg: var(--brass);
   --kendo-button-solid-primary-active-bg: var(--brass-light);
@@ -361,7 +361,6 @@ html, body, #root {
   line-height: 1.8;
   color: var(--text-dark);
   opacity: 0.9;
-  max-width: 620px;
   margin: 0 auto 2.5rem;
   font-style: italic;
   text-align: center;
