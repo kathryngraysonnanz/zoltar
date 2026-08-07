@@ -1,0 +1,8 @@
+version = "2.1.0"
+created_at = "2026-08-06T20:33:28.716763+00:00"
+external_sources_enabled = false
+
+[hashes]
+project = "738dc465eb703e0c9361f226ae21c1545fe58c7080c9a8a2f9ce66e3f6ca6368"
+agents = "956d8af5f6043d9e7bee55266a73e20aaf78547ba255e0b8bcbf1954733df545"
+toolchain = "eb0a7d68a174b1b47f6020ca4de65cc49b1bf11ea56d44e8d31be6d2b404baa6"

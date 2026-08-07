@@ -1,0 +1,809 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Monorepo Support - Nia CLI User Guide</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="User documentation for Nia agentic SDLC CLI">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-2459343d.css">
+        <link rel="stylesheet" href="../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../user-docs/theme/custom-38873017.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-e42586be.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-b4caf93b.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Nia CLI User Guide</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/telerik/project-nia" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="monorepo-configuration-support"><a class="header" href="#monorepo-configuration-support">Monorepo Configuration Support</a></h1>
+<h2 id="overview"><a class="header" href="#overview">Overview</a></h2>
+<p>Nia supports monorepo (multi-service) projects where multiple services within a single repository can each have their own metadata for AI context injection. This enables AI coding agents to receive both project-wide and service-specific context when working with individual services.</p>
+<p><strong>Key Concepts:</strong></p>
+<ul>
+<li><strong>Monorepo</strong> - A single repository containing multiple services/applications</li>
+<li><strong>Service</strong> - An individual application or microservice within the monorepo</li>
+<li><strong>Service Selection</strong> - Choosing which service to provide context for</li>
+<li><strong>Service Metadata</strong> - Service-specific configuration that supplements project-wide metadata</li>
+</ul>
+<hr>
+<h2 id="when-to-use-monorepo-mode"><a class="header" href="#when-to-use-monorepo-mode">When to Use Monorepo Mode</a></h2>
+<p>Use monorepo configuration when:</p>
+<ul>
+<li>Your repository contains multiple services or applications</li>
+<li>Each service has different metadata (languages, frameworks, etc.)</li>
+<li>You want AI agents to understand service-specific context</li>
+<li>Services share common tooling and workflows</li>
+</ul>
+<p><strong>Example Use Cases:</strong></p>
+<ul>
+<li>Microservices architecture (API, frontend, workers)</li>
+<li>Multi-platform apps (web, mobile, desktop)</li>
+<li>Plugin systems with multiple plugins</li>
+<li>Multi-language projects (backend in Rust, frontend in TypeScript)</li>
+</ul>
+<hr>
+<h2 id="configuration-setup"><a class="header" href="#configuration-setup">Configuration Setup</a></h2>
+<h3 id="enabling-monorepo-mode"><a class="header" href="#enabling-monorepo-mode">Enabling Monorepo Mode</a></h3>
+<p>Monorepo features are opt-in and enabled in your <code>project.toml</code>:</p>
+<pre><code class="language-toml">schema_version = "2.1.0"
+
+[project]
+name = "my-monorepo"
+description = "Multi-service project"
+language = "Rust"
+framework = "axum, tokio"
+testing_framework = "cargo test"
+package_manager = "cargo"
+version = "1.0.0" # Optional custom field
+author = "Development Team" # Optional custom field
+
+[monorepo]
+enabled = true
+
+[[monorepo.services]]
+name = "api"
+path = "services/api"
+description = "REST API service"
+language = "Rust"
+framework = "axum, tokio"
+testing_framework = "cargo test"
+package_manager = "cargo"
+
+[[monorepo.services]]
+name = "web"
+path = "services/web"
+description = "Frontend web application"
+language = "TypeScript"
+framework = "React, Next.js"
+testing_framework = "Jest"
+package_manager = "npm"
+
+[[monorepo.services]]
+name = "worker"
+path = "services/worker"
+description = "Background job processor"
+language = "Python"
+framework = "Celery, FastAPI"
+testing_framework = "pytest"
+package_manager = "pip"
+</code></pre>
+<blockquote>
+<p><strong>Note:</strong> The <code>version</code> and <code>author</code> fields shown above are <strong>optional custom fields</strong>, not part of the required schema. Any arbitrary key-value pair can be added to the <code>[project]</code> section and will be available as a placeholder (e.g., <code>{{version}}</code>). The six required fields are: <code>name</code>, <code>description</code>, <code>language</code>, <code>framework</code>, <code>testing_framework</code>, and <code>package_manager</code>.</p>
+</blockquote>
+<h3 id="service-metadata-fields"><a class="header" href="#service-metadata-fields">Service Metadata Fields</a></h3>
+<p>Service fields match the project metadata fields from <code>[project]</code> section, plus the additional <code>path</code> field:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>name</code></td><td>String</td><td>Yes</td><td>Unique service identifier</td></tr>
+<tr><td><code>path</code></td><td>String</td><td>Yes</td><td>Relative path from repo root</td></tr>
+<tr><td><code>description</code></td><td>String</td><td>No</td><td>Service description (overrides project.description)</td></tr>
+<tr><td><code>language</code></td><td>String</td><td>No</td><td>Primary programming language (overrides project.language)</td></tr>
+<tr><td><code>framework</code></td><td>String</td><td>No</td><td>Framework(s) used (overrides project.framework)</td></tr>
+<tr><td><code>testing_framework</code></td><td>String</td><td>No</td><td>Testing framework (overrides project.testing_framework)</td></tr>
+<tr><td><code>package_manager</code></td><td>String</td><td>No</td><td>Package manager (overrides project.package_manager)</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Note</strong>: Any custom fields defined in the <code>[project]</code> section can also be added to services and will override project values when the service is selected.</p>
+<p><strong>Validation Rules:</strong></p>
+<ul>
+<li>Service names must be unique within the monorepo</li>
+<li>Service names must be valid identifiers (alphanumeric, hyphens, underscores)</li>
+<li>Paths must be relative to repository root</li>
+<li>Paths cannot use <code>..</code> or absolute paths</li>
+<li>At least one service must be defined when <code>enabled = true</code></li>
+</ul>
+<hr>
+<h2 id="service-selection"><a class="header" href="#service-selection">Service Selection</a></h2>
+<h3 id="setting-the-current-service"><a class="header" href="#setting-the-current-service">Setting the Current Service</a></h3>
+<p>Select which service you’re working on:</p>
+<pre><code class="language-bash">nia config set-service api
+</code></pre>
+<p>This updates <code>.nia/context.toml</code> to store the service selection:</p>
+<pre><code class="language-toml">[context]
+service_name = "api"
+</code></pre>
+<h3 id="viewing-current-context"><a class="header" href="#viewing-current-context">Viewing Current Context</a></h3>
+<p>Check which service is currently selected:</p>
+<pre><code class="language-bash">nia config show-context
+</code></pre>
+<p>Output:</p>
+<pre><code>Context Configuration:
+  Issue ID:   123
+  PR ID:      Not set
+  Service:    api (services/api)
+</code></pre>
+<h3 id="clearing-service-selection"><a class="header" href="#clearing-service-selection">Clearing Service Selection</a></h3>
+<p>Remove service selection and revert to project-wide context:</p>
+<pre><code class="language-bash">nia config clear-service
+</code></pre>
+<hr>
+<h2 id="how-service-context-works"><a class="header" href="#how-service-context-works">How Service Context Works</a></h2>
+<h3 id="context-composition"><a class="header" href="#context-composition">Context Composition</a></h3>
+<p>When a service is selected, AI agents receive <strong>both</strong> project-wide and service-specific context:</p>
+<ol>
+<li><strong>Project-wide metadata</strong> - Shared configuration from <code>[project]</code> section</li>
+<li><strong>Service-specific metadata</strong> - Service configuration that overrides project fields</li>
+<li><strong>Toolchain configuration</strong> - Shared across all services</li>
+<li><strong>Workflow configuration</strong> - Shared across all services</li>
+</ol>
+<h3 id="metadata-precedence"><a class="header" href="#metadata-precedence">Metadata Precedence</a></h3>
+<p>Service fields override project fields:</p>
+<pre><code class="language-toml"># Project-wide (default)
+[project]
+# ... (name, description, and other required fields omitted for brevity)
+language = "Rust"
+framework = "tokio"
+
+# Service-specific (overrides for 'web' service)
+[[monorepo.services]]
+name = "web"
+language = "TypeScript"  # Overrides project language
+framework = "React"      # Overrides project framework
+</code></pre>
+<p>When service <code>web</code> is selected, agents see:</p>
+<ul>
+<li>Language: TypeScript (from service)</li>
+<li>Framework: React (from service)</li>
+</ul>
+<p>When no service is selected, agents see:</p>
+<ul>
+<li>Language: Rust (from project)</li>
+<li>Framework: tokio (from project)</li>
+</ul>
+<h3 id="service-specific-prompts"><a class="header" href="#service-specific-prompts">Service-Specific Prompts</a></h3>
+<p>Nia generates a separate <code>service.config.md</code> prompt file for service context:</p>
+<p><strong>Generated Files:</strong></p>
+<ul>
+<li><code>.nia/prompts/project.config.md</code> - Project-wide configuration</li>
+<li><code>.nia/prompts/service.config.md</code> - Service-specific configuration (when service selected)</li>
+</ul>
+<p><strong>Example service.config.md:</strong></p>
+<pre><code class="language-markdown"># Service Configuration
+
+**Service**: api  
+**Path**: services/api  
+**Description**: REST API service
+
+## Technical Stack
+
+**Language**: Rust  
+**Framework**: axum, tokio  
+**Testing Framework**: cargo test  
+**Package Manager**: cargo
+
+## Service Scope
+
+This service handles the REST API layer of the application.
+Focus on code within the services/api directory.
+</code></pre>
+<hr>
+<h2 id="placeholder-system"><a class="header" href="#placeholder-system">Placeholder System</a></h2>
+<h3 id="service-placeholders"><a class="header" href="#service-placeholders">Service Placeholders</a></h3>
+<p>Service metadata can be referenced in custom prompts using <code>{{service.*}}</code> placeholders:</p>
+<p><strong>Available Placeholders:</strong></p>
+<ul>
+<li><code>{{service.name}}</code> - Service name (e.g., “api”)</li>
+<li><code>{{service.path}}</code> - Service path (e.g., “services/api”)</li>
+<li><code>{{service.description}}</code> - Service description</li>
+<li><code>{{service.language}}</code> - Service language</li>
+<li><code>{{service.framework}}</code> - Service framework(s)</li>
+<li><code>{{service.testing_framework}}</code> or <code>{{service.testingFramework}}</code> - Testing framework</li>
+<li><code>{{service.package_manager}}</code> or <code>{{service.packageManager}}</code> - Package manager</li>
+<li>Any custom fields defined for the service</li>
+</ul>
+<p><strong>Example Custom Prompt:</strong></p>
+<pre><code class="language-markdown"># Task: {{service.name}} Development
+
+You are working on the {{service.name}} service located at {{service.path}}.
+
+This service uses {{service.language}} with the following framework:
+{{service.framework}}
+
+Testing framework: {{service.testing_framework}}
+Package manager: {{service.package_manager}}
+
+{{service.description}}
+
+Focus your changes on files within the {{service.path}} directory.
+</code></pre>
+<h3 id="conditional-rendering"><a class="header" href="#conditional-rendering">Conditional Rendering</a></h3>
+<p>Placeholders are only replaced when a service is selected. If no service is selected, <code>{{service.*}}</code> placeholders remain unreplaced (or can be configured to show default values).</p>
+<hr>
+<h2 id="validation"><a class="header" href="#validation">Validation</a></h2>
+<h3 id="configuration-validation"><a class="header" href="#configuration-validation">Configuration Validation</a></h3>
+<p>Validate your monorepo configuration:</p>
+<pre><code class="language-bash">nia config validate
+</code></pre>
+<p><strong>Checks Performed:</strong></p>
+<ul>
+<li>Monorepo enabled flag is valid</li>
+<li>All service names are unique</li>
+<li>All service paths are valid</li>
+<li>Required fields are present</li>
+<li>Service metadata is well-formed</li>
+</ul>
+<h3 id="service-selection-validation"><a class="header" href="#service-selection-validation">Service Selection Validation</a></h3>
+<p>When setting a service, Nia validates:</p>
+<ul>
+<li>Service exists in monorepo configuration</li>
+<li>Service name matches exactly (case-sensitive)</li>
+</ul>
+<p><strong>Error Example:</strong></p>
+<pre><code>Error: Service 'webapp' not found in monorepo configuration.
+
+Available services:
+  - api
+  - web
+  - worker
+
+To select a different service:
+  nia config set-service &lt;service_name&gt;
+
+To clear service selection:
+  nia config clear-service
+</code></pre>
+<hr>
+<h2 id="workflow-examples"><a class="header" href="#workflow-examples">Workflow Examples</a></h2>
+<h3 id="example-1-microservices-architecture"><a class="header" href="#example-1-microservices-architecture">Example 1: Microservices Architecture</a></h3>
+<p><strong>Repository Structure:</strong></p>
+<pre><code>my-monorepo/
+├── services/
+│   ├── api/           # Rust REST API
+│   ├── web/           # React frontend
+│   └── worker/        # Python background jobs
+├── .nia/
+│   └── config/
+│       ├── project.toml
+│       └── context.toml
+└── README.md
+</code></pre>
+<p><strong>Configuration:</strong></p>
+<pre><code class="language-toml">[project]
+name = "my-monorepo"
+description = "Microservices architecture project"
+language = "Rust"
+framework = "axum, tokio"
+testing_framework = "cargo test"
+package_manager = "cargo"
+
+[monorepo]
+enabled = true
+
+[[monorepo.services]]
+name = "api"
+path = "services/api"
+description = "REST API service"
+language = "Rust"
+framework = "axum, tokio, sqlx"
+testing_framework = "cargo test"
+package_manager = "cargo"
+
+[[monorepo.services]]
+name = "web"
+path = "services/web"
+description = "Frontend application"
+language = "TypeScript"
+framework = "React, Next.js, TailwindCSS"
+testing_framework = "Jest"
+package_manager = "npm"
+
+[[monorepo.services]]
+name = "worker"
+path = "services/worker"
+description = "Background job processor"
+language = "Python"
+framework = "Celery, Redis"
+testing_framework = "pytest"
+package_manager = "pip"
+</code></pre>
+<p><strong>Usage:</strong></p>
+<pre><code class="language-bash"># Work on API service
+nia config set-service api
+nia code implement --issue 123
+
+# Switch to web service
+nia config set-service web
+nia code implement --issue 124
+
+# Clear service for repo-wide work
+nia config clear-service
+nia docs update
+</code></pre>
+<h3 id="example-2-multi-platform-application"><a class="header" href="#example-2-multi-platform-application">Example 2: Multi-Platform Application</a></h3>
+<p><strong>Repository Structure:</strong></p>
+<pre><code>my-app/
+├── ios/              # iOS app
+├── android/          # Android app
+├── web/              # Web app
+└── shared/           # Shared code
+</code></pre>
+<p><strong>Configuration:</strong></p>
+<pre><code class="language-toml">[project]
+name = "my-app"
+description = "Multi-platform application"
+language = "Swift"
+framework = "SwiftUI, Combine"
+testing_framework = "XCTest"
+package_manager = "Swift Package Manager"
+
+[monorepo]
+enabled = true
+
+[[monorepo.services]]
+name = "ios"
+path = "ios"
+description = "iOS mobile app"
+language = "Swift"
+framework = "SwiftUI, Combine"
+testing_framework = "XCTest"
+package_manager = "Swift Package Manager"
+
+[[monorepo.services]]
+name = "android"
+path = "android"
+description = "Android mobile app"
+language = "Kotlin"
+framework = "Jetpack Compose, Coroutines"
+testing_framework = "JUnit"
+package_manager = "Gradle"
+
+[[monorepo.services]]
+name = "web"
+path = "web"
+description = "Web application"
+language = "TypeScript"
+framework = "React, Vite"
+testing_framework = "Vitest"
+package_manager = "npm"
+</code></pre>
+<hr>
+<h2 id="backward-compatibility"><a class="header" href="#backward-compatibility">Backward Compatibility</a></h2>
+<h3 id="non-monorepo-projects"><a class="header" href="#non-monorepo-projects">Non-Monorepo Projects</a></h3>
+<p>If you don’t use monorepo features:</p>
+<ul>
+<li>Omit <code>[monorepo]</code> section entirely, OR</li>
+<li>Set <code>monorepo.enabled = false</code></li>
+</ul>
+<p><strong>Single-Project Configuration:</strong></p>
+<pre><code class="language-toml">[project]
+name = "my-project"
+description = "Single service project"
+language = "Rust"
+framework = "tokio, axum"
+testing_framework = "cargo test"
+package_manager = "cargo"
+
+# No [monorepo] section needed
+</code></pre>
+<p>Nia behaves identically to pre-monorepo versions:</p>
+<ul>
+<li>No service selection needed</li>
+<li>All workflows use project-wide metadata</li>
+<li>No service-specific prompts generated</li>
+</ul>
+<h3 id="migration-from-single-project"><a class="header" href="#migration-from-single-project">Migration from Single-Project</a></h3>
+<p>To migrate an existing project to monorepo mode:</p>
+<ol>
+<li><strong>Add monorepo configuration:</strong></li>
+</ol>
+<pre><code class="language-toml">[monorepo]
+enabled = true
+
+[[monorepo.services]]
+name = "main"
+path = "."
+description = "Main application"
+# Copy existing metadata fields here
+</code></pre>
+<ol start="2">
+<li><strong>Validate configuration:</strong></li>
+</ol>
+<pre><code class="language-bash">nia config validate
+</code></pre>
+<ol start="3">
+<li><strong>Select service:</strong></li>
+</ol>
+<pre><code class="language-bash">nia config set-service main
+</code></pre>
+<ol start="4">
+<li><strong>Verify workflows still work:</strong></li>
+</ol>
+<pre><code class="language-bash">nia config show-context
+</code></pre>
+<hr>
+<h2 id="best-practices"><a class="header" href="#best-practices">Best Practices</a></h2>
+<h3 id="1-use-descriptive-service-names"><a class="header" href="#1-use-descriptive-service-names">1. Use Descriptive Service Names</a></h3>
+<p>Choose clear, unambiguous names:</p>
+<p>✅ <strong>Good:</strong></p>
+<ul>
+<li><code>api</code>, <code>web</code>, <code>worker</code></li>
+<li><code>ios-app</code>, <code>android-app</code></li>
+<li><code>admin-ui</code>, <code>customer-ui</code></li>
+</ul>
+<p>❌ <strong>Avoid:</strong></p>
+<ul>
+<li><code>svc1</code>, <code>svc2</code></li>
+<li><code>app</code>, <code>app2</code></li>
+<li>Single letters like <code>a</code>, <code>b</code></li>
+</ul>
+<h3 id="2-document-service-descriptions"><a class="header" href="#2-document-service-descriptions">2. Document Service Descriptions</a></h3>
+<p>Provide meaningful descriptions:</p>
+<pre><code class="language-toml">[[monorepo.services]]
+name = "api"
+description = "REST API service handling authentication, user management, and data access"
+</code></pre>
+<h3 id="3-keep-service-paths-consistent"><a class="header" href="#3-keep-service-paths-consistent">3. Keep Service Paths Consistent</a></h3>
+<p>Organize services in a predictable structure:</p>
+<pre><code>services/api/
+services/web/
+services/worker/
+</code></pre>
+<p>Or:</p>
+<pre><code>packages/api/
+packages/web/
+packages/worker/
+</code></pre>
+<h3 id="4-use-service-selection-for-focused-work"><a class="header" href="#4-use-service-selection-for-focused-work">4. Use Service Selection for Focused Work</a></h3>
+<p>Select the service you’re actively working on:</p>
+<pre><code class="language-bash"># Starting work on the API
+nia config set-service api
+nia code implement --issue 123
+
+# Switching to web work
+nia config set-service web
+nia code refactor
+</code></pre>
+<h3 id="5-clear-service-for-cross-cutting-changes"><a class="header" href="#5-clear-service-for-cross-cutting-changes">5. Clear Service for Cross-Cutting Changes</a></h3>
+<p>For repository-wide changes, clear service selection:</p>
+<pre><code class="language-bash">nia config clear-service
+nia docs update        # Updates root README
+nia code format        # Formats all services
+</code></pre>
+<hr>
+<h2 id="troubleshooting"><a class="header" href="#troubleshooting">Troubleshooting</a></h2>
+<h3 id="service-not-found-error"><a class="header" href="#service-not-found-error">“Service not found” Error</a></h3>
+<p><strong>Symptom:</strong></p>
+<pre><code>Error: Service 'webapp' not found in monorepo configuration.
+</code></pre>
+<p><strong>Solutions:</strong></p>
+<ol>
+<li>Check service name spelling (case-sensitive)</li>
+<li>Run <code>nia config validate</code> to see available services</li>
+<li>Verify service is defined in <code>project.toml</code></li>
+</ol>
+<h3 id="service-selection-not-persisting"><a class="header" href="#service-selection-not-persisting">Service Selection Not Persisting</a></h3>
+<p><strong>Symptom:</strong> Service selection resets after commands</p>
+<p><strong>Cause:</strong> <code>.nia/context.toml</code> not writable</p>
+<p><strong>Solutions:</strong></p>
+<ol>
+<li>Check file permissions: <code>ls -la .nia/context.toml</code></li>
+<li>Ensure <code>.nia/</code> directory exists</li>
+<li>Verify not in read-only filesystem</li>
+</ol>
+<h3 id="wrong-metadata-being-used"><a class="header" href="#wrong-metadata-being-used">Wrong Metadata Being Used</a></h3>
+<p><strong>Symptom:</strong> Agent sees wrong language/framework</p>
+<p><strong>Solutions:</strong></p>
+<ol>
+<li>Verify service is selected: <code>nia config show-context</code></li>
+<li>Check metadata precedence (service overrides project)</li>
+<li>Validate configuration: <code>nia config validate</code></li>
+</ol>
+<h3 id="monorepo-validation-fails"><a class="header" href="#monorepo-validation-fails">Monorepo Validation Fails</a></h3>
+<p><strong>Symptom:</strong></p>
+<pre><code>Error: Monorepo validation failed
+</code></pre>
+<p><strong>Solutions:</strong></p>
+<ol>
+<li>Run <code>nia config validate</code> for detailed errors</li>
+<li>Check each service has unique name</li>
+<li>Verify all paths are relative and valid</li>
+<li>Ensure at least one service is defined when <code>enabled = true</code></li>
+</ol>
+<hr>
+<h2 id="advanced-topics"><a class="header" href="#advanced-topics">Advanced Topics</a></h2>
+<h3 id="path-resolution"><a class="header" href="#path-resolution">Path Resolution</a></h3>
+<p>Service paths are resolved relative to repository root:</p>
+<pre><code class="language-toml">[[monorepo.services]]
+name = "api"
+path = "services/api"  # Resolves to /repo/services/api
+</code></pre>
+<p><strong>Path Validation:</strong></p>
+<ul>
+<li>Must be relative (no leading <code>/</code>)</li>
+<li>Cannot use <code>..</code> parent references</li>
+<li>Must exist in repository</li>
+<li>Validated during <code>nia config validate</code></li>
+</ul>
+<h3 id="service-metadata-loading"><a class="header" href="#service-metadata-loading">Service Metadata Loading</a></h3>
+<p>Service metadata is:</p>
+<ol>
+<li>Loaded once at command start</li>
+<li>Cached for the command duration</li>
+<li>Merged with project metadata</li>
+<li>Provided to AI agents via prompts</li>
+</ol>
+<p><strong>Performance:</strong> Service loading adds ~1-2ms overhead per command.</p>
+<h3 id="lock-file-integration"><a class="header" href="#lock-file-integration">Lock File Integration</a></h3>
+<p>Monorepo configuration is cached in <code>.nia/nia.lock</code>:</p>
+<pre><code class="language-toml">[monorepo]
+enabled = true
+services = ["api", "web", "worker"]
+config_hash = "abc123..."
+</code></pre>
+<p>Changes to <code>project.toml</code> invalidate the lock file and trigger re-validation.</p>
+<hr>
+<h2 id="related-documentation"><a class="header" href="#related-documentation">Related Documentation</a></h2>
+<ul>
+<li><a href="../configuration/toolchain.html">Toolchain Configuration</a> - Shared across all services</li>
+<li><a href="../troubleshooting/config.html">Validation</a> - Configuration validation</li>
+</ul>
+<hr>
+<h2 id="next-steps"><a class="header" href="#next-steps">Next Steps</a></h2>
+<ol>
+<li>Enable monorepo mode in <code>project.toml</code></li>
+<li>Define your services with metadata</li>
+<li>Run <code>nia config validate</code> to verify configuration</li>
+<li>Select a service with <code>nia config set-service</code></li>
+<li>Start using workflows with service-specific context</li>
+</ol>
+<hr>
+<h2 id="faq"><a class="header" href="#faq">FAQ</a></h2>
+<h3 id="q-can-services-have-different-toolchains"><a class="header" href="#q-can-services-have-different-toolchains">Q: Can services have different toolchains?</a></h3>
+<p><strong>A:</strong> No. Toolchain configuration (issue tracker, code platform) is defined at the repository level and shared across all services.</p>
+<h3 id="q-can-i-nest-services-within-services"><a class="header" href="#q-can-i-nest-services-within-services">Q: Can I nest services within services?</a></h3>
+<p><strong>A:</strong> No. Services are flat - no hierarchical nesting is supported.</p>
+<h3 id="q-what-happens-if-i-forget-to-select-a-service"><a class="header" href="#q-what-happens-if-i-forget-to-select-a-service">Q: What happens if I forget to select a service?</a></h3>
+<p><strong>A:</strong> Nia uses project-wide metadata (fallback behavior). It’s the same as working with a non-monorepo project.</p>
+<h3 id="q-can-i-select-multiple-services-at-once"><a class="header" href="#q-can-i-select-multiple-services-at-once">Q: Can I select multiple services at once?</a></h3>
+<p><strong>A:</strong> No. Only one service can be selected at a time. For multi-service work, use project-wide mode (no service selected).</p>
+<h3 id="q-do-i-need-to-select-a-service-for-every-command"><a class="header" href="#q-do-i-need-to-select-a-service-for-every-command">Q: Do I need to select a service for every command?</a></h3>
+<p><strong>A:</strong> No. Service selection persists in <code>.nia/context.toml</code> until you change it or clear it.</p>
+<h3 id="q-can-services-share-configuration-files"><a class="header" href="#q-can-services-share-configuration-files">Q: Can services share configuration files?</a></h3>
+<p><strong>A:</strong> Yes. Services can reference shared configuration files, but the service metadata itself must be defined per-service in <code>project.toml</code>.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../advanced/local-mode.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../advanced/multi-repository.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../advanced/local-mode.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../advanced/multi-repository.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-c2a407aa.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../user-docs/theme/custom-aab95659.js"></script>
+
+
+
+    </div>
+    </body>
+</html>

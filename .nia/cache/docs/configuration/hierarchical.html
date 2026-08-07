@@ -1,0 +1,750 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Hierarchical Loading - Nia CLI User Guide</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="User documentation for Nia agentic SDLC CLI">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-2459343d.css">
+        <link rel="stylesheet" href="../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../user-docs/theme/custom-38873017.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-e42586be.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-b4caf93b.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Nia CLI User Guide</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/telerik/project-nia" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="hierarchical-configuration"><a class="header" href="#hierarchical-configuration">Hierarchical Configuration</a></h1>
+<p>Nia supports loading configuration from multiple locations, allowing you to share configurations across repositories while maintaining repository-level control.</p>
+<h2 id="overview"><a class="header" href="#overview">Overview</a></h2>
+<p>Configuration files can be loaded from up to five locations (in priority order):</p>
+<ol>
+<li><strong>Repository</strong> (highest priority): <code>.nia/config/&lt;file&gt;.toml</code></li>
+<li><strong>Application</strong>: <code>&lt;app-root&gt;/.nia/config/application.toml</code> (when using multi-repository applications)</li>
+<li><strong>User</strong>: <code>~/.config/nia/&lt;file&gt;.toml</code> (Linux/macOS) or <code>%APPDATA%\nia\&lt;file&gt;.toml</code> (Windows)</li>
+<li><strong>System</strong> (lowest priority): <code>/etc/nia/&lt;file&gt;.toml</code> (Linux/macOS) or <code>%PROGRAMDATA%\nia\&lt;file&gt;.toml</code> (Windows)</li>
+<li><strong>Default</strong>: Built-in default values</li>
+</ol>
+<p>Settings from higher-priority sources override those from lower-priority sources.</p>
+<blockquote>
+<p><strong>New in 4.2</strong>: Application-level configuration for multi-repository applications. See <a href="#multi-repository-applications">Multi-Repository Applications</a> below.</p>
+</blockquote>
+<h2 id="supported-configuration-files"><a class="header" href="#supported-configuration-files">Supported Configuration Files</a></h2>
+<p>The following files support hierarchical loading:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>File</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>agents.toml</code></td><td>AI agent selection and model configuration</td></tr>
+<tr><td><code>toolchain.toml</code></td><td>Development tool definitions</td></tr>
+<tr><td><code>commands.toml</code></td><td>Workflow command customizations</td></tr>
+<tr><td><code>workflows/*.toml</code></td><td>Stateful workflow definitions</td></tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<p><strong>Note</strong>: <code>project.toml</code> is always repository-specific and does not support hierarchical loading.</p>
+</blockquote>
+<h2 id="enabling-external-sources"><a class="header" href="#enabling-external-sources">Enabling External Sources</a></h2>
+<p>⚠️ <strong>Important</strong>: External configurations are disabled by default for security reasons.</p>
+<p>By default, nia only loads configuration from the repository. To enable user and system configurations, add the following to your <code>project.toml</code>:</p>
+<pre><code class="language-toml">[config.external_sources]
+enabled = true
+</code></pre>
+<h3 id="fine-grained-control"><a class="header" href="#fine-grained-control">Fine-Grained Control</a></h3>
+<p>You can enable external sources for specific configuration files:</p>
+<pre><code class="language-toml">[config.external_sources]
+enabled = true
+agents = true      # Load agents.toml from user/system
+toolchain = false  # Keep toolchain.toml repository-only
+commands = true    # Load commands.toml from user/system
+workflows = true   # Load workflows/*.toml from user/system
+</code></pre>
+<p>If a specific file toggle is omitted, it defaults to <code>true</code> when the master <code>enabled</code> switch is on.</p>
+<h2 id="merge-behavior"><a class="header" href="#merge-behavior">Merge Behavior</a></h2>
+<p>When multiple sources provide the same configuration:</p>
+<ul>
+<li><strong>Simple values</strong>: Higher priority wins (repository overrides user, user overrides system)</li>
+<li><strong>Objects/tables</strong>: Deep merge (nested values merge recursively)</li>
+<li><strong>Arrays</strong>: Higher priority replaces entirely (no merging)</li>
+</ul>
+<h3 id="example-merging-agent-configuration"><a class="header" href="#example-merging-agent-configuration">Example: Merging Agent Configuration</a></h3>
+<p><strong>System</strong> (<code>/etc/nia/agents.toml</code>):</p>
+<pre><code class="language-toml">schema_version = "1.0.0"
+
+[agent]
+default = "github_copilot"
+
+[models]
+code = "claude-sonnet-4.5"
+docs = "claude-haiku-4.5"
+</code></pre>
+<p><strong>Repository</strong> (<code>.nia/config/agents.toml</code>):</p>
+<pre><code class="language-toml">schema_version = "1.0.0"
+
+[models]
+code = "claude-opus-4.5"
+</code></pre>
+<p><strong>Result</strong> (merged):</p>
+<pre><code class="language-toml">[agent]
+default = "github_copilot"              # From system
+
+[models]
+code = "claude-opus-4.5"                # From repository (overrides)
+docs = "claude-haiku-4.5"               # From system (preserved)
+</code></pre>
+<h2 id="minimal-initialization"><a class="header" href="#minimal-initialization">Minimal Initialization</a></h2>
+<p>For repositories that rely primarily on user/system configurations:</p>
+<pre><code class="language-bash">nia config init --minimal
+</code></pre>
+<p>This creates only <code>project.toml</code> with commented examples showing how to enable external sources. You can then manage agents, toolchain, commands, and workflows at the user or system level.</p>
+<h2 id="diagnostics"><a class="header" href="#diagnostics">Diagnostics</a></h2>
+<h3 id="view-configuration-sources"><a class="header" href="#view-configuration-sources">View Configuration Sources</a></h3>
+<pre><code class="language-bash">nia config show --sources
+</code></pre>
+<p>Output example:</p>
+<pre><code>Configuration Sources
+
+External sources: enabled
+
+project.toml:
+  • repository configuration (.nia/config/project.toml)
+
+agents.toml:
+  • system configuration (/etc/nia/agents.toml)
+  • repository configuration (.nia/config/agents.toml)
+
+toolchain.toml:
+  • user configuration (~/.config/nia/toolchain.toml)
+  • repository configuration (.nia/config/toolchain.toml)
+</code></pre>
+<h3 id="validate-merged-configuration"><a class="header" href="#validate-merged-configuration">Validate Merged Configuration</a></h3>
+<pre><code class="language-bash">nia config validate
+</code></pre>
+<p>This validates the merged configuration and reports which sources contributed to each file.</p>
+<h3 id="lock-configuration"><a class="header" href="#lock-configuration">Lock Configuration</a></h3>
+<pre><code class="language-bash">nia config lock
+</code></pre>
+<p>Creates a lockfile (<code>.nia/.config_lock</code>) with hashes of all configuration sources. This ensures reproducible builds and helps detect configuration changes.</p>
+<h2 id="security-considerations"><a class="header" href="#security-considerations">Security Considerations</a></h2>
+<p>⚠️ <strong>Important</strong>: External configurations are disabled by default for security reasons.</p>
+<p>Before enabling external sources:</p>
+<ol>
+<li><strong>Trust the source</strong>: Ensure you trust configurations at user/system locations</li>
+<li><strong>Review contents</strong>: Inspect external configuration files before enabling</li>
+<li><strong>CI/CD environments</strong>: Consider using <code>NIA_DISABLE_EXTERNAL_CONFIGS=true</code> to force repository-only mode</li>
+</ol>
+<h3 id="environment-override"><a class="header" href="#environment-override">Environment Override</a></h3>
+<p>Force-disable external sources regardless of <code>project.toml</code>:</p>
+<pre><code class="language-bash">export NIA_DISABLE_EXTERNAL_CONFIGS=true
+nia workflow run  # Will only use repository config
+</code></pre>
+<p>This is particularly useful in CI/CD pipelines where you want to ensure reproducible builds without external dependencies.</p>
+<h2 id="use-cases"><a class="header" href="#use-cases">Use Cases</a></h2>
+<h3 id="enterprise-standard-configuration"><a class="header" href="#enterprise-standard-configuration">Enterprise Standard Configuration</a></h3>
+<p>System administrators can deploy standard configurations to <code>/etc/nia/</code>:</p>
+<pre><code class="language-bash"># Install organization-wide defaults
+sudo mkdir -p /etc/nia
+sudo cp agents.toml toolchain.toml /etc/nia/
+</code></pre>
+<p>Repositories only need minimal configuration:</p>
+<pre><code class="language-toml"># .nia/config/project.toml
+schema_version = "1.0.0"
+
+[project]
+name = "my-service"
+description = "My service"
+language = "Rust"
+framework = "actix-web"
+testing_framework = "cargo test"
+package_manager = "cargo"
+
+[config.external_sources]
+enabled = true
+</code></pre>
+<h3 id="personal-preferences"><a class="header" href="#personal-preferences">Personal Preferences</a></h3>
+<p>Store personal AI agent preferences in user configuration:</p>
+<pre><code class="language-bash">mkdir -p ~/.config/nia
+cat &gt; ~/.config/nia/agents.toml &lt;&lt; EOF
+schema_version = "1.0.0"
+
+[agent]
+default = "github_copilot"
+
+[models]
+code = "claude-sonnet-4.5"
+docs = "claude-haiku-4.5"
+EOF
+</code></pre>
+<p>All your repositories can then use these settings without duplicating configuration.</p>
+<h3 id="project-specific-overrides"><a class="header" href="#project-specific-overrides">Project-Specific Overrides</a></h3>
+<p>Override specific settings while inheriting defaults:</p>
+<pre><code class="language-toml"># .nia/config/agents.toml
+# Only override what's different for this project
+schema_version = "1.0.0"
+
+[models]
+code = "claude-opus-4.5"  # Use premium model for this critical project
+</code></pre>
+<p>The other settings (agent selection, docs model, etc.) will be inherited from user/system configuration.</p>
+<h3 id="team-workflows"><a class="header" href="#team-workflows">Team Workflows</a></h3>
+<p>Share common workflows across repositories via system configuration:</p>
+<pre><code class="language-bash"># System admin installs team workflows
+sudo mkdir -p /etc/nia/config/workflows
+sudo cp review-checklist.toml code-quality.toml /etc/nia/config/workflows/
+</code></pre>
+<p>Individual repositories can:</p>
+<ul>
+<li>Use team workflows as-is by enabling external sources</li>
+<li>Override specific workflow steps in their repository configuration</li>
+<li>Add repository-specific workflows alongside team workflows</li>
+</ul>
+<h2 id="workflow-configuration"><a class="header" href="#workflow-configuration">Workflow Configuration</a></h2>
+<p>Workflows support the same hierarchical loading as other configuration files:</p>
+<pre><code class="language-toml"># .nia/config/project.toml
+[config.external_sources]
+enabled = true
+workflows = true  # Enable workflow loading from user/system
+</code></pre>
+<p>Workflow merge strategy:</p>
+<ul>
+<li>Workflows with the same filename from higher priority sources <strong>completely override</strong> lower priority</li>
+<li>No partial merging of workflow steps</li>
+<li>This ensures workflow consistency and prevents unexpected behavior</li>
+</ul>
+<p>Example:</p>
+<pre><code>System: /etc/nia/config/workflows/review.toml
+User:   ~/.config/nia/config/workflows/review.toml
+Repo:   .nia/config/workflows/review.toml
+
+Result: Only repo review.toml is used (completely overrides user and system)
+</code></pre>
+<h2 id="troubleshooting"><a class="header" href="#troubleshooting">Troubleshooting</a></h2>
+<h3 id="external-sources-not-loading"><a class="header" href="#external-sources-not-loading">External sources not loading</a></h3>
+<p>Check that:</p>
+<ol>
+<li><code>project.toml</code> has <code>[config.external_sources]</code> with <code>enabled = true</code></li>
+<li>File-specific toggle is not explicitly set to <code>false</code></li>
+<li><code>NIA_DISABLE_EXTERNAL_CONFIGS</code> environment variable is not set</li>
+<li>Configuration files exist at expected user/system paths</li>
+</ol>
+<p>Run <code>nia config show --sources</code> to see which sources are being loaded.</p>
+<h3 id="configuration-validation-errors"><a class="header" href="#configuration-validation-errors">Configuration validation errors</a></h3>
+<p>If validation fails:</p>
+<ol>
+<li>Check syntax in all configuration files</li>
+<li>Ensure schema versions match (use <code>1.0.0</code> for all files)</li>
+<li>Verify merged configuration with <code>nia config validate --verbose</code></li>
+<li>Check individual files in isolation first</li>
+</ol>
+<h3 id="lockfile-conflicts"><a class="header" href="#lockfile-conflicts">Lockfile conflicts</a></h3>
+<p>If you see lockfile validation errors:</p>
+<ol>
+<li>Delete <code>.nia/.config_lock</code></li>
+<li>Run <code>nia config lock</code> to regenerate</li>
+<li>Commit the new lockfile</li>
+</ol>
+<p>The lockfile includes hashes from all sources, so changes to user/system configs will invalidate it.</p>
+<h2 id="best-practices"><a class="header" href="#best-practices">Best Practices</a></h2>
+<ol>
+<li><strong>Start minimal</strong>: Use <code>nia config init --minimal</code> for new repositories that will use external configs</li>
+<li><strong>Layer appropriately</strong>: System for organization-wide, user for personal, repository for project-specific</li>
+<li><strong>Document overrides</strong>: Add comments explaining why repository config overrides external settings</li>
+<li><strong>Lock in CI</strong>: Always use <code>NIA_DISABLE_EXTERNAL_CONFIGS=true</code> in CI/CD for reproducibility</li>
+<li><strong>Version control</strong>: Only commit repository configs to git, never user/system configs</li>
+<li><strong>Review external</strong>: Periodically review user/system configs for stale or conflicting settings</li>
+</ol>
+<h2 id="multi-repository-applications"><a class="header" href="#multi-repository-applications">Multi-Repository Applications</a></h2>
+<p><em>New in version 4.2</em></p>
+<p>Nia supports managing multiple related repositories as a single application. This is useful for:</p>
+<ul>
+<li>Microservices architectures with separate repositories per service</li>
+<li>Large projects spanning multiple related repositories</li>
+<li>Monorepo alternatives where repositories are siblings in a directory</li>
+</ul>
+<h3 id="creating-an-application"><a class="header" href="#creating-an-application">Creating an Application</a></h3>
+<p>Initialize an application configuration in your application root directory:</p>
+<pre><code class="language-bash">cd /path/to/my-application
+nia config init --app
+</code></pre>
+<p>This creates <code>.nia/config/application.toml</code> with a unique application ID:</p>
+<pre><code class="language-toml">schema_version = "1.0.0"
+
+[application]
+id = "550e8400-e29b-41d4-a716-446655440000"
+name = "my-application"
+description = "Multi-repository application"
+
+[discovery]
+enabled = true
+max_depth = 5
+exclude = ["node_modules", "target", ".git"]
+
+# Discovered repositories will be added here
+[[repositories]]
+name = "api-service"
+path = "./services/api"
+</code></pre>
+<h3 id="initializing-with-additional-configuration"><a class="header" href="#initializing-with-additional-configuration">Initializing with Additional Configuration</a></h3>
+<p>The <code>--app</code> flag can be combined with other configuration flags to create a complete setup in one command:</p>
+<h4 id="application-with-issue-tracker-and-code-platform"><a class="header" href="#application-with-issue-tracker-and-code-platform">Application with Issue Tracker and Code Platform</a></h4>
+<pre><code class="language-bash">nia config init --app --issues github_issues --code github
+</code></pre>
+<p>This creates:</p>
+<ul>
+<li><code>.nia/config/application.toml</code> - Application metadata and repository discovery</li>
+<li><code>.nia/config/toolchain.toml</code> - Issue tracker and code platform configuration</li>
+</ul>
+<h4 id="application-with-ai-agent-configuration"><a class="header" href="#application-with-ai-agent-configuration">Application with AI Agent Configuration</a></h4>
+<pre><code class="language-bash">nia config init --app --agent github_copilot --models balanced
+</code></pre>
+<p>This creates:</p>
+<ul>
+<li><code>.nia/config/application.toml</code> - Application metadata</li>
+<li><code>.nia/config/agents.toml</code> - AI agent and model selection</li>
+</ul>
+<h4 id="complete-application-setup"><a class="header" href="#complete-application-setup">Complete Application Setup</a></h4>
+<pre><code class="language-bash">nia config init --app \
+    --issues github_issues \
+    --code github \
+    --agent github_copilot \
+    --models balanced
+</code></pre>
+<p>This creates all configuration files at once:</p>
+<ul>
+<li><code>.nia/config/application.toml</code> - Application metadata</li>
+<li><code>.nia/config/toolchain.toml</code> - Development toolchain</li>
+<li><code>.nia/config/agents.toml</code> - AI agent configuration</li>
+</ul>
+<p>This is particularly useful for bootstrapping new multi-repository applications where child repositories will inherit these shared configurations.</p>
+<h3 id="repository-opt-in"><a class="header" href="#repository-opt-in">Repository Opt-In</a></h3>
+<p>Each repository that should be part of the application must explicitly opt-in by adding the application ID to its <code>project.toml</code>:</p>
+<pre><code class="language-toml"># services/api/.nia/config/project.toml
+schema_version = "1.0.0"
+
+[project]
+name = "api-service"
+description = "API Service"
+language = "Rust"
+framework = "actix-web"
+testing_framework = "cargo test"
+package_manager = "cargo"
+allow_app = "550e8400-e29b-41d4-a716-446655440000"  # Application UUID
+</code></pre>
+<p>This opt-in mechanism ensures:</p>
+<ul>
+<li>Repositories consciously join applications</li>
+<li>Accidental inclusion is prevented</li>
+<li>Security boundaries are maintained</li>
+</ul>
+<h3 id="discovering-repositories"><a class="header" href="#discovering-repositories">Discovering Repositories</a></h3>
+<p>Find all repositories that have opted into the application and save them to configuration:</p>
+<pre><code class="language-bash">nia app discover
+</code></pre>
+<p>This command:</p>
+<ol>
+<li>Recursively scans directories up to <code>max_depth</code> from application root</li>
+<li>Finds repositories with matching <code>allow_app</code> UUID</li>
+<li>Writes discovered repositories to <code>application.toml</code></li>
+</ol>
+<p>To overwrite existing repository configuration with fresh discovery:</p>
+<pre><code class="language-bash">nia app discover --force
+</code></pre>
+<p><strong>Note</strong>: Discovery results are persisted to <code>application.toml</code> since nia operates as single-execution CLI commands. This ensures repository configuration is explicit, version-controllable, and reproducible across runs.</p>
+<h3 id="discovery-configuration"><a class="header" href="#discovery-configuration">Discovery Configuration</a></h3>
+<p>Control the discovery process in <code>application.toml</code>:</p>
+<pre><code class="language-toml">[discovery]
+enabled = true           # Enable automatic discovery
+max_depth = 5            # Maximum directory depth to scan (1-10)
+exclude = [              # Patterns to exclude from scanning
+    "node_modules",
+    "target",
+    ".git",
+    "vendor",
+    "*_cache"
+]
+</code></pre>
+<p>Exclusion patterns support:</p>
+<ul>
+<li>Exact matches: <code>"node_modules"</code></li>
+<li>Prefix wildcards: <code>".cache*"</code> matches <code>.cache</code>, <code>.cache-v3</code>, etc.</li>
+<li>Suffix wildcards: <code>"*_build"</code> matches <code>cmake_build</code>, <code>debug_build</code>, etc.</li>
+</ul>
+<h3 id="explicit-repository-paths"><a class="header" href="#explicit-repository-paths">Explicit Repository Paths</a></h3>
+<p>You can also explicitly list repositories in <code>application.toml</code>:</p>
+<pre><code class="language-toml">[[repositories]]
+name = "external-lib"
+path = "../external-repo"
+
+[[repositories]]
+name = "shared-utils"
+path = "/absolute/path/to/repo"
+</code></pre>
+<p>Explicit repositories:</p>
+<ul>
+<li>Are included even without <code>allow_app</code> matching</li>
+<li>Can use relative or absolute paths</li>
+<li>Override discovered repositories with the same name</li>
+</ul>
+<h3 id="application-configuration-hierarchy"><a class="header" href="#application-configuration-hierarchy">Application Configuration Hierarchy</a></h3>
+<p>With an application, the configuration hierarchy becomes:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Priority</th><th>Source</th><th>Location</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>4</td><td>Repository</td><td><code>.nia/config/</code></td><td>Repository-specific config</td></tr>
+<tr><td>3</td><td>Application</td><td><code>&lt;app-root&gt;/.nia/config/application.toml</code></td><td>Application-level config</td></tr>
+<tr><td>2</td><td>User</td><td><code>~/.config/nia/</code></td><td>User preferences</td></tr>
+<tr><td>1</td><td>System</td><td><code>/etc/nia/</code></td><td>System-wide config</td></tr>
+<tr><td>0</td><td>Default</td><td>Built-in</td><td>Default values</td></tr>
+</tbody>
+</table>
+</div>
+<p>Higher priority settings override lower priority ones.</p>
+<h3 id="viewing-application-context"><a class="header" href="#viewing-application-context">Viewing Application Context</a></h3>
+<p>See which repositories are part of the application:</p>
+<pre><code class="language-bash">nia config show --sources
+</code></pre>
+<p>Output example:</p>
+<pre><code>Configuration Sources
+
+Application: my-application (550e8400-e29b-41d4-a716-446655440000)
+  Repositories:
+    • api-service (./services/api)
+    • web-frontend (./services/web)
+    • shared-lib (./libraries/shared)
+
+project.toml:
+  • application configuration (../.nia/config/application.toml)
+  • repository configuration (.nia/config/project.toml)
+
+agents.toml:
+  • user configuration (~/.config/nia/agents.toml)
+  • application configuration (../.nia/config/application.toml)
+  • repository configuration (.nia/config/agents.toml)
+</code></pre>
+<h3 id="working-across-repositories"><a class="header" href="#working-across-repositories">Working Across Repositories</a></h3>
+<p>When you run nia commands from within any repository that has opted into an application:</p>
+<ol>
+<li>Nia searches upward for <code>application.toml</code></li>
+<li>Application-level configuration is loaded and merged</li>
+<li>Repository-specific config overrides application config</li>
+<li>You can access application-wide settings while maintaining repository autonomy</li>
+</ol>
+<h3 id="best-practices-1"><a class="header" href="#best-practices-1">Best Practices</a></h3>
+<ol>
+<li><strong>Use meaningful application names</strong> - Helps identify the application purpose</li>
+<li><strong>Set reasonable exclude patterns</strong> - Improves discovery performance and accuracy</li>
+<li><strong>Keep max_depth minimal</strong> - Only as deep as your repository structure requires</li>
+<li><strong>Use explicit paths for external repos</strong> - Repositories outside the app directory tree</li>
+<li><strong>Validate configurations</strong> - Run <code>nia config validate</code> regularly</li>
+<li><strong>Version control application.toml</strong> - Commit to ensure team has same repository list</li>
+<li><strong>Document UUID in project.toml</strong> - Add comment explaining which application it joins</li>
+</ol>
+<h3 id="example-microservices-application"><a class="header" href="#example-microservices-application">Example: Microservices Application</a></h3>
+<pre><code>my-microservices-app/
+├── .nia/
+│   └── config/
+│       └── application.toml          # Application config
+├── services/
+│   ├── api/
+│   │   └── .nia/
+│   │       └── config/
+│   │           └── project.toml      # allow_app = "app-uuid"
+│   ├── auth/
+│   │   └── .nia/
+│   │       └── config/
+│   │           └── project.toml      # allow_app = "app-uuid"
+│   └── notifications/
+│       └── .nia/
+│           └── config/
+│               └── project.toml      # allow_app = "app-uuid"
+└── libraries/
+    └── shared/
+        └── .nia/
+            └── config/
+                └── project.toml      # allow_app = "app-uuid"
+</code></pre>
+<p>Setup:</p>
+<pre><code class="language-bash"># 1. Create application
+cd my-microservices-app
+nia config init --app
+
+# 2. Copy UUID from application.toml
+APP_UUID=$(grep 'id =' .nia/config/application.toml | cut -d'"' -f2)
+
+# 3. Add UUID to each repository's project.toml
+echo "allow_app = \"$APP_UUID\"" &gt;&gt; services/api/.nia/config/project.toml
+echo "allow_app = \"$APP_UUID\"" &gt;&gt; services/auth/.nia/config/project.toml
+echo "allow_app = \"$APP_UUID\"" &gt;&gt; services/notifications/.nia/config/project.toml
+echo "allow_app = \"$APP_UUID\"" &gt;&gt; libraries/shared/.nia/config/project.toml
+
+# 4. Discover all repositories
+nia app discover
+
+# 5. Verify
+nia config show --sources
+</code></pre>
+<h3 id="security-considerations-1"><a class="header" href="#security-considerations-1">Security Considerations</a></h3>
+<p>Application-level configuration introduces an additional trust boundary:</p>
+<ol>
+<li><strong>Verify application.toml</strong> - Review before opting repositories in</li>
+<li><strong>UUID validation</strong> - Nia validates UUIDs are properly formatted</li>
+<li><strong>Explicit opt-in required</strong> - Repositories must explicitly allow the application</li>
+<li><strong>Path validation</strong> - Explicit repository paths are validated during discovery</li>
+<li><strong>Backward compatibility</strong> - Repositories without <code>allow_app</code> work as before</li>
+</ol>
+<h3 id="troubleshooting-1"><a class="header" href="#troubleshooting-1">Troubleshooting</a></h3>
+<h4 id="repository-not-discovered"><a class="header" href="#repository-not-discovered">Repository not discovered</a></h4>
+<p>Check that:</p>
+<ol>
+<li>Repository has <code>allow_app</code> field with correct UUID (case-insensitive)</li>
+<li>Repository is within <code>max_depth</code> from application root</li>
+<li>Repository path is not matched by <code>exclude</code> patterns</li>
+<li>Repository has <code>.nia/config/project.toml</code> file</li>
+</ol>
+<h4 id="uuid-mismatch-errors"><a class="header" href="#uuid-mismatch-errors">UUID mismatch errors</a></h4>
+<ul>
+<li>UUIDs are case-insensitive but must be valid UUIDv4 format</li>
+<li>Copy UUID exactly from <code>application.toml</code></li>
+<li>Check for extra whitespace or quotes</li>
+</ul>
+<h4 id="discovery-finds-wrong-repositories"><a class="header" href="#discovery-finds-wrong-repositories">Discovery finds wrong repositories</a></h4>
+<ol>
+<li>Check <code>exclude</code> patterns in <code>application.toml</code></li>
+<li>Reduce <code>max_depth</code> if scanning too deep</li>
+<li>Use explicit <code>[[repositories]]</code> entries for specific repos</li>
+</ol>
+<h2 id="further-reading"><a class="header" href="#further-reading">Further Reading</a></h2>
+<ul>
+<li><a href="../reference/config-fields.html">Configuration Reference</a> - Complete configuration field documentation</li>
+<li><a href="../reference/workflow-schema.html">Workflow Configuration</a> - Workflow configuration schema</li>
+<li><a href="./project.html">Project Configuration</a> - Project-level configuration guide</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../configuration/toolchain.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../configuration/skills.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../configuration/toolchain.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../configuration/skills.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-c2a407aa.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../user-docs/theme/custom-aab95659.js"></script>
+
+
+
+    </div>
+    </body>
+</html>

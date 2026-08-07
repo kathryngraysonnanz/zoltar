@@ -1,0 +1,1948 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Command Reference - Nia CLI User Guide</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="User documentation for Nia agentic SDLC CLI">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-2459343d.css">
+        <link rel="stylesheet" href="../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../user-docs/theme/custom-38873017.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-e42586be.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-b4caf93b.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Nia CLI User Guide</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/telerik/project-nia" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="command-reference"><a class="header" href="#command-reference">Command Reference</a></h1>
+<p>Complete reference for all Nia CLI commands. Nia provides two types of commands:</p>
+<ol>
+<li><strong>Workflow Commands</strong> - AI agent-driven operations for development workflows</li>
+<li><strong>Utility Commands</strong> - System and configuration management</li>
+</ol>
+<h2 id="table-of-contents"><a class="header" href="#table-of-contents">Table of Contents</a></h2>
+<ul>
+<li><a href="#global-options">Global Options</a></li>
+<li><a href="#workflow-commands">Workflow Commands</a>
+<ul>
+<li><a href="#issue-operations">Issue Operations</a></li>
+<li><a href="#backlog-operations">Backlog Operations</a></li>
+<li><a href="#code-operations">Code Operations</a></li>
+<li><a href="#pr-operations">PR Operations</a></li>
+<li><a href="#docs-operations">Docs Operations</a></li>
+</ul>
+</li>
+<li><a href="#utility-commands">Utility Commands</a>
+<ul>
+<li><a href="#config">config</a></li>
+<li><a href="#guide">guide</a></li>
+<li><a href="#shell">shell</a></li>
+<li><a href="#status">status</a></li>
+<li><a href="#workflow">workflow</a></li>
+</ul>
+</li>
+<li><a href="#global-workflow-flags">Global Workflow Flags</a>
+<ul>
+<li><a href="#--role-flag">–role Flag</a></li>
+<li><a href="#--context-file-flag">–context-file Flag</a></li>
+<li><a href="#--context-dir-flag">–context-dir Flag</a></li>
+</ul>
+</li>
+<li><a href="#global-modifiers">Global Modifiers</a></li>
+<li><a href="#context-requirements">Context Requirements</a></li>
+</ul>
+<hr>
+<h2 id="global-options"><a class="header" href="#global-options">Global Options</a></h2>
+<p>Available for all commands:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Option</th><th>Short</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>--help</code></td><td><code>-h</code></td><td>Display help information</td></tr>
+<tr><td><code>--version</code></td><td><code>-V</code></td><td>Display version information</td></tr>
+<tr><td><code>--tail</code></td><td>—</td><td>Watch trace file in real-time</td></tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<p><strong>Note:</strong> The flags <code>--agent</code> (<code>-a</code>), <code>--role</code> (<code>-r</code>), <code>--context-file</code> (<code>-c</code>), and <code>--context-dir</code> are workflow-specific options available only for workflow commands (<code>issue</code>, <code>code</code>, <code>pr</code>, <code>research</code>). They are NOT available for utility commands like <code>config</code>, <code>workspace</code>, or <code>status</code>. See the Short Flags Reference below for details.</p>
+</blockquote>
+<h3 id="short-flags-reference"><a class="header" href="#short-flags-reference">Short Flags Reference</a></h3>
+<p>The following flags have short versions for convenient command-line usage:</p>
+<h4 id="workflow-command-flags"><a class="header" href="#workflow-command-flags">Workflow Command Flags</a></h4>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Long Flag</th><th>Short</th><th>Available In</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>--agent</code></td><td><code>-a</code></td><td>All workflow operations</td><td>Select AI coding agent</td></tr>
+<tr><td><code>--role</code></td><td><code>-r</code></td><td>All workflow operations</td><td>Override AI role</td></tr>
+<tr><td><code>--context-file</code></td><td><code>-c</code></td><td>All workflow operations</td><td>Add file context (repeatable)</td></tr>
+<tr><td><code>--context-dir</code></td><td>—</td><td>All workflow operations</td><td>Add directory context (repeatable)</td></tr>
+<tr><td><code>--model</code></td><td><code>-m</code></td><td>All workflow operations</td><td>Override AI model</td></tr>
+</tbody>
+</table>
+</div>
+<h4 id="utility-command-flags"><a class="header" href="#utility-command-flags">Utility Command Flags</a></h4>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Long Flag</th><th>Short</th><th>Available In</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>--file</code></td><td><code>-f</code></td><td><code>config validate</code></td><td>Specify config file</td></tr>
+<tr><td><code>--target</code></td><td><code>-t</code></td><td><code>config export</code></td><td>Export specific target</td></tr>
+<tr><td><code>--verbose</code></td><td><code>-v</code></td><td><code>status</code></td><td>Show detailed output</td></tr>
+</tbody>
+</table>
+</div>
+<h4 id="flags-without-short-versions"><a class="header" href="#flags-without-short-versions">Flags Without Short Versions</a></h4>
+<p>These flags intentionally do not have short versions:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Long Flag</th><th>Reason</th></tr>
+</thead>
+<tbody>
+<tr><td><code>--force</code></td><td>Destructive operation - requires explicit typing</td></tr>
+<tr><td><code>--tail</code></td><td>Debug feature - not for routine use</td></tr>
+<tr><td><code>--print-prompt</code></td><td>Debug feature - not for routine use</td></tr>
+<tr><td><code>--custom-agent</code></td><td>Power-user feature - rarely used</td></tr>
+<tr><td><code>--manual</code></td><td>One-time setup - clarity over brevity</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Usage Examples:</strong></p>
+<pre><code class="language-bash"># Short flags for common operations
+nia issue draft -a copilot -r software_engineer -m claude-sonnet-4
+nia code review -c docs/design.md -c src/main.rs -m gpt-5.2-codex
+
+# Long flags for scripts (recommended for readability)
+nia issue draft --agent copilot --role software_engineer --model claude-opus-4.5
+</code></pre>
+<hr>
+<h2 id="workflow-commands"><a class="header" href="#workflow-commands">Workflow Commands</a></h2>
+<p>Workflow commands follow the pattern: <code>nia &lt;target&gt; &lt;operation&gt; [MODIFIERS]</code></p>
+<p>All workflow commands are AI agent-driven and compose prompts from your repository context.</p>
+<h3 id="issue-operations"><a class="header" href="#issue-operations">Issue Operations</a></h3>
+<p>Commands for managing work items (features, bugs, tasks).</p>
+<h4 id="nia-issue-draft"><a class="header" href="#nia-issue-draft"><code>nia issue draft</code></a></h4>
+<p><strong>Description</strong>: Create a local issue draft with AI assistance.</p>
+<p><strong>Required Context</strong>: None (creates new issue)</p>
+<p><strong>Available Modifiers</strong>: <code>--edit</code>, <code>--lite</code>, <code>--lite-edit</code></p>
+<p><strong>Usage Examples</strong>:</p>
+<pre><code class="language-bash"># Create an issue draft
+nia issue draft
+
+# Create with editing instructions
+nia issue draft --edit
+</code></pre>
+<p><strong>Common Use Cases</strong>:</p>
+<ul>
+<li>Starting a new feature or bug report</li>
+<li>Brainstorming requirements</li>
+<li>Creating well-structured issue descriptions</li>
+</ul>
+<p><strong>Related Commands</strong>: <code>issue publish</code>, <code>issue review</code></p>
+<hr>
+<h4 id="nia-issue-publish"><a class="header" href="#nia-issue-publish"><code>nia issue publish</code></a></h4>
+<p><strong>Description</strong>: Publish a local issue draft to your issue tracking system (GitHub, GitLab, etc.).</p>
+<p><strong>Required Context</strong>: Local issue draft file</p>
+<p><strong>Available Modifiers</strong>: None</p>
+<p><strong>Usage Examples</strong>:</p>
+<pre><code class="language-bash"># Publish issue to tracking system
+nia issue publish
+</code></pre>
+<p><strong>Common Use Cases</strong>:</p>
+<ul>
+<li>Publishing completed issue drafts</li>
+<li>Creating issues in your tracking system</li>
+<li>Syncing local work with team</li>
+</ul>
+<p><strong>Related Commands</strong>: <code>issue draft</code>, <code>config set-issue</code></p>
+<hr>
+<h4 id="nia-issue-review"><a class="header" href="#nia-issue-review"><code>nia issue review</code></a></h4>
+<p><strong>Description</strong>: Review an issue for completeness, clarity, and quality.</p>
+<p><strong>Required Context</strong>: <code>NIA_ISSUE_ID</code> (set via env or config)</p>
+<p><strong>Available Modifiers</strong>: <code>--edit</code></p>
+<p><strong>Usage Examples</strong>:</p>
+<pre><code class="language-bash"># Review current issue
+export NIA_ISSUE_ID=123
+nia issue review
+
+# Review with editing instructions
+nia issue review --edit
+</code></pre>
+<p><strong>Common Use Cases</strong>:</p>
+<ul>
+<li>Ensuring issue quality before starting work</li>
+<li>Identifying missing requirements</li>
+<li>Improving issue clarity</li>
+</ul>
+<p><strong>Related Commands</strong>: <code>issue plan</code>, <code>issue triage</code>, <code>config set-issue</code></p>
+<hr>
+<h4 id="nia-issue-plan"><a class="header" href="#nia-issue-plan"><code>nia issue plan</code></a></h4>
+<p><strong>Description</strong>: Generate a detailed implementation plan for an issue.</p>
+<p><strong>Required Context</strong>: <code>NIA_ISSUE_ID</code></p>
+<p><strong>Available Modifiers</strong>: <code>--edit</code>, <code>--lite</code>, <code>--lite-edit</code></p>
+<p><strong>Usage Examples</strong>:</p>
+<pre><code class="language-bash"># Generate implementation plan
+nia config set-issue 123
+nia issue plan
+
+# Plan with editing instructions
+nia issue plan --edit
+
+# Lightweight plan for simple changes
+nia issue plan --lite
+</code></pre>
+<p><strong>Common Use Cases</strong>:</p>
+<ul>
+<li>Breaking down complex issues</li>
+<li>Creating step-by-step implementation guides</li>
+<li>Estimating work scope</li>
+</ul>
+<p><strong>Related Commands</strong>: <code>issue review</code>, <code>issue split</code>, <code>code create</code></p>
+<hr>
+<h4 id="nia-issue-triage"><a class="header" href="#nia-issue-triage"><code>nia issue triage</code></a></h4>
+<p><strong>Description</strong>: Evaluate and prioritize an issue based on impact, effort, and dependencies.</p>
+<p><strong>Required Context</strong>: <code>NIA_ISSUE_ID</code></p>
+<p><strong>Available Modifiers</strong>: None</p>
+<p><strong>Usage Examples</strong>:</p>
+<pre><code class="language-bash"># Triage an issue
+export NIA_ISSUE_ID=123
+nia issue triage
+</code></pre>
+<p><strong>Common Use Cases</strong>:</p>
+<ul>
+<li>Prioritizing backlog items</li>
+<li>Assessing issue urgency</li>
+<li>Resource allocation planning</li>
+</ul>
+<p><strong>Related Commands</strong>: <code>backlog rank</code>, <code>issue review</code></p>
+<hr>
+<h4 id="nia-issue-split"><a class="header" href="#nia-issue-split"><code>nia issue split</code></a></h4>
+<p><strong>Description</strong>: Split a large issue into smaller, manageable work items.</p>
+<p><strong>Required Context</strong>: <code>NIA_ISSUE_ID</code></p>
+<p><strong>Available Modifiers</strong>: None</p>
+<p><strong>Usage Examples</strong>:</p>
+<pre><code class="language-bash"># Split large issue
+nia config set-issue 123
+nia issue split
+</code></pre>
+<p><strong>Common Use Cases</strong>:</p>
+<ul>
+<li>Breaking down epics</li>
+<li>Creating sprint-sized tasks</li>
+<li>Parallel work distribution</li>
+</ul>
+<p><strong>Related Commands</strong>: <code>issue plan</code>, <code>backlog create</code></p>
+<hr>
+<h4 id="nia-issue-ask"><a class="header" href="#nia-issue-ask"><code>nia issue ask</code></a></h4>
+<p><strong>Description</strong>: Ask questions about the current issue context.</p>
+<p><strong>Required Context</strong>: <code>NIA_ISSUE_ID</code></p>
+<p><strong>Available Modifiers</strong>: None</p>
+<p><strong>Usage Examples</strong>:</p>
+<pre><code class="language-bash"># Ask about issue
+export NIA_ISSUE_ID=123
+nia issue ask "What are the main technical challenges?"
+
+# Query issue requirements
+nia issue ask "Are there any missing dependencies?"
+</code></pre>
+<p><strong>Common Use Cases</strong>:</p>
+<ul>
+<li>Understanding issue requirements</li>
+<li>Clarifying technical details</li>
+<li>Exploring implementation options</li>
+</ul>
+<p><strong>Related Commands</strong>: All other <code>issue</code> operations</p>
+<hr>
+<h3 id="backlog-operations"><a class="header" href="#backlog-operations">Backlog Operations</a></h3>
+<p>Commands for strategic planning and backlog management.</p>
+<h4 id="nia-backlog-create"><a class="header" href="#nia-backlog-create"><code>nia backlog create</code></a></h4>
+<p><strong>Description</strong>: Create a strategic planning document or backlog.</p>
+<p><strong>Required Context</strong>: None</p>
+<p><strong>Available Modifiers</strong>: <code>--edit</code></p>
+<p><strong>Usage Examples</strong>:</p>
+<pre><code class="language-bash"># Create backlog document
+nia backlog create
+
+# Create with editing instructions
+nia backlog create --edit
+</code></pre>
+<p><strong>Common Use Cases</strong>:</p>
+<ul>
+<li>Quarterly planning</li>
+<li>Product roadmap creation</li>
+<li>Feature prioritization</li>
+</ul>
+<p><strong>Related Commands</strong>: <code>backlog review</code>, <code>backlog rank</code></p>
+<hr>
+<h4 id="nia-backlog-review"><a class="header" href="#nia-backlog-review"><code>nia backlog review</code></a></h4>
+<p><strong>Description</strong>: Review backlog health, quality, and completeness.</p>
+<p><strong>Required Context</strong>: Existing backlog document</p>
+<p><strong>Available Modifiers</strong>: <code>--edit</code></p>
+<p><strong>Usage Examples</strong>:</p>
+<pre><code class="language-bash"># Review backlog
+nia backlog review
+
+# Review with editing instructions
+nia backlog review --edit
+</code></pre>
+<p><strong>Common Use Cases</strong>:</p>
+<ul>
+<li>Sprint planning preparation</li>
+<li>Identifying backlog gaps</li>
+<li>Quality assurance</li>
+</ul>
+<p><strong>Related Commands</strong>: <code>backlog rank</code>, <code>issue triage</code></p>
+<hr>
+<h4 id="nia-backlog-rank"><a class="header" href="#nia-backlog-rank"><code>nia backlog rank</code></a></h4>
+<p><strong>Description</strong>: Rank backlog items by priority, impact, and dependencies.</p>
+<p><strong>Required Context</strong>: Existing backlog document</p>
+<p><strong>Available Modifiers</strong>: <code>--edit</code></p>
+<p><strong>Usage Examples</strong>:</p>
+<pre><code class="language-bash"># Rank backlog items
+nia backlog rank
+
+# Rank with editing instructions
+nia backlog rank --edit
+</code></pre>
+<p><strong>Common Use Cases</strong>:</p>
+<ul>
+<li>Sprint planning</li>
+<li>Resource allocation</li>
+<li>Release planning</li>
+</ul>
+<p><strong>Related Commands</strong>: <code>backlog review</code>, <code>issue triage</code></p>
+<hr>
+<h4 id="nia-backlog-ask"><a class="header" href="#nia-backlog-ask"><code>nia backlog ask</code></a></h4>
+<p><strong>Description</strong>: Ask questions about backlog strategy and planning.</p>
+<p><strong>Required Context</strong>: None (context-dependent)</p>
+<p><strong>Available Modifiers</strong>: None</p>
+<p><strong>Usage Examples</strong>:</p>
+<pre><code class="language-bash"># Query backlog strategy
+nia backlog ask "What should we prioritize for Q2?"
+
+# Ask about technical debt
+nia backlog ask "How much technical debt is in the backlog?"
+</code></pre>
+<p><strong>Common Use Cases</strong>:</p>
+<ul>
+<li>Strategic planning</li>
+<li>Understanding priorities</li>
+<li>Backlog analysis</li>
+</ul>
+<p><strong>Related Commands</strong>: All other <code>backlog</code> operations</p>
+<hr>
+<h3 id="code-operations"><a class="header" href="#code-operations">Code Operations</a></h3>
+<p>Commands for code generation, review, and maintenance.</p>
+<h4 id="nia-code-create"><a class="header" href="#nia-code-create"><code>nia code create</code></a></h4>
+<p><strong>Description</strong>: Generate new code with AI assistance.</p>
+<p><strong>Required Context</strong>: None (optional: <code>NIA_ISSUE_ID</code>)</p>
+<p><strong>Available Modifiers</strong>: <code>--fix</code></p>
+<p><strong>Usage Examples</strong>:</p>
+<pre><code class="language-bash"># Create code for current issue
+export NIA_ISSUE_ID=123
+nia code create
+
+# Create with fix instructions
+nia code create --fix
+</code></pre>
+<p><strong>Common Use Cases</strong>:</p>
+<ul>
+<li>Implementing new features</li>
+<li>Creating boilerplate code</li>
+<li>Generating test cases</li>
+</ul>
+<p><strong>Related Commands</strong>: <code>issue plan</code>, <code>code review</code>, <code>code test</code></p>
+<hr>
+<h4 id="nia-code-review"><a class="header" href="#nia-code-review"><code>nia code review</code></a></h4>
+<p><strong>Description</strong>: Review code quality, patterns, and best practices.</p>
+<p><strong>Required Context</strong>: None (reviews working directory changes)</p>
+<p><strong>Available Modifiers</strong>: <code>--edit</code></p>
+<p><strong>Available Options</strong>: <code>--auto-fix &lt;LEVEL&gt;</code> (requires <code>.nia/work/job_&lt;id&gt;/code/review.md</code>; run <code>nia code review</code> first)</p>
+<p><strong>Usage Examples</strong>:</p>
+<pre><code class="language-bash"># Review code changes
+nia code review
+
+# Review with editing instructions
+nia code review --edit
+
+# Auto-fix all issues from review
+nia code review --auto-fix issues
+
+# Auto-fix only critical issues
+nia code review --auto-fix critical
+</code></pre>
+<p><strong>Common Use Cases</strong>:</p>
+<ul>
+<li>Pre-commit code review</li>
+<li>Code quality improvement</li>
+<li>Learning best practices</li>
+<li>Automatic issue fixing</li>
+</ul>
+<p><strong>Related Commands</strong>: <code>pr review</code>, <code>code refactor</code></p>
+<hr>
+<h4 id="nia-code-refactor"><a class="header" href="#nia-code-refactor"><code>nia code refactor</code></a></h4>
+<p><strong>Description</strong>: Restructure existing code to improve quality and maintainability.</p>
+<p><strong>Required Context</strong>: None (operates on current directory)</p>
+<p><strong>Available Modifiers</strong>: <code>--fix</code></p>
+<p><strong>Usage Examples</strong>:</p>
+<pre><code class="language-bash"># Refactor code
+nia code refactor
+
+# Apply refactorings using your instructions
+nia code refactor --fix
+</code></pre>
+<p><strong>Common Use Cases</strong>:</p>
+<ul>
+<li>Technical debt reduction</li>
+<li>Code modernization</li>
+<li>Performance optimization</li>
+</ul>
+<p><strong>Related Commands</strong>: <code>code review</code>, <code>code test</code></p>
+<hr>
+<h4 id="nia-code-document"><a class="header" href="#nia-code-document"><code>nia code document</code></a></h4>
+<p><strong>Description</strong>: Generate code documentation (comments, README, API docs).</p>
+<p><strong>Required Context</strong>: None (documents current directory)</p>
+<p><strong>Available Modifiers</strong>: <code>--edit</code></p>
+<p><strong>Usage Examples</strong>:</p>
+<pre><code class="language-bash"># Generate documentation
+nia code document
+
+# Generate with editing instructions
+nia code document --edit
+</code></pre>
+<p><strong>Common Use Cases</strong>:</p>
+<ul>
+<li>API documentation</li>
+<li>Code comment generation</li>
+<li>README updates</li>
+</ul>
+<p><strong>Related Commands</strong>: <code>docs create</code>, <code>docs build</code></p>
+<hr>
+<h4 id="nia-code-build"><a class="header" href="#nia-code-build"><code>nia code build</code></a></h4>
+<p><strong>Description</strong>: Compile and build code, diagnose build issues.</p>
+<p><strong>Required Context</strong>: None (builds current project)</p>
+<p><strong>Available Modifiers</strong>: None</p>
+<p><strong>Usage Examples</strong>:</p>
+<pre><code class="language-bash"># Build project
+nia code build
+</code></pre>
+<p><strong>Common Use Cases</strong>:</p>
+<ul>
+<li>Fixing build errors</li>
+<li>Dependency resolution</li>
+<li>Build optimization</li>
+</ul>
+<p><strong>Related Commands</strong>: <code>code test</code>, <code>code create</code></p>
+<hr>
+<h4 id="nia-code-test"><a class="header" href="#nia-code-test"><code>nia code test</code></a></h4>
+<p><strong>Description</strong>: Execute test suites and analyze test results.</p>
+<p><strong>Required Context</strong>: None (tests current project)</p>
+<p><strong>Available Modifiers</strong>: None</p>
+<p><strong>Usage Examples</strong>:</p>
+<pre><code class="language-bash"># Run tests
+nia code test
+</code></pre>
+<p><strong>Common Use Cases</strong>:</p>
+<ul>
+<li>Running test suites</li>
+<li>Fixing failing tests</li>
+<li>Test coverage analysis</li>
+</ul>
+<p><strong>Related Commands</strong>: <code>code build</code>, <code>code review</code></p>
+<hr>
+<h4 id="nia-code-ask"><a class="header" href="#nia-code-ask"><code>nia code ask</code></a></h4>
+<p><strong>Description</strong>: Ask questions about code in your repository.</p>
+<p><strong>Required Context</strong>: None (context-dependent)</p>
+<p><strong>Available Modifiers</strong>: None</p>
+<p><strong>Usage Examples</strong>:</p>
+<pre><code class="language-bash"># Ask about code architecture
+nia code ask "How does authentication work?"
+
+# Query specific functionality
+nia code ask "Where is user validation implemented?"
+</code></pre>
+<p><strong>Common Use Cases</strong>:</p>
+<ul>
+<li>Code exploration</li>
+<li>Understanding architecture</li>
+<li>Finding implementations</li>
+</ul>
+<p><strong>Related Commands</strong>: All other <code>code</code> operations</p>
+<hr>
+<h3 id="pr-operations"><a class="header" href="#pr-operations">PR Operations</a></h3>
+<p>Commands for pull request management.</p>
+<h4 id="nia-pr-draft"><a class="header" href="#nia-pr-draft"><code>nia pr draft</code></a></h4>
+<p><strong>Description</strong>: Create a pull request draft with generated title and description.</p>
+<p><strong>Required Context</strong>: <code>NIA_ISSUE_ID</code>, <code>NIA_PR_ID</code> (optional)</p>
+<p><strong>Available Modifiers</strong>: <code>--edit</code></p>
+<p><strong>Usage Examples</strong>:</p>
+<pre><code class="language-bash"># Create PR draft
+export NIA_ISSUE_ID=123
+nia pr draft
+
+# Create with editing instructions
+nia pr draft --edit
+</code></pre>
+<p><strong>Common Use Cases</strong>:</p>
+<ul>
+<li>Creating pull requests</li>
+<li>Generating PR descriptions</li>
+<li>Linking PRs to issues</li>
+</ul>
+<p><strong>Related Commands</strong>: <code>issue plan</code>, <code>pr review</code>, <code>config set-pr</code></p>
+<hr>
+<h4 id="nia-pr-review"><a class="header" href="#nia-pr-review"><code>nia pr review</code></a></h4>
+<p><strong>Description</strong>: Review a pull request for quality, completeness, and best practices.</p>
+<p><strong>Required Context</strong>: <code>NIA_ISSUE_ID</code>, <code>NIA_PR_ID</code></p>
+<p><strong>Available Modifiers</strong>: <code>--edit</code></p>
+<p><strong>Usage Examples</strong>:</p>
+<pre><code class="language-bash"># Review current PR
+export NIA_ISSUE_ID=123 NIA_PR_ID=456
+nia pr review
+
+# Review with editing instructions
+nia pr review --edit
+</code></pre>
+<p><strong>Common Use Cases</strong>:</p>
+<ul>
+<li>Pre-merge code review</li>
+<li>Quality assurance</li>
+<li>Finding potential issues</li>
+</ul>
+<p><strong>Related Commands</strong>: <code>code review</code>, <code>pr merge</code></p>
+<hr>
+<h4 id="nia-pr-merge"><a class="header" href="#nia-pr-merge"><code>nia pr merge</code></a></h4>
+<p><strong>Description</strong>: Analyze merge safety, check CI status, and prepare for merge.</p>
+<p><strong>Required Context</strong>: <code>NIA_ISSUE_ID</code>, <code>NIA_PR_ID</code></p>
+<p><strong>Available Modifiers</strong>: <code>--fix</code></p>
+<p><strong>Usage Examples</strong>:</p>
+<pre><code class="language-bash"># Check merge readiness
+nia config set-issue 123
+nia config set-pr 456
+nia pr merge
+
+# Fix merge issues and CI failures
+nia pr merge --fix
+</code></pre>
+<p><strong>Common Use Cases</strong>:</p>
+<ul>
+<li>Pre-merge validation</li>
+<li>Fixing CI failures</li>
+<li>Resolving merge conflicts</li>
+</ul>
+<p><strong>Related Commands</strong>: <code>pr review</code>, <code>code test</code></p>
+<hr>
+<h4 id="nia-pr-ask"><a class="header" href="#nia-pr-ask"><code>nia pr ask</code></a></h4>
+<p><strong>Description</strong>: Ask questions about a pull request.</p>
+<p><strong>Required Context</strong>: <code>NIA_ISSUE_ID</code>, <code>NIA_PR_ID</code></p>
+<p><strong>Available Modifiers</strong>: None</p>
+<p><strong>Usage Examples</strong>:</p>
+<pre><code class="language-bash"># Ask about PR
+export NIA_ISSUE_ID=123 NIA_PR_ID=456
+nia pr ask "What are the main changes in this PR?"
+
+# Query PR impact
+nia pr ask "Are there any breaking changes?"
+</code></pre>
+<p><strong>Common Use Cases</strong>:</p>
+<ul>
+<li>Understanding PR scope</li>
+<li>Impact analysis</li>
+<li>Review preparation</li>
+</ul>
+<p><strong>Related Commands</strong>: All other <code>pr</code> operations</p>
+<hr>
+<h3 id="docs-operations"><a class="header" href="#docs-operations">Docs Operations</a></h3>
+<p>Commands for documentation management.</p>
+<h4 id="nia-docs-create"><a class="header" href="#nia-docs-create"><code>nia docs create</code></a></h4>
+<p><strong>Description</strong>: Generate documentation or user guides.</p>
+<p><strong>Required Context</strong>: None (context-dependent)</p>
+<p><strong>Available Modifiers</strong>: <code>--edit</code></p>
+<p><strong>Usage Examples</strong>:</p>
+<pre><code class="language-bash"># Create documentation
+nia docs create
+
+# Create with editing instructions
+nia docs create --edit
+</code></pre>
+<p><strong>Common Use Cases</strong>:</p>
+<ul>
+<li>User guide creation</li>
+<li>Tutorial writing</li>
+<li>Documentation updates</li>
+</ul>
+<p><strong>Related Commands</strong>: <code>code document</code>, <code>docs build</code></p>
+<hr>
+<h4 id="nia-docs-build"><a class="header" href="#nia-docs-build"><code>nia docs build</code></a></h4>
+<p><strong>Description</strong>: Build documentation from code (API docs, inline comments).</p>
+<p><strong>Required Context</strong>: None (builds from current directory)</p>
+<p><strong>Available Modifiers</strong>: <code>--dev</code></p>
+<p><strong>Usage Examples</strong>:</p>
+<pre><code class="language-bash"># Build documentation
+nia docs build
+
+# Build for developer audience
+nia docs build --dev
+</code></pre>
+<p><strong>Common Use Cases</strong>:</p>
+<ul>
+<li>API documentation generation</li>
+<li>Reference documentation</li>
+<li>Developer documentation</li>
+</ul>
+<p><strong>Related Commands</strong>: <code>code document</code>, <code>docs create</code></p>
+<hr>
+<h4 id="nia-docs-ask"><a class="header" href="#nia-docs-ask"><code>nia docs ask</code></a></h4>
+<p><strong>Description</strong>: Ask questions about project documentation.</p>
+<p><strong>Required Context</strong>: None (context-dependent)</p>
+<p><strong>Available Modifiers</strong>: None</p>
+<p><strong>Usage Examples</strong>:</p>
+<pre><code class="language-bash"># Ask about documentation
+nia docs ask "What's missing from the user guide?"
+
+# Query documentation coverage
+nia docs ask "Which APIs are undocumented?"
+</code></pre>
+<p><strong>Common Use Cases</strong>:</p>
+<ul>
+<li>Documentation gap analysis</li>
+<li>Finding documentation</li>
+<li>Understanding docs structure</li>
+</ul>
+<p><strong>Related Commands</strong>: All other <code>docs</code> operations</p>
+<hr>
+<h2 id="utility-commands"><a class="header" href="#utility-commands">Utility Commands</a></h2>
+<p>System and configuration management commands.</p>
+<h3 id="config"><a class="header" href="#config">config</a></h3>
+<p>Configuration management for Nia CLI.</p>
+<h4 id="nia-config-show"><a class="header" href="#nia-config-show"><code>nia config show</code></a></h4>
+<p><strong>Description</strong>: Display current Nia configuration.</p>
+<p><strong>Usage Example</strong>:</p>
+<pre><code class="language-bash">nia config show
+</code></pre>
+<hr>
+<h4 id="nia-config-validate"><a class="header" href="#nia-config-validate"><code>nia config validate</code></a></h4>
+<p><strong>Description</strong>: Validate Nia configuration files for errors.</p>
+<p><strong>Usage Example</strong>:</p>
+<pre><code class="language-bash"># Validate default config
+nia config validate
+
+# Validate specific file
+nia config validate --file .nia/config/commands.toml
+</code></pre>
+<hr>
+<h4 id="nia-config-init"><a class="header" href="#nia-config-init"><code>nia config init</code></a></h4>
+<p><strong>Description</strong>: Initialize the <code>.nia/</code> directory structure in your project.</p>
+<p><strong>Environment Support</strong>:</p>
+<ul>
+<li>✅ Git repository: Full support with commit SHA tracking</li>
+<li>✅ Non-git directory: Full support (commit SHA will be empty in logs)</li>
+<li>✅ VS Code workspace: Works in any folder</li>
+<li>✅ Docker container: Works without git</li>
+</ul>
+<p><strong>Usage Example</strong>:</p>
+<pre><code class="language-bash"># Basic initialization (toolchain only)
+nia config init
+
+# Initialize with specific tools
+nia config init --issues github_issues --code github
+
+# Initialize with agent and model profile (v3.1.0+)
+nia config init --agent github_copilot --models balanced
+nia config init --agent opencode --models stable
+
+# Agent with default profile (stable)
+nia config init --agent github_copilot
+</code></pre>
+<p><strong>Flags</strong>:</p>
+<ul>
+<li><code>--agent &lt;AGENT&gt;</code> - AI agent to configure (required when using –models)
+<ul>
+<li><code>github_copilot</code> - GitHub Copilot CLI</li>
+<li><code>opencode</code> - Multi-provider AI CLI</li>
+</ul>
+</li>
+<li><code>--models &lt;PROFILE&gt;</code> - Model profile for cost/performance tradeoffs (default: stable)
+<ul>
+<li><code>lite</code> - Minimize costs</li>
+<li><code>balanced</code> - Latest generation models</li>
+<li><code>stable</code> - Predictable behaviour (default)</li>
+<li><code>heavy</code> - Maximum quality</li>
+</ul>
+</li>
+<li><code>--issues &lt;TRACKER&gt;</code> - Issue tracker integration</li>
+<li><code>--tickets &lt;PLATFORM&gt;</code> - Ticketing system integration</li>
+<li><code>--code &lt;HOST&gt;</code> - Code hosting platform integration</li>
+</ul>
+<p><strong>Output</strong>:</p>
+<p>In a git repository:</p>
+<pre><code>Initializing .nia directory structure...
+✓ Created .nia/ directory structure
+  - .nia/config/   (configuration files)
+  - .nia/work/     (job outputs)
+  - .nia/prompts/  (custom prompts)
+  Project root: /path/to/project
+
+⚠  Reminder: Add .nia/work/ to .gitignore
+  You may want to commit .nia/config/ and .nia/prompts/
+
+✓ Initialization complete!
+</code></pre>
+<p>In a non-git directory:</p>
+<pre><code>Initializing .nia directory structure...
+✓ Created .nia/ directory structure
+  - .nia/config/   (configuration files)
+  - .nia/work/     (job outputs)
+  - .nia/prompts/  (custom prompts)
+  Project root: /path/to/project
+  Note: Not in a git repository
+
+✓ Initialization complete!
+</code></pre>
+<p><strong>Common Use Cases</strong>:</p>
+<ul>
+<li>Setting up Nia in a new project (git or non-git)</li>
+<li>Reinitializing after directory structure changes</li>
+<li>Creating temporary testing environments</li>
+</ul>
+<hr>
+<h4 id="nia-config-export"><a class="header" href="#nia-config-export"><code>nia config export</code></a></h4>
+<p><strong>Description</strong>: Export built-in workflow definitions to <code>.nia/config/commands.toml</code>.</p>
+<p><strong>Usage Example</strong>:</p>
+<pre><code class="language-bash">nia config export
+</code></pre>
+<p><strong>Common Use Cases</strong>:</p>
+<ul>
+<li>Customizing built-in workflows</li>
+<li>Creating workflow templates</li>
+<li>Understanding workflow structure</li>
+</ul>
+<hr>
+<h4 id="nia-config-set-issue"><a class="header" href="#nia-config-set-issue"><code>nia config set-issue</code></a></h4>
+<p><strong>Description</strong>: Set the current issue ID in context.</p>
+<p><strong>Usage Example</strong>:</p>
+<pre><code class="language-bash"># Set current issue
+nia config set-issue 123
+
+# Use in workflow
+nia issue review
+</code></pre>
+<p><strong>Common Use Cases</strong>:</p>
+<ul>
+<li>Working with specific issues</li>
+<li>Setting context for commands</li>
+<li>Avoiding environment variables</li>
+</ul>
+<p><strong>Related Commands</strong>: <code>config set-pr</code>, <code>config show-context</code></p>
+<hr>
+<h4 id="nia-config-set-pr"><a class="header" href="#nia-config-set-pr"><code>nia config set-pr</code></a></h4>
+<p><strong>Description</strong>: Set the current PR ID in context.</p>
+<p><strong>Usage Example</strong>:</p>
+<pre><code class="language-bash"># Set current PR
+nia config set-pr 456
+
+# Use in workflow
+nia pr review
+</code></pre>
+<p><strong>Common Use Cases</strong>:</p>
+<ul>
+<li>Working with specific PRs</li>
+<li>Setting context for commands</li>
+<li>Avoiding environment variables</li>
+</ul>
+<p><strong>Related Commands</strong>: <code>config set-issue</code>, <code>config show-context</code></p>
+<hr>
+<h4 id="nia-config-show-context"><a class="header" href="#nia-config-show-context"><code>nia config show-context</code></a></h4>
+<p><strong>Description</strong>: Display current workflow context (issue ID, PR ID, service).</p>
+<p><strong>Usage Example</strong>:</p>
+<pre><code class="language-bash">nia config show-context
+</code></pre>
+<p><strong>Example Output</strong>:</p>
+<pre><code>Context Configuration:
+  Issue ID:   123
+  PR ID:      456
+  Service:    api (services/api)
+</code></pre>
+<p><strong>Related Commands</strong>: <code>config set-issue</code>, <code>config set-pr</code>, <code>config set-service</code>, <code>config clear-context</code></p>
+<hr>
+<h4 id="nia-config-clear-context"><a class="header" href="#nia-config-clear-context"><code>nia config clear-context</code></a></h4>
+<p><strong>Description</strong>: Clear both Issue ID and PR ID from the workflow context file.</p>
+<p><strong>Usage Example</strong>:</p>
+<pre><code class="language-bash"># Set context
+nia config set-issue 42
+nia config set-pr 99
+
+# Clear all context
+nia config clear-context
+
+# Verify context is empty
+nia config show-context
+</code></pre>
+<p><strong>Common Use Cases</strong>:</p>
+<ul>
+<li>Switching between different issues/PRs</li>
+<li>Resetting workflow context</li>
+<li>Cleaning up after completing work</li>
+</ul>
+<p><strong>Note</strong>: This command only clears the context file (<code>.nia/context.toml</code>). If you have set <code>NIA_ISSUE_ID</code> or <code>NIA_PR_ID</code> environment variables, they must be manually unset:</p>
+<pre><code class="language-bash">unset NIA_ISSUE_ID NIA_PR_ID
+</code></pre>
+<p><strong>Related Commands</strong>: <code>config set-issue</code>, <code>config set-pr</code>, <code>config show-context</code>, <code>config clear-issue</code>, <code>config clear-pr</code></p>
+<hr>
+<h4 id="nia-config-clear-issue"><a class="header" href="#nia-config-clear-issue"><code>nia config clear-issue</code></a></h4>
+<p><strong>Description</strong>: Clear the Issue ID from the workflow context, preserving the PR ID.</p>
+<p><strong>Usage Example</strong>:</p>
+<pre><code class="language-bash"># Set both values
+nia config set-issue 42
+nia config set-pr 99
+
+# Clear only issue (PR preserved)
+nia config clear-issue
+
+# Verify - PR should still be set
+nia config show-context
+</code></pre>
+<p><strong>Common Use Cases</strong>:</p>
+<ul>
+<li>Clearing issue context while maintaining PR context</li>
+<li>Switching to a different issue while keeping same PR</li>
+<li>Cleaning up partial context</li>
+</ul>
+<p><strong>Note</strong>: This command only clears the context file. If you have set the <code>NIA_ISSUE_ID</code> environment variable, it must be manually unset:</p>
+<pre><code class="language-bash">unset NIA_ISSUE_ID
+</code></pre>
+<p><strong>Related Commands</strong>: <code>config clear-context</code>, <code>config clear-pr</code>, <code>config set-issue</code>, <code>config show-context</code></p>
+<hr>
+<h4 id="nia-config-clear-pr"><a class="header" href="#nia-config-clear-pr"><code>nia config clear-pr</code></a></h4>
+<p><strong>Description</strong>: Clear the PR ID from the workflow context, preserving the Issue ID.</p>
+<p><strong>Usage Example</strong>:</p>
+<pre><code class="language-bash"># Set both values
+nia config set-issue 42
+nia config set-pr 99
+
+# Clear only PR (issue preserved)
+nia config clear-pr
+
+# Verify - issue should still be set
+nia config show-context
+</code></pre>
+<p><strong>Common Use Cases</strong>:</p>
+<ul>
+<li>Clearing PR context while maintaining issue context</li>
+<li>Switching to a different PR while keeping same issue</li>
+<li>Cleaning up partial context</li>
+</ul>
+<p><strong>Note</strong>: This command only clears the context file. If you have set the <code>NIA_PR_ID</code> environment variable, it must be manually unset:</p>
+<pre><code class="language-bash">unset NIA_PR_ID
+</code></pre>
+<p><strong>Related Commands</strong>: <code>config clear-context</code>, <code>config clear-issue</code>, <code>config set-pr</code>, <code>config show-context</code></p>
+<hr>
+<h4 id="nia-config-set-service"><a class="header" href="#nia-config-set-service"><code>nia config set-service</code></a></h4>
+<p><strong>Description</strong>: Set the current service in context (for monorepo projects).</p>
+<p><strong>Usage Example</strong>:</p>
+<pre><code class="language-bash"># Set current service
+nia config set-service api
+
+# Use in workflow
+nia code implement
+</code></pre>
+<p><strong>Common Use Cases</strong>:</p>
+<ul>
+<li>Working with specific services in a monorepo</li>
+<li>Providing service-specific context to AI agents</li>
+<li>Switching between services</li>
+</ul>
+<p><strong>Prerequisites</strong>:</p>
+<ul>
+<li>Monorepo mode must be enabled in <code>project.toml</code></li>
+<li>Service must be defined in <code>[[monorepo.services]]</code></li>
+</ul>
+<p><strong>Related Commands</strong>: <code>config clear-service</code>, <code>config show-context</code></p>
+<p><strong>Related Documentation</strong>: <a href="../advanced/monorepo.html">Monorepo Support Guide</a></p>
+<hr>
+<h4 id="nia-config-clear-service"><a class="header" href="#nia-config-clear-service"><code>nia config clear-service</code></a></h4>
+<p><strong>Description</strong>: Clear service selection from context (reverts to project-wide mode).</p>
+<p><strong>Usage Example</strong>:</p>
+<pre><code class="language-bash"># Set service
+nia config set-service api
+
+# Clear service selection
+nia config clear-service
+
+# Verify service is cleared
+nia config show-context
+</code></pre>
+<p><strong>Common Use Cases</strong>:</p>
+<ul>
+<li>Switching to project-wide operations</li>
+<li>Working across multiple services</li>
+<li>Resetting service context after focused work</li>
+</ul>
+<p><strong>Related Commands</strong>: <code>config set-service</code>, <code>config show-context</code></p>
+<p><strong>Related Documentation</strong>: <a href="../advanced/monorepo.html">Monorepo Support Guide</a></p>
+<hr>
+<h3 id="guide"><a class="header" href="#guide">guide</a></h3>
+<p>Open Nia user documentation.</p>
+<p><strong>Description</strong>: Open the Nia user guide in your default browser.</p>
+<p><strong>Usage Examples</strong>:</p>
+<pre><code class="language-bash"># Open full guide
+nia guide
+
+# Open specific section (if available)
+nia guide getting-started
+</code></pre>
+<hr>
+<h3 id="shell"><a class="header" href="#shell">shell</a></h3>
+<p>Shell completion management.</p>
+<h4 id="nia-shell-install"><a class="header" href="#nia-shell-install"><code>nia shell install</code></a></h4>
+<p><strong>Description</strong>: Install shell completions for your shell.</p>
+<p><strong>Usage Example</strong>:</p>
+<pre><code class="language-bash"># Auto-detect and install
+nia shell install
+
+# Install for specific shell
+nia shell install bash
+nia shell install zsh
+nia shell install fish
+</code></pre>
+<hr>
+<h4 id="nia-shell-uninstall"><a class="header" href="#nia-shell-uninstall"><code>nia shell uninstall</code></a></h4>
+<p><strong>Description</strong>: Uninstall shell completions.</p>
+<p><strong>Usage Example</strong>:</p>
+<pre><code class="language-bash">nia shell uninstall
+</code></pre>
+<hr>
+<h4 id="nia-shell-generate"><a class="header" href="#nia-shell-generate"><code>nia shell generate</code></a></h4>
+<p><strong>Description</strong>: Generate shell completion script (for manual installation).</p>
+<p><strong>Usage Example</strong>:</p>
+<pre><code class="language-bash"># Generate for bash
+nia shell generate bash &gt; nia-completions.bash
+
+# Generate for zsh
+nia shell generate zsh &gt; _neo
+</code></pre>
+<hr>
+<h3 id="status"><a class="header" href="#status">status</a></h3>
+<p>System status check.</p>
+<p><strong>Description</strong>: Check Nia configuration, project root detection, and agent connectivity.</p>
+<p><strong>Usage Examples</strong>:</p>
+<pre><code class="language-bash"># Quick status check
+nia status
+
+# Verbose diagnostics
+nia status --verbose
+</code></pre>
+<p><strong>Example Output</strong>:</p>
+<pre><code>Nia Status Check
+=================
+
+ℹ  Project Root: /path/to/your/project
+   Detected via: .git/ directory
+✓  Nia: Initialized
+ℹ  Coding Agent: GitHub Copilot (authenticated)
+✓  Toolchain: Configured
+   Issue Tracker: github_issues (cli)
+   Code Platform: github (cli)
+</code></pre>
+<p><strong>Project Root Detection</strong>:</p>
+<p>The status command shows how Nia detected your project root:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Detection Method</th><th>Meaning</th></tr>
+</thead>
+<tbody>
+<tr><td><code>.git/</code> directory</td><td>Found git repository root</td></tr>
+<tr><td><code>.nia/</code> directory</td><td>Found existing Nia installation</td></tr>
+<tr><td>current working directory</td><td>No markers found, using CWD</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Common Use Cases</strong>:</p>
+<ul>
+<li>Troubleshooting setup</li>
+<li>Verifying configuration</li>
+<li>Checking agent availability</li>
+<li>Confirming project root detection</li>
+</ul>
+<hr>
+<h3 id="workflow"><a class="header" href="#workflow">workflow</a></h3>
+<p>Workflow definition management and visualization tools.</p>
+<h4 id="nia-workflow-run"><a class="header" href="#nia-workflow-run"><code>nia workflow run</code></a></h4>
+<p><strong>Description</strong>: Execute a stateful workflow from a TOML definition.</p>
+<p><strong>Usage Example</strong>:</p>
+<pre><code class="language-bash"># Run a workflow
+nia workflow run issue-to-pr
+
+# Run with specific context
+export NIA_ISSUE_ID=123
+nia workflow run issue-to-pr
+
+# List all states in a workflow
+nia workflow run issue-to-pr --list-states
+
+# Start from a specific step
+nia workflow run issue-to-pr --start-from create_code
+
+# Validate without executing
+nia workflow run issue-to-pr --dry-run
+</code></pre>
+<p><strong>Options</strong>:</p>
+<ul>
+<li>
+<p><code>--list-states</code>, <code>-l</code> - List all workflow states without executing</p>
+<ul>
+<li>Displays state names, types, and descriptions</li>
+<li>Use to discover valid values for <code>--start-from</code> and <code>--resume-at</code></li>
+<li>No workflow execution or lock acquisition occurs</li>
+<li>Output shows initial state with <code>*</code> marker</li>
+</ul>
+</li>
+<li>
+<p><code>--start-from &lt;state&gt;</code> - Resume execution from a specific state</p>
+</li>
+<li>
+<p><code>--bypass-approvals</code> - Skip approval gates during execution</p>
+</li>
+<li>
+<p><code>--dry-run</code> - Validate workflow without executing</p>
+</li>
+</ul>
+<p><strong>Common Use Cases</strong>:</p>
+<ul>
+<li>Executing multi-step automated workflows</li>
+<li>Running pre-defined process flows</li>
+<li>Automating complex task sequences</li>
+<li>Discovering available workflow states for resumption</li>
+</ul>
+<p><strong>Related Commands</strong>: <code>workflow list</code>, <code>workflow graph</code>, <code>workflow status</code></p>
+<hr>
+<blockquote>
+<p><strong>Tip</strong>: Use <code>--list-states</code> to discover valid state names before using <code>--start-from</code> to resume workflows.</p>
+</blockquote>
+<hr>
+<h4 id="nia-workflow-graph"><a class="header" href="#nia-workflow-graph"><code>nia workflow graph</code></a></h4>
+<p><strong>Description</strong>: Generate a visual Mermaid state diagram of a workflow.</p>
+<p><strong>Usage Example</strong>:</p>
+<pre><code class="language-bash"># Generate diagram file for one workflow
+nia workflow graph issue-to-pr
+
+# Generate diagrams for all workflows
+nia workflow graph --all
+
+# Print to stdout
+nia workflow graph linear-test --print
+
+# Print all diagrams to stdout
+nia workflow graph --all --print
+
+# Quiet mode (no success message)
+nia workflow graph branch-test --quiet
+</code></pre>
+<p><strong>Options</strong>:</p>
+<ul>
+<li><code>--all</code> (<code>-a</code>) - Generate diagrams for all workflows</li>
+<li><code>--print</code> (<code>-p</code>) - Output diagram(s) to stdout instead of file(s)</li>
+<li><code>--quiet</code> (<code>-q</code>) - Suppress success messages</li>
+</ul>
+<p><strong>Output</strong>:</p>
+<ul>
+<li>Built-in workflows: Creates <code>.nia/config/workflows/&lt;workflow-name&gt;.md</code></li>
+<li>User-defined workflows: Creates <code>&lt;workflow-name&gt;.md</code> alongside the workflow TOML file</li>
+<li>Mermaid diagram renders natively in GitHub markdown</li>
+<li>The <code>.nia/config/workflows/</code> directory is created automatically if it doesn’t exist</li>
+</ul>
+<p><strong>Diagram Features</strong>:</p>
+<p>The generated diagram includes:</p>
+<p><strong>State Types</strong> (color-coded borders):</p>
+<ul>
+<li>🔵 Blue (thick) - Initial state</li>
+<li>🔵 Blue - Command operation</li>
+<li>🟢 Teal - Step operation</li>
+<li>🟡 Amber - Check operation</li>
+<li>🟣 Purple - Approval gate</li>
+<li>🟢 Green - Success terminal</li>
+<li>🔴 Red - Failed terminal</li>
+<li>⚪ Gray (dashed) - Cancelled terminal</li>
+</ul>
+<p><strong>Transitions</strong>:</p>
+<ul>
+<li><code>──▶</code> Solid arrow - Success path</li>
+<li><code>╌╌▶</code> Dashed arrow - Failure path</li>
+<li><code>····▶</code> Dotted arrow - Escape condition</li>
+</ul>
+<p><strong>Additional Features</strong>:</p>
+<ul>
+<li>Loop indicators for states with loop_enabled</li>
+<li>Orphaned state detection and warnings</li>
+<li>Smart label truncation for readability</li>
+<li>Legend explaining state types and transitions</li>
+</ul>
+<p><strong>Example Output</strong>:</p>
+<pre><code class="language-mermaid">stateDiagram-v2
+    direction TB
+
+    state "Generate plan" as start
+    state "Review plan" as review
+    state "Complete" as done
+
+    [*] --&gt; start
+    start --&gt; review: success
+    start -.-&gt; failed: failure
+    review --&gt; done: success
+    done --&gt; [*]
+
+    classDef initial stroke:#3b82f6,stroke-width:3px
+    classDef success stroke:#22c55e,stroke-width:3px
+    class start initial
+    class done success
+</code></pre>
+<p><strong>Common Use Cases</strong>:</p>
+<ul>
+<li>Understanding workflow structure</li>
+<li>Documenting process flows</li>
+<li>Reviewing complex workflows visually</li>
+<li>Debugging state transitions</li>
+<li>Creating workflow documentation</li>
+</ul>
+<p><strong>Error Messages</strong>:</p>
+<p>If workflow not found, suggestions are provided:</p>
+<pre><code>Error: Workflow 'issue-pr' not found
+
+Did you mean one of these?
+  - issue-to-pr
+  - linear-test
+</code></pre>
+<p><strong>Related Commands</strong>: <code>workflow run</code>, <code>workflow list</code></p>
+<hr>
+<h2 id="global-workflow-flags"><a class="header" href="#global-workflow-flags">Global Workflow Flags</a></h2>
+<p>The following flags are available on all workflow commands (<code>issue</code>, <code>code</code>, <code>pr</code>, <code>docs</code>, <code>backlog</code>, <code>ticket</code>) but NOT on utility commands (<code>config</code>, <code>guide</code>, <code>shell</code>, <code>status</code>, <code>workflow</code>).</p>
+<h3 id="model-flag"><a class="header" href="#model-flag">–model Flag</a></h3>
+<p>Override the AI model for this execution, bypassing configured model selection.</p>
+<p><strong>Availability:</strong> All workflow commands (<code>issue</code>, <code>code</code>, <code>pr</code>, <code>docs</code>, <code>backlog</code>, <code>ticket</code>, <code>ask</code>)</p>
+<p><strong>Short form:</strong> <code>-m</code></p>
+<p><strong>NOT available on:</strong> Utility commands (<code>config</code>, <code>guide</code>, <code>shell</code>, <code>status</code>)</p>
+<h4 id="purpose"><a class="header" href="#purpose">Purpose</a></h4>
+<p>The <code>--model</code> flag allows you to override the AI model on a per-command basis. The CLI argument takes precedence over all configuration-based model selection (operation-specific, target-specific, and default models).</p>
+<h4 id="usage-examples"><a class="header" href="#usage-examples">Usage Examples</a></h4>
+<pre><code class="language-bash"># Use a specific model for this execution
+nia issue draft --model claude-sonnet-4
+
+# Short form
+nia code create -m claude-opus-4.5
+
+# Combine with other flags
+nia issue plan --model claude-opus-4.5 --role software_architect
+
+# Override for quick fixes
+nia code fix -m claude-haiku-4.5
+
+# Override for ask command
+nia ask --model claude-sonnet-4 "How does authentication work?"
+</code></pre>
+<h4 id="model-precedence"><a class="header" href="#model-precedence">Model Precedence</a></h4>
+<p>When <code>--model</code> is specified, it takes highest precedence:</p>
+<p><strong>CLI argument (–model) &gt; Operation config &gt; Target config &gt; Default config</strong></p>
+<pre><code class="language-bash"># Even if agents.toml specifies claude-sonnet-4.5 for issue.draft,
+# this command will use claude-opus-4.5
+nia issue draft --model claude-opus-4.5
+</code></pre>
+<h4 id="available-models"><a class="header" href="#available-models">Available Models</a></h4>
+<p>Available models depend on your configured agent. Use <code>nia status</code> to see available models for your agent:</p>
+<p><strong>GitHub Copilot CLI:</strong></p>
+<ul>
+<li>Standard: <code>claude-sonnet-4.5</code>, <code>claude-sonnet-4.5</code>, <code>gpt-5.2</code>, <code>gpt-5.1</code></li>
+<li>Fast/Cheap: <code>claude-haiku-4.5</code>, <code>gpt-5-mini</code>, <code>gpt-4.1</code></li>
+<li>Premium: <code>claude-opus-4.5</code>, <code>claude-opus-4.5</code>, <code>gpt-5.1-codex-max</code></li>
+</ul>
+<h4 id="invalid-model-error"><a class="header" href="#invalid-model-error">Invalid Model Error</a></h4>
+<p>If you specify an invalid model, you’ll see a clear error with available options:</p>
+<pre><code class="language-bash">$ nia issue draft --model nonexistent-model
+Error: Invalid model 'nonexistent-model' for agent 'github_copilot'.
+
+Available models:
+  claude-sonnet-4.5, claude-haiku-4.5,
+  claude-opus-4.5, claude-opus-4.5, gpt-5.2, gpt-5.1, ...
+
+Use 'nia status' to see model details and pricing tiers.
+</code></pre>
+<h4 id="when-to-use"><a class="header" href="#when-to-use">When to Use</a></h4>
+<p><strong>Use <code>--model</code> when you want to:</strong></p>
+<ul>
+<li>Try a different model for a specific task</li>
+<li>Use a premium model for complex work</li>
+<li>Use a faster model for quick iterations</li>
+<li>Compare model performance on the same task</li>
+<li>Override team defaults for your local workflow</li>
+</ul>
+<p><strong>Use configuration (<code>agents.toml</code>) when you want to:</strong></p>
+<ul>
+<li>Set consistent defaults for your team</li>
+<li>Define operation-specific model strategies</li>
+<li>Manage model selection centrally</li>
+</ul>
+<h4 id="interaction-with-configuration"><a class="header" href="#interaction-with-configuration">Interaction with Configuration</a></h4>
+<p>The <code>--model</code> flag is independent of configuration file settings:</p>
+<pre><code class="language-toml"># .nia/config/agents.toml
+[agent.github_copilot.operations]
+"issue.draft" = "claude-opus-4.5"  # Config says opus
+</code></pre>
+<pre><code class="language-bash"># CLI override wins
+nia issue draft --model claude-haiku-4.5  # Uses haiku, not opus
+</code></pre>
+<p>See <a href="../agents/model-selection.html">Model Selection Guide</a> for details on configuring default models.</p>
+<hr>
+<h3 id="role-flag"><a class="header" href="#role-flag">–role Flag</a></h3>
+<p>Override the default AI role for workflow command execution.</p>
+<p><strong>Availability:</strong> All workflow commands (<code>issue</code>, <code>code</code>, <code>pr</code>, <code>docs</code>, <code>backlog</code>, <code>ticket</code>)</p>
+<p><strong>Short form:</strong> <code>-r</code></p>
+<p><strong>NOT available on:</strong> Utility commands (<code>config</code>, <code>guide</code>, <code>shell</code>, <code>status</code>)</p>
+<h4 id="valid-role-values"><a class="header" href="#valid-role-values">Valid Role Values</a></h4>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Role</th><th>Description</th><th>Best For</th></tr>
+</thead>
+<tbody>
+<tr><td><code>product_manager</code></td><td>Product strategy and requirements</td><td>Issue drafting, backlog planning</td></tr>
+<tr><td><code>software_architect</code></td><td>System design and architecture</td><td>Issue planning, code review</td></tr>
+<tr><td><code>software_engineer</code></td><td>Implementation and coding</td><td>Code operations, PR work</td></tr>
+<tr><td><code>technical_writer</code></td><td>Documentation and clarity</td><td>Docs operations, issue review</td></tr>
+</tbody>
+</table>
+</div>
+<h4 id="usage-examples-1"><a class="header" href="#usage-examples-1">Usage Examples</a></h4>
+<pre><code class="language-bash"># Override role for issue planning
+nia issue plan --role software_architect
+
+# Use short form
+nia code review -r software_engineer
+
+# Combine with other flags
+nia issue draft --role product_manager --agent copilot
+
+# Technical writer for documentation-heavy work
+nia docs create --role technical_writer
+</code></pre>
+<h4 id="default-role-assignments"><a class="header" href="#default-role-assignments">Default Role Assignments</a></h4>
+<p>Each workflow operation has a default role:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Target</th><th>Default Role</th></tr>
+</thead>
+<tbody>
+<tr><td><code>issue</code></td><td><code>product_manager</code></td></tr>
+<tr><td><code>code</code></td><td><code>software_engineer</code></td></tr>
+<tr><td><code>pr</code></td><td><code>software_engineer</code></td></tr>
+<tr><td><code>docs</code></td><td><code>technical_writer</code></td></tr>
+<tr><td><code>backlog</code></td><td><code>product_manager</code></td></tr>
+</tbody>
+</table>
+</div>
+<h4 id="interaction-with-custom-agent"><a class="header" href="#interaction-with-custom-agent">Interaction with –custom-agent</a></h4>
+<p>When using <code>--custom-agent</code>, the <code>--role</code> flag is ignored because custom agents define their own personas:</p>
+<pre><code class="language-bash"># Warning: --role ignored when --custom-agent is specified
+nia issue draft --custom-agent security-expert --role product_manager
+# Output: Warning: Ignoring --role 'product_manager' because --custom-agent 'security-expert' is specified.
+</code></pre>
+<p>See <a href="../agents/custom-agent-configurations.html">Custom Agent Configurations</a> for details.</p>
+<hr>
+<h3 id="context-file-flag"><a class="header" href="#context-file-flag">–context-file Flag</a></h3>
+<p>Include additional file contents as context for AI agent execution.</p>
+<p><strong>Availability:</strong> All workflow commands</p>
+<p><strong>Short form:</strong> <code>-c</code></p>
+<p><strong>Repeatable:</strong> Yes (can specify multiple files)</p>
+<h4 id="purpose-1"><a class="header" href="#purpose-1">Purpose</a></h4>
+<p>The <code>--context-file</code> flag allows you to provide additional context to the AI agent beyond what’s automatically included. This is useful when:</p>
+<ul>
+<li>Working with files not in the standard job directory</li>
+<li>Providing architectural documentation</li>
+<li>Including example code or patterns</li>
+<li>Adding requirements documents</li>
+</ul>
+<h4 id="usage-examples-2"><a class="header" href="#usage-examples-2">Usage Examples</a></h4>
+<pre><code class="language-bash"># Single context file
+nia issue draft --context-file docs/architecture.md
+
+# Multiple context files
+nia code create --context-file docs/design.md --context-file examples/reference.rs
+
+# Using short form with multiple files
+nia issue plan -c docs/requirements.md -c specs/api.yaml -c CHANGELOG.md
+
+# Combine with other workflow flags
+nia code review --context-file docs/style-guide.md --role software_architect
+</code></pre>
+<h4 id="path-handling"><a class="header" href="#path-handling">Path Handling</a></h4>
+<p>Both relative and absolute paths are supported:</p>
+<pre><code class="language-bash"># Relative path (from current directory)
+nia code create --context-file ./docs/design.md
+
+# Absolute path
+nia code create --context-file /project/shared/patterns.md
+
+# Multiple path types
+nia issue draft -c docs/local.md -c /shared/global-standards.md
+</code></pre>
+<h4 id="context-window-considerations"><a class="header" href="#context-window-considerations">Context Window Considerations</a></h4>
+<p>Each context file’s contents are included in the prompt sent to the AI agent. Consider:</p>
+<ol>
+<li><strong>File size:</strong> Large files consume context window capacity</li>
+<li><strong>Relevance:</strong> Include only files relevant to the task</li>
+<li><strong>Prioritization:</strong> Most important files should be listed first</li>
+<li><strong>Token limits:</strong> AI models have context limits (8K-128K+ tokens)</li>
+</ol>
+<p><strong>Best practices:</strong></p>
+<ul>
+<li>Use concise, focused files</li>
+<li>Prefer markdown or text files</li>
+<li>Avoid binary files</li>
+<li>Limit to 3-5 context files per operation</li>
+</ul>
+<h4 id="validation"><a class="header" href="#validation">Validation</a></h4>
+<p>Invalid paths result in clear error messages:</p>
+<pre><code class="language-bash">$ nia code create --context-file nonexistent.md
+Error: Context file not found: nonexistent.md
+
+Verify the file exists and the path is correct.
+</code></pre>
+<h4 id="use-case-examples"><a class="header" href="#use-case-examples">Use Case Examples</a></h4>
+<p><strong>Architecture reference:</strong></p>
+<pre><code class="language-bash">nia code create --context-file docs/architecture.md --context-file docs/api-design.md
+</code></pre>
+<p><strong>Style guide enforcement:</strong></p>
+<pre><code class="language-bash">nia code review --context-file .github/STYLE_GUIDE.md
+</code></pre>
+<p><strong>Cross-reference related issues:</strong></p>
+<pre><code class="language-bash">nia issue draft --context-file .nia/work/job_41/issue/issue.md
+</code></pre>
+<hr>
+<h3 id="context-dir-flag"><a class="header" href="#context-dir-flag">–context-dir Flag</a></h3>
+<p>Include all text files from a directory (and subdirectories) as context for AI agent execution.</p>
+<p><strong>Availability:</strong> All workflow commands</p>
+<p><strong>Short form:</strong> None</p>
+<p><strong>Repeatable:</strong> Yes (can specify multiple directories)</p>
+<h4 id="purpose-2"><a class="header" href="#purpose-2">Purpose</a></h4>
+<p>The <code>--context-dir</code> flag allows you to provide entire directories of context files to the AI agent. This is useful when:</p>
+<ul>
+<li>Including documentation folders</li>
+<li>Providing example code directories</li>
+<li>Adding pattern libraries</li>
+<li>Including design specification folders</li>
+</ul>
+<h4 id="usage-examples-3"><a class="header" href="#usage-examples-3">Usage Examples</a></h4>
+<pre><code class="language-bash"># Single context directory
+nia issue draft --context-dir docs/
+
+# Multiple context directories
+nia code create --context-dir docs/patterns --context-dir examples/
+
+# Combine with --context-file
+nia code review --context-file docs/checklist.md --context-dir docs/standards/
+
+# With other workflow flags
+nia code create --context-dir docs/api/ --role software_architect
+</code></pre>
+<h4 id="directory-traversal-behavior"><a class="header" href="#directory-traversal-behavior">Directory Traversal Behavior</a></h4>
+<p>The flag automatically:</p>
+<ul>
+<li><strong>Recursively traverses</strong> all subdirectories</li>
+<li><strong>Skips hidden directories</strong> (<code>.git</code>, <code>.nia</code>, <code>node_modules</code>, <code>.venv</code>, etc.)</li>
+<li><strong>Skips binary files</strong> (images, executables, archives, compiled code)</li>
+<li><strong>Includes text files</strong> (markdown, code, config, documentation)</li>
+<li><strong>Deduplicates</strong> files if the same path is encountered multiple times</li>
+</ul>
+<h4 id="limits-and-safety"><a class="header" href="#limits-and-safety">Limits and Safety</a></h4>
+<p>To prevent overwhelming the context window:</p>
+<ul>
+<li><strong>Maximum 100 files</strong> per directory source</li>
+<li><strong>Maximum 1MB</strong> per individual file</li>
+<li><strong>Binary files</strong> are automatically skipped</li>
+<li><strong>Hidden directories</strong> are excluded</li>
+</ul>
+<h4 id="path-handling-1"><a class="header" href="#path-handling-1">Path Handling</a></h4>
+<p>Both relative and absolute paths are supported:</p>
+<pre><code class="language-bash"># Relative path (from current directory)
+nia code create --context-dir ./docs
+
+# Absolute path
+nia code create --context-dir /project/shared/standards
+
+# Multiple path types
+nia issue draft --context-dir docs/ --context-dir /shared/templates/
+</code></pre>
+<h4 id="combining-with-context-file"><a class="header" href="#combining-with-context-file">Combining with –context-file</a></h4>
+<p>The <code>--context-dir</code> and <code>--context-file</code> flags work together seamlessly:</p>
+<pre><code class="language-bash"># Specific file + entire directory
+nia code review \
+  --context-file docs/review-checklist.md \
+  --context-dir docs/patterns/
+
+# Multiple files and directories
+nia issue plan \
+  --context-file requirements.md \
+  --context-file specs/api.yaml \
+  --context-dir docs/architecture/ \
+  --context-dir examples/
+</code></pre>
+<p>Files are deduplicated across all sources, so if a file is referenced multiple times, it’s only included once.</p>
+<h4 id="validation-1"><a class="header" href="#validation-1">Validation</a></h4>
+<p>Invalid paths result in clear error messages:</p>
+<pre><code class="language-bash">$ nia code create --context-dir nonexistent/
+Error: Context directory not found: nonexistent/
+
+Verify the directory exists and the path is correct.
+
+$ nia code create --context-dir README.md
+Error: Path is not a directory: README.md
+
+Use --context-file for individual files, or --context-dir for directories.
+</code></pre>
+<h4 id="use-case-examples-1"><a class="header" href="#use-case-examples-1">Use Case Examples</a></h4>
+<p><strong>Documentation folder:</strong></p>
+<pre><code class="language-bash">nia code create --context-dir docs/
+</code></pre>
+<p><strong>Multiple reference directories:</strong></p>
+<pre><code class="language-bash">nia code review --context-dir docs/standards/ --context-dir docs/patterns/
+</code></pre>
+<p><strong>Architecture documentation with specific checklist:</strong></p>
+<pre><code class="language-bash">nia code create \
+  --context-dir docs/architecture/ \
+  --context-file docs/checklist.md
+</code></pre>
+<p><strong>Example code patterns:</strong></p>
+<pre><code class="language-bash">nia code create --context-dir examples/ --context-dir tests/fixtures/
+</code></pre>
+<h4 id="context-window-considerations-1"><a class="header" href="#context-window-considerations-1">Context Window Considerations</a></h4>
+<p>Each file in the directory is included in the prompt sent to the AI agent. Consider:</p>
+<ol>
+<li><strong>Directory size:</strong> Large directories consume more context capacity</li>
+<li><strong>Relevance:</strong> Include only directories relevant to the task</li>
+<li><strong>Selectivity:</strong> Use <code>--context-file</code> for specific files if you don’t need the whole directory</li>
+<li><strong>File limits:</strong> 100 files per directory; use focused directories</li>
+</ol>
+<p><strong>Best practices:</strong></p>
+<ul>
+<li>Use focused directories (e.g., <code>docs/api/</code> not root <code>docs/</code>)</li>
+<li>Prefer small, relevant documentation folders</li>
+<li>Avoid large directories with many files</li>
+<li>Combine with specific <code>--context-file</code> for critical files</li>
+<li>Test with <code>--print-prompt</code> to verify context size</li>
+</ul>
+<hr>
+<h2 id="global-modifiers"><a class="header" href="#global-modifiers">Global Modifiers</a></h2>
+<p>Modifiers are command-specific flags that alter behavior. Some modifiers accept optional instructions:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Modifier</th><th>Description</th><th>Available On</th></tr>
+</thead>
+<tbody>
+<tr><td><code>--edit [INSTRUCTIONS]</code></td><td>Customize output with optional inline editing instructions</td><td>issue draft/review/plan, backlog create/review/rank, code review/document, pr draft/review, docs create</td></tr>
+<tr><td><code>--fix [INSTRUCTIONS]</code></td><td>Apply fix instructions with optional inline instructions</td><td>code create/refactor, pr merge</td></tr>
+<tr><td><code>--clear</code></td><td>Start a fresh agent session, discarding previous context</td><td>All workflow commands</td></tr>
+<tr><td><code>--dev</code></td><td>Focus on developer/API audience</td><td>docs build</td></tr>
+<tr><td><code>--print-prompt</code></td><td>Display compiled prompt without executing</td><td>All workflow commands</td></tr>
+<tr><td><code>--tail</code></td><td>Watch trace file in real-time</td><td>All workflow commands</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="providing-modifier-instructions"><a class="header" href="#providing-modifier-instructions">Providing Modifier Instructions</a></h3>
+<p>The <code>--edit</code> and <code>--fix</code> modifiers support two ways to provide instructions:</p>
+<h4 id="option-1-inline-instructions-quick--simple"><a class="header" href="#option-1-inline-instructions-quick--simple">Option 1: Inline Instructions (Quick &amp; Simple)</a></h4>
+<p>Pass instructions directly on the command line for simple, one-line edits:</p>
+<pre><code class="language-bash"># Quick edit instruction
+nia issue review --edit "Fix all spelling errors in the requirements"
+
+# Quick fix instruction
+nia code create --fix "Address all TODO comments"
+</code></pre>
+<p><strong>Best for:</strong></p>
+<ul>
+<li>Simple, one-line instructions</li>
+<li>Ad-hoc modifications</li>
+<li>Quick iterations during development</li>
+</ul>
+<h4 id="option-2-file-based-instructions-detailed--complex"><a class="header" href="#option-2-file-based-instructions-detailed--complex">Option 2: File-Based Instructions (Detailed &amp; Complex)</a></h4>
+<p>Create a markdown file with detailed, multi-line instructions:</p>
+<pre><code class="language-bash"># Create detailed instructions file
+cat &gt; .nia/work/job_42/code/fix.md &lt;&lt; 'EOF'
+# Fix Instructions
+
+## Priority Issues
+1. Address all critical TODOs
+2. Fix deprecated API usage
+
+## Style Requirements
+- Use consistent naming conventions
+- Add JSDoc comments to public functions
+
+## Testing
+- Ensure all new code has unit tests
+- Update existing tests for modified behavior
+EOF
+
+# Run with file-based instructions (no argument after --fix)
+nia code create --fix
+</code></pre>
+<p><strong>Best for:</strong></p>
+<ul>
+<li>Multi-line instructions with formatting</li>
+<li>Instructions with code examples</li>
+<li>Reusable instruction templates</li>
+<li>Complex modification requirements</li>
+</ul>
+<p><strong>File Location:</strong></p>
+<ul>
+<li>Edit modifier: <code>.nia/work/job_{ID}/{target}/edit.md</code></li>
+<li>Fix modifier: <code>.nia/work/job_{ID}/{target}/fix.md</code></li>
+</ul>
+<p><strong>Tip:</strong> Use <code>nia status</code> to see your current job ID and context.</p>
+<h3 id="modifier-usage-examples"><a class="header" href="#modifier-usage-examples">Modifier Usage Examples</a></h3>
+<pre><code class="language-bash"># Editing with inline instruction
+nia issue draft --edit "Add acceptance criteria for edge cases"
+
+# Editing with file (create edit.md first)
+nia issue draft --edit
+
+# Fix with inline instruction
+nia code create --fix "Use async/await instead of callbacks"
+
+# Fix with file (create fix.md first)
+nia code create --fix
+
+# Combine modifiers
+nia code refactor --fix "Extract common validation logic"
+</code></pre>
+<h3 id="--tail---real-time-trace-watching"><a class="header" href="#--tail---real-time-trace-watching"><code>--tail</code> - Real-Time Trace Watching</a></h3>
+<p>The <code>--tail</code> flag streams trace file output in real-time during agent execution.</p>
+<p><strong>Usage</strong>:</p>
+<pre><code class="language-bash">nia &lt;target&gt; &lt;operation&gt; --tail
+</code></pre>
+<p><strong>Examples</strong>:</p>
+<pre><code class="language-bash"># Watch issue draft execution
+export NIA_ISSUE_ID=42
+nia issue draft --tail
+
+# Watch code review in progress
+nia code review --tail
+
+# Watch PR creation from another terminal
+# Terminal 1:
+nia pr draft
+
+# Terminal 2:
+nia pr draft --tail  # Streams Terminal 1's execution
+</code></pre>
+<p><strong>Requirements</strong>:</p>
+<ul>
+<li>Job context must be set (<code>NIA_ISSUE_ID</code> or <code>NIA_PR_ID</code>)</li>
+<li>Trace directory must exist (created during agent execution)</li>
+</ul>
+<p><strong>Behavior</strong>:</p>
+<ul>
+<li>Displays trace file path on start</li>
+<li>Streams new content as it’s written (500ms polling interval)</li>
+<li>Exits when agent completes or after 60s of inactivity</li>
+<li>Can be interrupted with <code>Ctrl+C</code> (agent continues if running separately)</li>
+</ul>
+<p><strong>What You’ll See</strong>:</p>
+<ul>
+<li>Real-time agent reasoning and decision-making</li>
+<li>File operations and code changes being made</li>
+<li>Error messages and debugging information</li>
+<li>Agent’s thought process and tool usage</li>
+</ul>
+<p><strong>Common Issues</strong>:</p>
+<ul>
+<li>“No active job context”: Set <code>NIA_ISSUE_ID</code> or <code>NIA_PR_ID</code> environment variable</li>
+<li>“Trace directory not found”: Workflow hasn’t started yet or job ID is incorrect</li>
+<li>“Timeout waiting for trace file”: Agent failed to start or encountered error</li>
+</ul>
+<p><strong>See Also</strong>:</p>
+<ul>
+<li><code>nia status</code> - Check current job context</li>
+<li>Manual trace viewing: <code>cat .nia/work/&lt;job_id&gt;/traces/&lt;trace_file&gt;</code></li>
+</ul>
+<hr>
+<h2 id="context-requirements"><a class="header" href="#context-requirements">Context Requirements</a></h2>
+<p>Many workflow commands require context (issue ID, PR ID) to operate:</p>
+<h3 id="setting-context"><a class="header" href="#setting-context">Setting Context</a></h3>
+<p><strong>Via Environment Variables</strong>:</p>
+<pre><code class="language-bash">export NIA_ISSUE_ID=123
+export NIA_PR_ID=456
+nia issue review
+</code></pre>
+<p><strong>Via Config Commands</strong>:</p>
+<pre><code class="language-bash">nia config set-issue 123
+nia config set-pr 456
+nia pr review
+</code></pre>
+<h3 id="context-storage"><a class="header" href="#context-storage">Context Storage</a></h3>
+<p>Context is stored in <code>.nia/context.toml</code>:</p>
+<pre><code class="language-toml">issue_id = 123
+pr_id = 456
+
+[agent_sessions]
+code = "code-481"
+issue = "issue-481"
+</code></pre>
+<p>The <code>[agent_sessions]</code> section tracks agent session IDs for reusing sessions across related commands. This reduces token consumption and improves execution speed. Session management is automatic - nia creates, reuses, and clears sessions as needed.</p>
+<p><strong>Session Groups</strong>: Commands are organized into session groups that share agent sessions:</p>
+<ul>
+<li><code>code</code> - code create, test, ask</li>
+<li><code>issue</code> - issue draft, plan, split, ask</li>
+<li><code>code_review</code> - code review</li>
+<li><code>pr</code> - pr draft, review, merge, ask</li>
+<li><code>backlog</code>, <code>docs</code>, <code>sec</code>, <code>ticket</code> - respective command operations</li>
+</ul>
+<p>Use <code>--clear</code> flag to start a fresh session: <code>nia code create --clear</code></p>
+<h3 id="context-priority"><a class="header" href="#context-priority">Context Priority</a></h3>
+<p>Nia resolves context in this order:</p>
+<ol>
+<li>Environment variables (<code>NIA_ISSUE_ID</code>, <code>NIA_PR_ID</code>)</li>
+<li>Config file (<code>.nia/context.toml</code>)</li>
+<li>None (for commands that don’t require context)</li>
+</ol>
+<h3 id="commands-by-context-requirement"><a class="header" href="#commands-by-context-requirement">Commands by Context Requirement</a></h3>
+<p><strong>Require Issue ID</strong>:</p>
+<ul>
+<li><code>issue review</code>, <code>issue plan</code>, <code>issue triage</code>, <code>issue split</code>, <code>issue ask</code></li>
+<li><code>pr draft</code> (issue ID only)</li>
+</ul>
+<p><strong>Require Issue ID + PR ID</strong>:</p>
+<ul>
+<li><code>pr review</code>, <code>pr merge</code>, <code>pr ask</code></li>
+</ul>
+<p><strong>No Context Required</strong>:</p>
+<ul>
+<li><code>issue draft</code>, <code>issue publish</code></li>
+<li><code>backlog</code> operations</li>
+<li><code>code</code> operations</li>
+<li><code>docs</code> operations</li>
+<li>All utility commands</li>
+</ul>
+<hr>
+<h2 id="quick-reference"><a class="header" href="#quick-reference">Quick Reference</a></h2>
+<h3 id="most-common-workflows"><a class="header" href="#most-common-workflows">Most Common Workflows</a></h3>
+<p><strong>Starting New Work</strong>:</p>
+<pre><code class="language-bash"># 1. Create and publish issue
+nia issue draft
+nia issue publish
+
+# 2. Set context
+nia config set-issue 123
+
+# 3. Plan implementation
+nia issue plan
+
+# 4. Create code
+nia code create
+
+# 5. Review and test
+nia code review
+nia code test
+</code></pre>
+<p><strong>Pull Request Workflow</strong>:</p>
+<pre><code class="language-bash"># 1. Set context
+nia config set-issue 123
+nia config set-pr 456
+
+# 2. Draft PR
+nia pr draft
+
+# 3. Review
+nia pr review
+
+# 4. Merge preparation
+nia pr merge
+</code></pre>
+<p><strong>Planning Workflow</strong>:</p>
+<pre><code class="language-bash"># 1. Create backlog
+nia backlog create
+
+# 2. Review and rank
+nia backlog review
+nia backlog rank
+
+# 3. Create issues
+nia issue draft
+</code></pre>
+<hr>
+<h2 id="see-also"><a class="header" href="#see-also">See Also</a></h2>
+<ul>
+<li><a href="./config-fields.html">Configuration Reference</a> - Detailed configuration options</li>
+<li><a href="./registry.html">Workflow Registry</a> - Custom workflow creation</li>
+<li><a href="./schema.html">Schema Reference</a> - Workflow schema documentation</li>
+<li><a href="../getting-started/README.html">Getting Started</a> - Setup and tutorials</li>
+</ul>
+<hr>
+<p><em>For additional help, run <code>nia --help</code> or <code>nia &lt;command&gt; --help</code></em></p>
+<h5 id="validate-default"><a class="header" href="#validate-default">validate (default)</a></h5>
+<p><strong>Description</strong>: Validate configuration files</p>
+<p><strong>Options</strong>:</p>
+<ul>
+<li><code>--file</code>, <code>-f</code>: Configuration file to validate (path, optional)</li>
+</ul>
+<p><strong>Examples</strong>:</p>
+<pre><code class="language-bash">nia config validate
+nia config validate --file .nia/config.toml
+nia config -f custom.toml
+</code></pre>
+<hr>
+<h2 id="command-tree"><a class="header" href="#command-tree">Command Tree</a></h2>
+<pre><code>nia [--help | --version]
+├── plan
+│   └── task
+│       ├── create
+│       └── draft (default)
+│           └── edit
+└── config
+    └── validate (default) [--file|-f PATH]
+</code></pre>
+<h2 id="usage-patterns"><a class="header" href="#usage-patterns">Usage Patterns</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Pattern</th><th>Example</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>Global help</td><td><code>nia --help</code></td><td>Show all commands</td></tr>
+<tr><td>Command help</td><td><code>nia plan --help</code></td><td>Show command details</td></tr>
+<tr><td>Default operation</td><td><code>nia config</code></td><td>Uses <code>validate</code></td></tr>
+<tr><td>Sub-operation</td><td><code>nia plan task draft edit</code></td><td>Nested operation</td></tr>
+</tbody>
+</table>
+</div>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../troubleshooting/tail.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../reference/workflow-schema.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../troubleshooting/tail.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../reference/workflow-schema.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-c2a407aa.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../user-docs/theme/custom-aab95659.js"></script>
+
+
+
+    </div>
+    </body>
+</html>

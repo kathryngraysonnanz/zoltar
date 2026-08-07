@@ -1,0 +1,776 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Agent Issues - Nia CLI User Guide</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="User documentation for Nia agentic SDLC CLI">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-2459343d.css">
+        <link rel="stylesheet" href="../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../user-docs/theme/custom-38873017.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-e42586be.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-b4caf93b.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Nia CLI User Guide</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/telerik/project-nia" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="agent-issues"><a class="header" href="#agent-issues">Agent Issues</a></h1>
+<h3 id="github-copilot-cli-not-found"><a class="header" href="#github-copilot-cli-not-found">GitHub Copilot CLI Not Found</a></h3>
+<p><strong>Problem</strong>: GitHub Copilot CLI agent executable is not installed or not in PATH.</p>
+<p><strong>Error Message</strong>:</p>
+<pre><code>❌ Error: GitHub Copilot CLI is not installed
+Agent not found in PATH
+</code></pre>
+<p><strong>Cause</strong>: The <code>copilot</code> executable is not installed or not accessible via PATH.</p>
+<p><strong>Solution</strong>:</p>
+<ol>
+<li>
+<p><strong>Check if installed</strong>:</p>
+<pre><code class="language-bash">which copilot
+</code></pre>
+</li>
+<li>
+<p><strong>Install GitHub Copilot CLI</strong>:</p>
+<pre><code class="language-bash">npm install -g @github/copilot
+</code></pre>
+</li>
+<li>
+<p><strong>Verify installation</strong>:</p>
+<pre><code class="language-bash">copilot --version
+</code></pre>
+</li>
+<li>
+<p><strong>Check npm global bin is in PATH</strong>:</p>
+<pre><code class="language-bash"># Find npm global bin location
+npm config get prefix
+
+# Should output something like: /usr/local
+# The bin directory should be /usr/local/bin
+</code></pre>
+</li>
+<li>
+<p><strong>Add npm global bin to PATH</strong> (if needed):</p>
+<pre><code class="language-bash"># Find exact path
+NPM_BIN=$(npm config get prefix)/bin
+
+# Add to PATH (Linux/macOS)
+export PATH="$PATH:$NPM_BIN"
+
+# Make permanent - add to ~/.bashrc or ~/.zshrc
+echo "export PATH=\"\$PATH:$NPM_BIN\"" &gt;&gt; ~/.bashrc
+source ~/.bashrc
+</code></pre>
+</li>
+<li>
+<p><strong>Verify nia can find it</strong>:</p>
+<pre><code class="language-bash">nia status --verbose
+</code></pre>
+</li>
+</ol>
+<p><strong>Prevention</strong>:</p>
+<ul>
+<li>Ensure npm global bin directory is in PATH during initial setup</li>
+<li>Document agent installation as part of project onboarding</li>
+</ul>
+<p><strong>Related</strong>: <a href="../agents/setup.html">Agent Setup</a>, <a href="../agents/troubleshooting.html">Agent Troubleshooting</a></p>
+<hr>
+<h3 id="windows-npm-installed-copilot-auto-discovery"><a class="header" href="#windows-npm-installed-copilot-auto-discovery">Windows: npm-Installed Copilot Auto-Discovery</a></h3>
+<p><strong>Status</strong>: ✅ <strong>Fully Supported</strong> (nia v4.1.0+)</p>
+<p><strong>How It Works</strong>: Nia automatically detects npm installations by:</p>
+<ol>
+<li>Finding <code>copilot.cmd</code> in your PATH</li>
+<li>Parsing the wrapper script to extract the Node.js entry point</li>
+<li>Invoking <code>node &lt;script&gt;</code> directly, bypassing <code>cmd.exe</code> limitations</li>
+</ol>
+<p><strong>No configuration needed</strong> - this happens automatically.</p>
+<p><strong>Verification</strong>:</p>
+<pre><code class="language-powershell"># Install via npm
+npm install -g @githubnext/github-copilot-cli
+
+# Verify auto-discovery works
+nia status --verbose
+</code></pre>
+<p>Look for this line in the output:</p>
+<pre><code>Successfully parsed wrapper script, will invoke Node.js directly
+</code></pre>
+<p><strong>Troubleshooting</strong>:</p>
+<p>If you see:</p>
+<pre><code>Wrapper parsing failed, falling back to direct invocation
+</code></pre>
+<p>This means nia couldn’t parse the wrapper format. To resolve:</p>
+<ol>
+<li>Install via WinGet for native .exe: <code>winget install GitHub.CopilotCLI</code></li>
+<li>Or set explicit path in <code>.nia/config/agents.toml</code></li>
+</ol>
+<p><strong>Technical Details</strong>: npm creates <code>.cmd</code> wrapper scripts on Windows. These wrappers have historically caused issues with long command lines and special characters. Nia now parses these wrappers at startup to find the underlying Node.js script, then invokes <code>node</code> directly, eliminating all wrapper-related limitations.</p>
+<p><strong>Related</strong>: <a href="../getting-started/installation.html">Installation Guide</a></p>
+<hr>
+<h3 id="-not-supported-github-cli-extension"><a class="header" href="#-not-supported-github-cli-extension">⚠️ Not Supported: GitHub CLI Extension</a></h3>
+<p><strong>Problem</strong>: The <code>gh extension install github/gh-copilot</code> method is not supported by nia on Windows.</p>
+<p><strong>Error Message</strong>:</p>
+<pre><code>Configuration error: 'command = "gh"' is not supported.
+</code></pre>
+<p><strong>Why Not Supported</strong>: The <code>gh copilot</code> command uses Windows Command Shell (<code>cmd.exe</code>) internally, which has an ~8191 character command-line limit. Nia’s prompts frequently exceed this limit when including:</p>
+<ul>
+<li>Multi-file context</li>
+<li>Detailed instructions</li>
+<li>XML-formatted prompts</li>
+<li>Complex workflow state</li>
+</ul>
+<p><strong>Symptoms</strong>:</p>
+<ul>
+<li>“The command line is too long” errors</li>
+<li>“batch file arguments are invalid” errors</li>
+<li>Truncated or failed Copilot responses</li>
+<li>Configuration validation errors</li>
+</ul>
+<p><strong>Solution</strong>:</p>
+<h4 id="option-1-install-via-winget-recommended"><a class="header" href="#option-1-install-via-winget-recommended">Option 1: Install via WinGet (Recommended)</a></h4>
+<pre><code class="language-powershell"># Install native executable
+winget install GitHub.CopilotCLI
+
+# Verify
+nia status
+</code></pre>
+<h4 id="option-2-use-npm-with-auto-discovery"><a class="header" href="#option-2-use-npm-with-auto-discovery">Option 2: Use npm with Auto-Discovery</a></h4>
+<pre><code class="language-powershell"># Install via npm
+npm install -g @githubnext/github-copilot-cli
+
+# Nia will automatically parse the wrapper
+nia status --verbose
+</code></pre>
+<h4 id="if-you-have-gh-extension-installed"><a class="header" href="#if-you-have-gh-extension-installed">If You Have gh Extension Installed:</a></h4>
+<ol>
+<li>
+<p><strong>Remove gh configuration</strong>:</p>
+<ul>
+<li>Edit <code>.nia/config/agents.toml</code></li>
+<li>Delete any <code>command = "gh"</code> lines</li>
+<li>Save the file</li>
+</ul>
+</li>
+<li>
+<p><strong>Install via WinGet or npm</strong> (see above)</p>
+</li>
+<li>
+<p><strong>Verify the fix</strong>:</p>
+<pre><code class="language-powershell">nia status
+</code></pre>
+</li>
+</ol>
+<p><strong>Note</strong>: The gh CLI itself works fine for other purposes (managing repos, PRs, etc.). Only the Copilot extension integration with nia is affected by command-line limitations.</p>
+<p><strong>Related</strong>: <a href="../getting-started/installation.html">Installation Guide</a>, <a href="../reference/config-fields.html">Configuration Reference</a></p>
+<h1 id="node_modulesgithubnextgithub-copilot-clibincopilotexe"><a class="header" href="#node_modulesgithubnextgithub-copilot-clibincopilotexe"><prefix>\node_modules@githubnext\github-copilot-cli\bin\copilot.exe</prefix></a></h1>
+<pre><code>
+Configure this path in `.nia/config/agents.toml`:
+
+```toml
+schema_version = "2.1.0"
+
+[agent]
+default = "github_copilot"
+
+[agent.github_copilot]
+command = "C:\\Users\\YourUsername\\AppData\\Roaming\\npm\\node_modules\\@githubnext\\github-copilot-cli\\bin\\copilot.exe"
+</code></pre>
+<p><strong>Why This Happens</strong>:</p>
+<p>When npm installs a package globally on Windows, it creates <code>.cmd</code> wrapper scripts that call the actual JavaScript or binary. For example, <code>copilot.cmd</code> might contain:</p>
+<pre><code class="language-batch">@"%~dp0\node_modules\@githubnext\github-copilot-cli\bin\copilot.exe" %*
+</code></pre>
+<p>When Windows executes a <code>.cmd</code> file, it passes arguments through <code>cmd.exe</code>, which interprets special characters:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Character</th><th>Interpretation</th></tr>
+</thead>
+<tbody>
+<tr><td><code>&lt;</code></td><td>Input redirection</td></tr>
+<tr><td><code>&gt;</code></td><td>Output redirection</td></tr>
+<tr><td><code>%</code></td><td>Environment variable</td></tr>
+<tr><td><code>!</code></td><td>Delayed expansion</td></tr>
+<tr><td><code>&amp;</code></td><td>Command chaining</td></tr>
+<tr><td><code>&amp;#124;</code></td><td>Pipe</td></tr>
+</tbody>
+</table>
+</div>
+<p>Nia’s prompts contain XML tags (<code>&lt;task&gt;</code>, <code>&lt;/task&gt;</code>) and other special characters, which get corrupted by <code>cmd.exe</code> before reaching the Copilot CLI.</p>
+<p><strong>Prevention</strong>:</p>
+<p>To avoid this issue in the future:</p>
+<ul>
+<li>Use WinGet or GitHub CLI extension for installation on Windows</li>
+<li>If using npm, configure the direct executable path in <code>agents.toml</code></li>
+</ul>
+<p><strong>Related</strong>: <a href="../getting-started/installation.html#github-copilot-cli-installation-windows">GitHub Copilot CLI Installation (Windows)</a></p>
+<hr>
+<h3 id="authentication-failures"><a class="header" href="#authentication-failures">Authentication Failures</a></h3>
+<p><strong>Problem</strong>: Agent is installed but not authenticated.</p>
+<p><strong>Error Message</strong>:</p>
+<pre><code>❌ Error: GitHub Copilot CLI is not authenticated
+</code></pre>
+<pre><code>Error: This operation requires SSO authentication
+</code></pre>
+<p><strong>Cause</strong>:</p>
+<ul>
+<li>Agent not logged in to service</li>
+<li>Authentication token expired</li>
+<li>SSO session expired</li>
+<li>Network blocking authentication</li>
+</ul>
+<p><strong>Solution</strong>:</p>
+<ol>
+<li>
+<p><strong>Authenticate the agent</strong>:</p>
+<pre><code class="language-bash">gh auth login
+</code></pre>
+</li>
+<li>
+<p><strong>Follow browser authentication flow</strong>:</p>
+<ul>
+<li>Browser window will open</li>
+<li>Sign in to GitHub</li>
+<li>Authorize GitHub Copilot CLI</li>
+<li>Complete SSO (if required)</li>
+</ul>
+</li>
+<li>
+<p><strong>Verify authentication</strong>:</p>
+<pre><code class="language-bash">gh auth status
+</code></pre>
+</li>
+<li>
+<p><strong>Test agent directly</strong>:</p>
+<pre><code class="language-bash">echo "What is Rust?" | copilot -p
+</code></pre>
+</li>
+<li>
+<p><strong>If authentication fails, try re-authenticating</strong>:</p>
+<pre><code class="language-bash">gh auth logout
+gh auth login
+</code></pre>
+</li>
+<li>
+<p><strong>Check common authentication blockers</strong>:</p>
+<ul>
+<li><strong>Subscription expired</strong>: Visit https://github.com/settings/copilot</li>
+<li><strong>Network firewall</strong>: May need VPN or proxy configuration</li>
+<li><strong>SSO required</strong>: Complete SSO flow in browser</li>
+<li><strong>Token expired</strong>: Re-authenticate</li>
+</ul>
+</li>
+<li>
+<p><strong>Configure proxy</strong> (if behind corporate firewall):</p>
+<pre><code class="language-bash">export HTTP_PROXY=http://proxy.company.com:8080
+export HTTPS_PROXY=http://proxy.company.com:8080
+gh auth login
+</code></pre>
+</li>
+<li>
+<p><strong>Verify nia sees authenticated agent</strong>:</p>
+<pre><code class="language-bash">nia status --verbose
+</code></pre>
+</li>
+</ol>
+<p><strong>Prevention</strong>:</p>
+<ul>
+<li>Keep subscription active</li>
+<li>Re-authenticate before expiration</li>
+<li>Document proxy requirements for corporate environments</li>
+</ul>
+<p><strong>Related</strong>: <a href="../agents/setup.html">Agent Setup</a>, <a href="../agents/troubleshooting.html">Agent Troubleshooting</a></p>
+<hr>
+<h3 id="agent-execution-timeouts"><a class="header" href="#agent-execution-timeouts">Agent Execution Timeouts</a></h3>
+<p><strong>Problem</strong>: Agent takes too long to respond and times out.</p>
+<p><strong>Error Message</strong>:</p>
+<pre><code>❌ Error: Agent execution timed out after 300s
+</code></pre>
+<p><strong>Cause</strong>:</p>
+<ul>
+<li>Agent processing very complex request</li>
+<li>Network latency to AI service</li>
+<li>Agent service experiencing slowdown</li>
+<li>Rate limiting delays</li>
+</ul>
+<p><strong>Solution</strong>:</p>
+<ol>
+<li>
+<p><strong>Simplify the prompt</strong>:</p>
+<ul>
+<li>Break complex tasks into smaller chunks</li>
+<li>Reduce context size</li>
+<li>Focus on specific questions</li>
+</ul>
+</li>
+<li>
+<p><strong>Check network latency</strong>:</p>
+<pre><code class="language-bash">ping github.com
+curl -w "@-" -o /dev/null -s https://api.github.com &lt;&lt;'EOF'
+time_namelookup:  %{time_namelookup}\n
+time_connect:  %{time_connect}\n
+time_starttransfer:  %{time_starttransfer}\n
+time_total:  %{time_total}\n
+EOF
+</code></pre>
+</li>
+<li>
+<p><strong>Check agent service status</strong>:</p>
+<ul>
+<li>GitHub Status: https://www.githubstatus.com/</li>
+<li>Check for service incidents</li>
+</ul>
+</li>
+<li>
+<p><strong>Test agent directly</strong> (without nia):</p>
+<pre><code class="language-bash">echo "Simple question?" | time copilot -p
+</code></pre>
+</li>
+<li>
+<p><strong>Check for rate limiting</strong>:</p>
+<pre><code class="language-bash">gh api rate_limit
+</code></pre>
+</li>
+<li>
+<p><strong>Wait and retry</strong> if rate limited:</p>
+<pre><code class="language-bash"># Rate limits typically reset hourly
+</code></pre>
+</li>
+<li>
+<p><strong>Review trace for actual timeout point</strong>:</p>
+<pre><code class="language-bash">nia trace list
+nia trace view &lt;latest-trace&gt;
+</code></pre>
+</li>
+</ol>
+<p><strong>Prevention</strong>:</p>
+<ul>
+<li>Keep prompts concise and focused</li>
+<li>Monitor service status before large batches</li>
+<li>Spread requests over time to avoid rate limits</li>
+<li>Use simpler models for quick questions</li>
+</ul>
+<p><strong>Related</strong>: <a href="../agents/troubleshooting.html">Agent Troubleshooting</a></p>
+<hr>
+<h3 id="network-errors"><a class="header" href="#network-errors">Network Errors</a></h3>
+<p><strong>Problem</strong>: Cannot reach AI agent service due to network issues.</p>
+<p><strong>Error Message</strong>:</p>
+<pre><code>❌ Error: Network request timed out
+</code></pre>
+<pre><code>❌ Error: Failed to connect to api.github.com
+</code></pre>
+<p><strong>Cause</strong>:</p>
+<ul>
+<li>No internet connection</li>
+<li>Corporate firewall blocking AI services</li>
+<li>VPN required but not connected</li>
+<li>DNS resolution failures</li>
+<li>Proxy misconfiguration</li>
+</ul>
+<p><strong>Solution</strong>:</p>
+<ol>
+<li>
+<p><strong>Check basic connectivity</strong>:</p>
+<pre><code class="language-bash">ping github.com
+curl -I https://api.github.com
+</code></pre>
+</li>
+<li>
+<p><strong>Check DNS resolution</strong>:</p>
+<pre><code class="language-bash">nslookup github.com
+dig github.com
+</code></pre>
+</li>
+<li>
+<p><strong>Check proxy settings</strong>:</p>
+<pre><code class="language-bash"># Linux/macOS
+echo $HTTP_PROXY
+echo $HTTPS_PROXY
+echo $NO_PROXY
+
+# Windows (PowerShell)
+$env:HTTP_PROXY
+$env:HTTPS_PROXY
+</code></pre>
+</li>
+<li>
+<p><strong>Configure proxy</strong> (if needed):</p>
+<pre><code class="language-bash"># Set proxy environment variables
+export HTTP_PROXY=http://proxy.company.com:8080
+export HTTPS_PROXY=http://proxy.company.com:8080
+export NO_PROXY=localhost,127.0.0.1
+
+# Test connectivity
+curl -I https://api.github.com
+</code></pre>
+</li>
+<li>
+<p><strong>Configure git proxy</strong> (for GitHub CLI operations):</p>
+<pre><code class="language-bash">git config --global http.proxy http://proxy.company.com:8080
+git config --global https.proxy http://proxy.company.com:8080
+</code></pre>
+</li>
+<li>
+<p><strong>Check firewall rules</strong>:</p>
+<ul>
+<li>Corporate firewall may block AI services</li>
+<li>Contact IT for whitelist requests</li>
+<li>Required domains: <code>github.com</code>, <code>api.github.com</code>, <code>*.openai.com</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Try with VPN</strong> (if required):</p>
+<pre><code class="language-bash"># Connect to corporate VPN
+# Then retry nia command
+</code></pre>
+</li>
+<li>
+<p><strong>Test specific endpoints</strong>:</p>
+<pre><code class="language-bash"># GitHub API
+curl -H "Authorization: token $(gh auth token)" https://api.github.com/user
+
+# GitHub Copilot
+echo "test" | copilot -p
+</code></pre>
+</li>
+</ol>
+<p><strong>Prevention</strong>:</p>
+<ul>
+<li>Document network requirements for team</li>
+<li>Configure proxy settings in shell profile</li>
+<li>Maintain VPN connectivity checklist</li>
+<li>Set up proxy auto-configuration (PAC) if available</li>
+</ul>
+<p><strong>Related</strong>: <a href="../agents/troubleshooting.html">Agent Troubleshooting</a></p>
+<hr>
+<h3 id="duplicate-session-conflict"><a class="header" href="#duplicate-session-conflict">Duplicate Session Conflict</a></h3>
+<p><strong>Problem</strong>: NIA reports multiple sessions exist with the same name.</p>
+<p><strong>Error Message</strong>:</p>
+<pre><code>Error: Multiple sessions exist with name 'code-job_506'
+Matching sessions:
+  a0e620ad-98c6-43ce-a1e6-710a101fed69
+  c46244a0-face-4cce-89b8-8286759ab613
+
+This can happen when a command is cancelled before completion.
+</code></pre>
+<p><strong>Cause</strong>: A previous NIA command was interrupted (e.g., Ctrl+C) before it could complete, leaving an orphaned session in GitHub Copilot. When NIA attempts to create a new session with the same name, Copilot reports the conflict.</p>
+<p><strong>Solution</strong>:</p>
+<ol>
+<li>
+<p><strong>Open the Copilot session picker</strong>:</p>
+<pre><code class="language-bash">copilot --resume
+</code></pre>
+</li>
+<li>
+<p><strong>Find the duplicate sessions</strong> by looking for entries matching the session name shown in the error (e.g., <code>code-job_506</code>)</p>
+</li>
+<li>
+<p><strong>Delete ONE duplicate session</strong> by selecting it and pressing <code>x</code></p>
+</li>
+<li>
+<p><strong>Exit Copilot</strong> by pressing Ctrl+C or completing the interaction</p>
+</li>
+<li>
+<p><strong>Resume your NIA operation</strong></p>
+</li>
+</ol>
+<blockquote>
+<p><strong>Important</strong>: Delete only ONE duplicate session, not all sessions with that name. You only need to remove the extra copy to resolve the conflict.</p>
+</blockquote>
+<p><strong>Prevention</strong>:</p>
+<ul>
+<li>Avoid interrupting NIA commands mid-execution when possible</li>
+<li>If you must cancel, wait for the “Session created” message before pressing Ctrl+C</li>
+<li>Use <code>nia config clear-context</code> to reset session state if you encounter persistent issues</li>
+</ul>
+<p><strong>Edge Case - Multiple Projects with Same Job IDs</strong>:</p>
+<p>If you work with multiple projects that share the same job ID numbers, you may see duplicate session conflicts that persist even after deleting duplicates. This occurs because different projects create sessions with the same name (e.g., both projects have <code>job_506</code>).</p>
+<p>Temporary workaround:</p>
+<ol>
+<li>Delete the duplicate session using <code>copilot --resume</code> + <code>x</code></li>
+<li>In the affected project, run: <code>nia &lt;target&gt; &lt;operation&gt; --clear</code></li>
+<li>This creates a session with a unique suffix to avoid the conflict</li>
+</ol>
+<blockquote>
+<p><strong>Note</strong>: This workaround is temporary.</p>
+</blockquote>
+<p><strong>Related</strong>: <a href="../advanced/session-context.html">Session Context &amp; Token Optimization</a></p>
+<hr>
+<h3 id="model-quality-issues-inconsistent-agent-behavior"><a class="header" href="#model-quality-issues-inconsistent-agent-behavior">Model Quality Issues (Inconsistent Agent Behavior)</a></h3>
+<p><strong>Problem</strong>: Agent produces inconsistent results, ignores instructions, or fails to follow nia’s conventions.</p>
+<p><strong>Symptoms</strong>:</p>
+<ul>
+<li>Agent makes code changes without creating incremental commits</li>
+<li>Agent ignores explicit instructions in prompts</li>
+<li>Responses vary significantly for identical prompts</li>
+<li>Agent doesn’t follow role-specific guidelines</li>
+</ul>
+<p><strong>Common Cause</strong>: Using latest-generation models (Claude 4.6, GPT-5.x) that may have behavioral inconsistencies with nia’s instruction set.</p>
+<p><strong>Solution</strong>:</p>
+<ol>
+<li>
+<p><strong>Check your current model configuration</strong>:</p>
+<pre><code class="language-bash">cat .nia/config/agents.toml | grep -A 5 '\[agent.github_copilot\]'
+</code></pre>
+</li>
+<li>
+<p><strong>Switch to the stable profile</strong>:</p>
+<pre><code class="language-bash"># Back up existing configuration
+cp .nia/config/agents.toml .nia/config/agents.toml.backup
+
+# Delete existing configuration
+rm .nia/config/agents.toml
+
+# Reinitialize with stable profile (default)
+nia config init --agent github_copilot
+</code></pre>
+</li>
+<li>
+<p><strong>Verify the change</strong>:</p>
+<pre><code class="language-bash">cat .nia/config/agents.toml | grep 'model'
+# Should show: model = "claude-sonnet-4.5"
+</code></pre>
+</li>
+</ol>
+<p><strong>Why This Works</strong>: The <code>stable</code> profile uses Claude 4.5 generation models (<code>claude-sonnet-4.5</code>, <code>claude-opus-4.5</code>) which have been validated for consistent behavior with nia’s prompting conventions.</p>
+<p><strong>When to Switch Back to Balanced</strong>:</p>
+<ul>
+<li>When newer models (Claude 4.6+, GPT-5.x) are confirmed to work reliably with nia</li>
+<li>If you’re testing compatibility with latest-generation models</li>
+<li>If your specific use case benefits from newer model capabilities</li>
+</ul>
+<p><strong>Profile Comparison</strong>:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Profile</th><th>Default Model</th><th>Behavior</th></tr>
+</thead>
+<tbody>
+<tr><td><code>stable</code> (default)</td><td>claude-sonnet-4.5</td><td>Consistent, predictable</td></tr>
+<tr><td><code>balanced</code></td><td>claude-sonnet-4.5</td><td>Latest features, may have inconsistencies</td></tr>
+<tr><td><code>lite</code></td><td>claude-haiku-4.5</td><td>Cost-optimized, stable</td></tr>
+<tr><td><code>heavy</code></td><td>claude-sonnet-4.5</td><td>Premium quality, latest generation</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Related</strong>: <a href="../agents/model-selection.html">AI Model Selection</a>, <a href="../agents/model-selection.html#quick-start-with-model-profiles">Model Profiles</a></p>
+<hr>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../troubleshooting/runtime.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../troubleshooting/workflow.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../troubleshooting/runtime.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../troubleshooting/workflow.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-c2a407aa.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../user-docs/theme/custom-aab95659.js"></script>
+
+
+
+    </div>
+    </body>
+</html>

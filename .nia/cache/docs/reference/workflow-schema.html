@@ -1,0 +1,1043 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Workflow Schema - Nia CLI User Guide</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="User documentation for Nia agentic SDLC CLI">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-2459343d.css">
+        <link rel="stylesheet" href="../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../user-docs/theme/custom-38873017.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-e42586be.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-b4caf93b.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Nia CLI User Guide</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/telerik/project-nia" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="workflow-toml-schema-reference"><a class="header" href="#workflow-toml-schema-reference">Workflow TOML Schema Reference</a></h1>
+<p>This document provides a complete reference for the workflow TOML schema used to define stateful workflows in nia.</p>
+<h2 id="file-location"><a class="header" href="#file-location">File Location</a></h2>
+<p>Workflow files are located in <code>.nia/config/workflows/</code> with the <code>.toml</code> extension. Each file defines one workflow.</p>
+<h2 id="schema-version"><a class="header" href="#schema-version">Schema Version</a></h2>
+<p>All workflow files must specify a schema version:</p>
+<pre><code class="language-toml">workflow_schema_version = "1.0.0"
+</code></pre>
+<p>Currently supported versions:</p>
+<ul>
+<li><code>1.0.x</code> - Initial release (current)</li>
+</ul>
+<h2 id="root-structure"><a class="header" href="#root-structure">Root Structure</a></h2>
+<pre><code class="language-toml">workflow_schema_version = "1.0.0"
+
+[workflow]
+name = "my-workflow"
+description = "Description of what this workflow does"
+version = "1.0.0"
+
+[workflow.initial_state]
+name = "first_state"
+
+[[workflow.states]]
+# State definitions...
+</code></pre>
+<hr>
+<h2 id="workflow-metadata"><a class="header" href="#workflow-metadata">Workflow Metadata</a></h2>
+<h3 id="workflow-section"><a class="header" href="#workflow-section"><code>[workflow]</code> Section</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>name</code></td><td>String</td><td>Yes</td><td>Unique workflow identifier (used in CLI)</td></tr>
+<tr><td><code>description</code></td><td>String</td><td>Yes</td><td>Human-readable description</td></tr>
+<tr><td><code>version</code></td><td>String</td><td>Yes</td><td>Semantic version (e.g., “1.0.0”)</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="workflowinitial_state-section"><a class="header" href="#workflowinitial_state-section"><code>[workflow.initial_state]</code> Section</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>name</code></td><td>String</td><td>Yes</td><td>Name of the starting state</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="loop-detection-configuration"><a class="header" href="#loop-detection-configuration">Loop Detection Configuration</a></h2>
+<p>Workflows are protected against infinite loops with configurable thresholds. By default, nia aborts workflows that exceed reasonable iteration limits, but you can adjust these for workflows with legitimate repetitive patterns (like iterative code generation).</p>
+<h3 id="global-loop-detection"><a class="header" href="#global-loop-detection">Global Loop Detection</a></h3>
+<p>Configure loop detection at the workflow level:</p>
+<pre><code class="language-toml">[workflow.loop_detection]
+max_state_visits = 10        # Allow each state to be visited up to 10 times
+max_transitions = 200        # Allow up to 200 total state transitions
+on_loop_detected = "approval_gate"  # Create approval gate on loop (default)
+</code></pre>
+<p><strong>Fields</strong>:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Default</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>max_state_visits</code></td><td>Number</td><td>3</td><td>Maximum times a single state can be visited</td></tr>
+<tr><td><code>max_transitions</code></td><td>Number</td><td>100</td><td>Maximum total state transitions in workflow</td></tr>
+<tr><td><code>on_loop_detected</code></td><td>String</td><td>“approval_gate”</td><td>Action when loop detected: “approval_gate” or “fail”</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Loop Detection Actions</strong>:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Value</th><th>Behavior</th></tr>
+</thead>
+<tbody>
+<tr><td><code>"approval_gate"</code> (default)</td><td>Pause workflow, create approval gate for user decision. Counters reset on approval.</td></tr>
+<tr><td><code>"fail"</code></td><td>Immediately fail workflow with error.</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Approval Gate Behavior</strong>:
+When loop detection triggers with <code>"approval_gate"</code>:</p>
+<ol>
+<li>Workflow pauses at the current state</li>
+<li>Dynamic approval gate created with detailed message showing:
+<ul>
+<li>State name that triggered detection</li>
+<li>Current visit count and configured limit</li>
+<li>Total transition count and limit</li>
+<li>Available options (approve/reject)</li>
+</ul>
+</li>
+<li>User can:
+<ul>
+<li><strong>Approve</strong>: Resets visit counter to 0, workflow continues from current state</li>
+<li><strong>Reject</strong>: Terminates workflow gracefully with recovery hints</li>
+</ul>
+</li>
+</ol>
+<p><strong>Note</strong>: The transition counter is NOT reset on approval, serving as a safety net against infinite loops.</p>
+<h3 id="per-state-overrides"><a class="header" href="#per-state-overrides">Per-State Overrides</a></h3>
+<p>Individual states can override the global <code>max_state_visits</code> threshold:</p>
+<pre><code class="language-toml">[[workflow.states]]
+name = "create_code"
+max_visits = 15              # Allow this state to be visited 15 times
+command = { target = "code", operation = "create" }
+on_success = "check_tasks"
+</code></pre>
+<p><strong>When to Use</strong>:</p>
+<ul>
+<li><strong>Iterative states</strong>: States like <code>create_code</code> that legitimately loop many times</li>
+<li><strong>Retry states</strong>: States with built-in retry logic that may execute repeatedly</li>
+<li><strong>Check states</strong>: Validation states that are revisited frequently in loops</li>
+</ul>
+<p><strong>Default Behavior</strong>:</p>
+<ul>
+<li>States without <code>max_visits</code> use the workflow-level <code>max_state_visits</code></li>
+<li>If no workflow-level config exists, defaults to <code>max_state_visits = 3</code></li>
+</ul>
+<h3 id="loop-counter-environment-variables"><a class="header" href="#loop-counter-environment-variables">Loop Counter Environment Variables</a></h3>
+<p>Loop counters are automatically exposed as environment variables for use in shell scripts and commands:</p>
+<pre><code class="language-bash"># If loop_counter = "code_iterations", the following env var is available:
+echo $NIA_LOOP_COUNTER_CODE_ITERATIONS
+</code></pre>
+<p><strong>Format</strong>: <code>NIA_LOOP_COUNTER_{COUNTER_NAME}</code> (uppercase, underscores)</p>
+<p><strong>Usage Example</strong>:</p>
+<pre><code class="language-toml">[[workflow.states]]
+name = "create_code"
+loop_enabled = true
+loop_counter = "iterations"
+command = { target = "code", operation = "create" }
+
+# In a subsequent shell step:
+# $NIA_LOOP_COUNTER_ITERATIONS will contain the current count
+</code></pre>
+<h3 id="complete-example"><a class="header" href="#complete-example">Complete Example</a></h3>
+<pre><code class="language-toml">[workflow]
+name = "iterative-workflow"
+
+[workflow.loop_detection]
+max_state_visits = 5         # Global default
+max_transitions = 150
+on_loop_detected = "approval_gate"
+
+[[workflow.states]]
+name = "create_code"
+max_visits = 12              # Override for this state only
+loop_enabled = true
+loop_counter = "code_iterations"
+command = { target = "code", operation = "create" }
+on_success = "check_tasks"
+
+[[workflow.states]]
+name = "check_tasks"
+max_visits = 15              # Another override
+operation = { id = "tasks-done", type = "tasks_complete", on_false = "fail" }
+on_success = "code_review"
+on_failure = "create_code"   # Loop back
+</code></pre>
+<hr>
+<h2 id="state-definitions"><a class="header" href="#state-definitions">State Definitions</a></h2>
+<p>States are defined with <code>[[workflow.states]]</code> array syntax:</p>
+<pre><code class="language-toml">[[workflow.states]]
+name = "state_name"
+description = "Optional description"
+# ... other fields
+</code></pre>
+<h3 id="state-fields"><a class="header" href="#state-fields">State Fields</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>name</code></td><td>String</td><td>Yes</td><td>Unique state identifier</td></tr>
+<tr><td><code>description</code></td><td>String</td><td>No</td><td>Human-readable description</td></tr>
+<tr><td><code>operation</code></td><td>Object</td><td>No</td><td>Single operation to execute</td></tr>
+<tr><td><code>operations</code></td><td>Array</td><td>No</td><td>Multiple operations to execute in sequence</td></tr>
+<tr><td><code>command</code></td><td>Object</td><td>No</td><td>Nia command to execute (legacy)</td></tr>
+<tr><td><code>pre_steps</code></td><td>Array</td><td>No</td><td>Steps to run before command (legacy)</td></tr>
+<tr><td><code>post_steps</code></td><td>Array</td><td>No</td><td>Steps to run after command (legacy)</td></tr>
+<tr><td><code>approval</code></td><td>Object</td><td>No</td><td>Approval gate configuration</td></tr>
+<tr><td><code>on_success</code></td><td>String</td><td>No</td><td>State to transition to on success</td></tr>
+<tr><td><code>on_failure</code></td><td>String</td><td>No</td><td>State to transition to on failure</td></tr>
+<tr><td><code>loop_enabled</code></td><td>Boolean</td><td>No</td><td>Enable loop behavior (default: false)</td></tr>
+<tr><td><code>loop_counter</code></td><td>String</td><td>No</td><td>Counter variable name for loops</td></tr>
+<tr><td><code>escape_conditions</code></td><td>Array</td><td>No</td><td>Conditions to exit loops</td></tr>
+<tr><td><code>retry</code></td><td>Object</td><td>No</td><td>Retry configuration</td></tr>
+<tr><td><code>max_visits</code></td><td>Number</td><td>No</td><td>Override loop detection threshold for this state</td></tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<p><strong>Note</strong>: States must specify one of: <code>operation</code>, <code>operations</code>, <code>command</code>, or <code>approval</code>. The <code>operation</code>/<code>operations</code> fields represent the new operation model, while <code>command</code>/<code>pre_steps</code>/<code>post_steps</code> are legacy patterns maintained for backward compatibility.</p>
+</blockquote>
+<hr>
+<h2 id="state-operations"><a class="header" href="#state-operations">State Operations</a></h2>
+<p>States can execute operations using the <code>operation</code> (single) or <code>operations</code> (multiple) fields. Operations allow you to execute steps, checks, and commands as first-class workflow state actions.</p>
+<h3 id="single-operation"><a class="header" href="#single-operation">Single Operation</a></h3>
+<p>Execute one operation per state:</p>
+<pre><code class="language-toml">[[workflow.states]]
+name = "setup"
+operation = { id = "create-dir", type = "builtin", action = "make_directory", path = "output" }
+on_success = "next"
+on_failure = "failed"
+</code></pre>
+<h3 id="multiple-operations"><a class="header" href="#multiple-operations">Multiple Operations</a></h3>
+<p>Execute a sequence of operations in one state:</p>
+<pre><code class="language-toml">[[workflow.states]]
+name = "setup-and-validate"
+operations = [
+    { id = "create-dir", type = "builtin", action = "make_directory", path = "output" },
+    { id = "verify-dir", type = "file_exists", path = "output", on_false = "fail" },
+    { id = "set-env", type = "builtin", action = "set_env", env_name = "READY", env_value = "true" },
+]
+on_success = "next"
+on_failure = "failed"
+</code></pre>
+<p><strong>Execution Rules</strong>:</p>
+<ul>
+<li>Operations execute in definition order</li>
+<li>First failure stops execution and triggers <code>on_failure</code> transition</li>
+<li>Environment variables set by earlier operations are available to later operations</li>
+<li>Progress display shows <code>[n/total]</code> for multi-operation states</li>
+</ul>
+<h3 id="operation-types"><a class="header" href="#operation-types">Operation Types</a></h3>
+<p>An operation is one of three kinds: <strong>step</strong>, <strong>check</strong>, or <strong>command</strong>. The kind is
+inferred from the operation’s fields — there is no separate <code>kind</code> field:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Operation is a…</th><th>When…</th></tr>
+</thead>
+<tbody>
+<tr><td>Command</td><td>it has a <code>target</code> field</td></tr>
+<tr><td>Step</td><td><code>type</code> is <code>shell</code>, <code>builtin</code>, or <code>agent</code></td></tr>
+<tr><td>Check</td><td><code>type</code> is one of the check types listed below</td></tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<p><strong>Important</strong>: <code>type</code> holds the concrete operation type directly. Do not write
+<code>type = "step"</code> or <code>type = "check"</code>, and do not use a separate <code>step_type</code> or
+<code>check_type</code> field — those forms are rejected during workflow validation.</p>
+</blockquote>
+<h4 id="step-operations"><a class="header" href="#step-operations">Step Operations</a></h4>
+<p>Execute a step (shell command, builtin action, or AI agent):</p>
+<p><strong>Shell Step</strong>:</p>
+<pre><code class="language-toml">operation = { id = "run-tests", type = "shell", command = "cargo test" }
+</code></pre>
+<p><strong>Built-in Directory Creation</strong>:</p>
+<pre><code class="language-toml">operation = { id = "create-output", type = "builtin", action = "make_directory", path = "output" }
+</code></pre>
+<p><strong>Environment Variable</strong>:</p>
+<pre><code class="language-toml">operation = { id = "set-mode", type = "builtin", action = "set_env", env_name = "MODE", env_value = "production" }
+</code></pre>
+<p><strong>Agent Step</strong>:</p>
+<pre><code class="language-toml">operation = { id = "send-initial", type = "agent", prompt = "Send the initial response.", context = ["ticket"] }
+</code></pre>
+<p><strong>Step Fields</strong>:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>id</code></td><td>String</td><td>Yes</td><td>Unique step identifier</td></tr>
+<tr><td><code>type</code></td><td>String</td><td>Yes</td><td>“shell”, “builtin”, or “agent”</td></tr>
+<tr><td><code>command</code></td><td>String</td><td>For shell</td><td>Shell command to execute</td></tr>
+<tr><td><code>action</code></td><td>String</td><td>For builtin</td><td>Built-in action name</td></tr>
+<tr><td><code>prompt</code></td><td>String</td><td>For agent</td><td>Prompt sent to the AI agent</td></tr>
+<tr><td><code>context</code></td><td>Array</td><td>No</td><td>Context to inject into an agent prompt</td></tr>
+<tr><td><code>share_session_with</code></td><td>String</td><td>No</td><td>State name whose agent session to reuse</td></tr>
+<tr><td><code>timeout_seconds</code></td><td>Number</td><td>No</td><td>Execution timeout (default: 300)</td></tr>
+<tr><td><code>retry_count</code></td><td>Number</td><td>No</td><td>Number of retries (default: 0)</td></tr>
+<tr><td><code>retry_delay_seconds</code></td><td>Number</td><td>No</td><td>Delay between retries (default: 1)</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Agent Context Values</strong>:</p>
+<p><code>context</code> accepts only these values: <code>issue</code>, <code>code</code>, <code>pr</code>, <code>security</code>, <code>ticket</code>.
+An unrecognized value makes the operation fail workflow validation.</p>
+<p><strong>Built-in Actions</strong>:</p>
+<ul>
+<li><code>make_directory</code>: Create directory (<code>path</code> field required)</li>
+<li><code>set_env</code>: Set environment variable (<code>env_name</code>, <code>env_value</code> required)</li>
+<li><code>copy_file</code>: Copy file (<code>source</code>, <code>destination</code> required)</li>
+<li><code>write_file</code>: Write content to file (<code>path</code>, <code>content</code> required)</li>
+</ul>
+<h4 id="check-operations"><a class="header" href="#check-operations">Check Operations</a></h4>
+<p>Evaluate a condition and control workflow based on result:</p>
+<p><strong>File Exists</strong>:</p>
+<pre><code class="language-toml">operation = { id = "config-exists", type = "file_exists", path = ".nia/config.toml", on_false = "fail" }
+</code></pre>
+<p><strong>Environment Equals</strong>:</p>
+<pre><code class="language-toml">operation = { id = "mode-check", type = "env_equals", env_name = "MODE", env_value = "production", on_false = "skip" }
+</code></pre>
+<p><strong>Check Fields</strong>:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>id</code></td><td>String</td><td>Yes</td><td>Unique check identifier</td></tr>
+<tr><td><code>type</code></td><td>String</td><td>Yes</td><td>Type of validation (see below)</td></tr>
+<tr><td><code>on_false</code></td><td>String</td><td>Yes</td><td>“fail” or “skip”</td></tr>
+<tr><td><code>timeout_seconds</code></td><td>Number</td><td>No</td><td>Execution timeout (default: 30)</td></tr>
+<tr><td><code>retry_count</code></td><td>Number</td><td>No</td><td>Number of retries (default: 0)</td></tr>
+<tr><td><code>retry_delay_seconds</code></td><td>Number</td><td>No</td><td>Delay between retries (default: 1)</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Check Types</strong>:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Type</th><th>Description</th><th>Required Fields</th></tr>
+</thead>
+<tbody>
+<tr><td><code>file_exists</code></td><td>File exists</td><td><code>path</code></td></tr>
+<tr><td><code>directory_exists</code></td><td>Directory exists</td><td><code>path</code></td></tr>
+<tr><td><code>path_exists</code></td><td>File or directory exists</td><td><code>path</code></td></tr>
+<tr><td><code>env_exists</code></td><td>Environment variable is set</td><td><code>env_name</code></td></tr>
+<tr><td><code>env_equals</code></td><td>Environment variable equals value</td><td><code>env_name</code>, <code>env_value</code></td></tr>
+<tr><td><code>file_contains</code></td><td>File contains string</td><td><code>path</code>, <code>content</code></td></tr>
+<tr><td><code>file_matches</code></td><td>File matches regex pattern</td><td><code>path</code>, <code>pattern</code></td></tr>
+<tr><td><code>command_exists</code></td><td>Command is available in <code>PATH</code></td><td><code>command</code></td></tr>
+<tr><td><code>command_success</code></td><td>Shell command exits with 0</td><td><code>command</code></td></tr>
+<tr><td><code>tasks_complete</code></td><td>All tasks in tasks.md are complete</td><td><code>path</code> (optional)</td></tr>
+<tr><td><code>counter_matches</code></td><td>Loop counter matches expression</td><td><code>counter_name</code>, <code>counter_expression</code></td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Check Behaviors</strong>:</p>
+<p>The <code>on_false</code> field controls what happens when a check evaluates to false:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Value</th><th>Behavior</th></tr>
+</thead>
+<tbody>
+<tr><td><code>"fail"</code></td><td>State fails immediately, transitions to <code>on_failure</code></td></tr>
+<tr><td><code>"skip"</code></td><td>Log warning, continue to next operation or transition to <code>on_success</code></td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Special Check Types</strong>:</p>
+<h5 id="tasks_complete-check"><a class="header" href="#tasks_complete-check"><code>tasks_complete</code> Check</a></h5>
+<p>Verifies that all tasks in a <code>tasks.md</code> file are complete by scanning for unchecked task markers (<code>- [ ]</code>) in task sections only.</p>
+<pre><code class="language-toml">operation = {
+    id = "all-tasks-done",
+    type = "tasks_complete",
+    on_false = "fail"
+}
+</code></pre>
+<p>With explicit path:</p>
+<pre><code class="language-toml">operation = {
+    id = "all-tasks-done",
+    type = "tasks_complete",
+    path = ".nia/work/job_123/code/tasks.md",
+    on_false = "fail"
+}
+</code></pre>
+<p><strong>Fields</strong>:</p>
+<ul>
+<li><code>path</code> (optional): Path to tasks.md file. If omitted, defaults to <code>{job_dir}/code/tasks.md</code></li>
+</ul>
+<p><strong>Section-Aware Parsing</strong>:</p>
+<p>The check uses intelligent section detection to avoid counting non-task checkboxes:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Section Type</th><th>Detection</th><th>Checkbox Behavior</th></tr>
+</thead>
+<tbody>
+<tr><td>Task sections</td><td>Headers without exclusion keywords</td><td>Counted</td></tr>
+<tr><td>Non-task sections</td><td>Headers containing “acceptance”, “criteria”, “summary”, “requirement”, “validation”, etc.</td><td>Ignored</td></tr>
+<tr><td>Code blocks</td><td>Content between ``` or ~~~</td><td>Ignored</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Example</strong>:</p>
+<pre><code class="language-markdown"># Implementation Tasks
+- [ ] Create config file        ← Detected as incomplete
+- [x] Update documentation      ← Ignored (complete)
+
+## Acceptance Criteria
+- [ ] Feature works as expected ← Ignored (non-task section)
+
+## Example Code
+~~~~
+</code></pre>
+<ul>
+<li><input disabled="" type="checkbox"> Example checkbox          ← Ignored (code block)</li>
+</ul>
+<pre><code>~~~~
+
+**Behavior**:
+- Check **passes** when no unchecked tasks remain in task sections
+- Check **fails** when any unchecked task marker (`- [ ]`) exists in a task section
+- Works with both lite plans (no task identifiers) and full plans (with `TASK-`/`TSK-` identifiers)
+
+**Common Pattern - Loop Until Complete**:
+```toml
+[[workflow.states]]
+name = "create_code"
+command = { target = "code", operation = "create" }
+on_success = "check_tasks"
+
+[[workflow.states]]
+name = "check_tasks"
+operation = { id = "tasks-done", type = "tasks_complete", on_false = "fail" }
+on_success = "code_review"      # All done, exit loop
+on_failure = "create_code"       # Tasks remain, continue loop
+</code></pre>
+<h5 id="counter_matches-check"><a class="header" href="#counter_matches-check"><code>counter_matches</code> Check</a></h5>
+<p>Evaluates arithmetic expressions on loop counters for conditional logic.</p>
+<pre><code class="language-toml">operation = {
+    id = "every-third",
+    type = "counter_matches",
+    counter_name = "code_iterations",
+    counter_expression = "% 3 == 0",
+    on_false = "skip"
+}
+</code></pre>
+<p><strong>Fields</strong>:</p>
+<ul>
+<li><code>counter_name</code>: Name of loop counter to evaluate</li>
+<li><code>counter_expression</code>: Arithmetic expression (e.g., <code>"% 3 == 0"</code>, <code>"&gt; 5"</code>, <code>"== 10"</code>)</li>
+</ul>
+<p><strong>Supported Operators</strong>:</p>
+<ul>
+<li>Arithmetic: <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code> (modulo)</li>
+<li>Comparison: <code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code></li>
+</ul>
+<p><strong>Behavior</strong>:</p>
+<ul>
+<li>Evaluates expression against current counter value</li>
+<li>Check passes (success) when expression is true</li>
+<li>Check fails when expression is false</li>
+</ul>
+<p><strong>Common Pattern - Periodic Actions</strong>:</p>
+<pre><code class="language-toml"># Clear context every 3rd iteration
+[[workflow.states]]
+name = "check_counter"
+operation = {
+    id = "mod-3",
+    type = "counter_matches",
+    counter_name = "iterations",
+    counter_expression = "% 3 == 0",
+    on_false = "skip"
+}
+on_success = "create_code_clear"   # Use --clear flag
+on_failure = "create_code"          # Regular operation
+</code></pre>
+<h4 id="command-operations"><a class="header" href="#command-operations">Command Operations</a></h4>
+<p>Execute a Nia CLI command within the workflow:</p>
+<pre><code class="language-toml">operation = { type = "command", target = "issue", operation = "draft", modifiers = ["lite"] }
+</code></pre>
+<p>With arguments:</p>
+<pre><code class="language-toml">operation = { type = "command", target = "code", operation = "review", args = { model = "gpt-4" } }
+</code></pre>
+<p><strong>Command Fields</strong>:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>type</code></td><td>String</td><td>Yes</td><td>Always “command”</td></tr>
+<tr><td><code>target</code></td><td>String</td><td>Yes</td><td>Command target (e.g., “issue”, “code”, “pr”)</td></tr>
+<tr><td><code>operation</code></td><td>String</td><td>Yes</td><td>Command operation (e.g., “draft”, “review”)</td></tr>
+<tr><td><code>modifiers</code></td><td>Array</td><td>No</td><td>List of modifiers to apply</td></tr>
+<tr><td><code>args</code></td><td>Object</td><td>No</td><td>Argument overrides</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="environment-persistence"><a class="header" href="#environment-persistence">Environment Persistence</a></h3>
+<p>Environment variables set by steps persist across operations and states:</p>
+<p><strong>Within State</strong>: Available to subsequent operations in the same state</p>
+<pre><code class="language-toml">[[workflow.states]]
+name = "multi-op"
+operations = [
+    { id = "set-var", type = "builtin", action = "set_env", env_name = "JOB_ID", env_value = "123" },
+    { id = "use-var", type = "shell", command = "echo $JOB_ID" },
+]
+</code></pre>
+<p><strong>Across States</strong>: Available to operations in subsequent states</p>
+<pre><code class="language-toml">[[workflow.states]]
+name = "configure"
+operation = { id = "set-id", type = "builtin", action = "set_env", env_name = "JOB_ID", env_value = "123" }
+on_success = "process"
+
+[[workflow.states]]
+name = "process"
+operation = { id = "use-id", type = "shell", command = "echo \"Processing $JOB_ID\"" }
+on_success = "done"
+</code></pre>
+<h3 id="example-workflows"><a class="header" href="#example-workflows">Example Workflows</a></h3>
+<p>See the example workflows in <code>.nia/config/workflows/</code>:</p>
+<ul>
+<li><code>06-step-check-demo.toml</code>: Basic steps and checks</li>
+<li><code>07-multi-operation-state.toml</code>: Multiple operations in one state</li>
+<li><code>08-conditional-validation.toml</code>: Conditional branching with checks</li>
+</ul>
+<hr>
+<h2 id="legacy-command-and-prepost-steps-backward-compatibility"><a class="header" href="#legacy-command-and-prepost-steps-backward-compatibility">Legacy Command and Pre/Post Steps (Backward Compatibility)</a></h2>
+<blockquote>
+<p><strong>Deprecated</strong>: The <code>command</code>, <code>pre_steps</code>, and <code>post_steps</code> fields are maintained for backward compatibility. New workflows should use the <code>operation</code> or <code>operations</code> fields instead (see <a href="#state-operations">State Operations</a> section above).</p>
+</blockquote>
+<h3 id="commands-legacy"><a class="header" href="#commands-legacy">Commands (Legacy)</a></h3>
+<p>Execute a nia command within a state:</p>
+<pre><code class="language-toml">[[workflow.states]]
+name = "draft_issue"
+
+[workflow.states.command]
+target = "issue"
+operation = "draft"
+modifiers = ["edit"]  # Optional
+args = { model = "gpt-4" }  # Optional argument overrides
+</code></pre>
+<h3 id="command-fields"><a class="header" href="#command-fields">Command Fields</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>target</code></td><td>String</td><td>Yes</td><td>Command target (e.g., “issue”, “code”, “pr”)</td></tr>
+<tr><td><code>operation</code></td><td>String</td><td>Yes</td><td>Command operation (e.g., “draft”, “review”)</td></tr>
+<tr><td><code>modifiers</code></td><td>Array</td><td>No</td><td>List of modifiers to apply</td></tr>
+<tr><td><code>args</code></td><td>Object</td><td>No</td><td>Argument overrides</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="prepost-steps-legacy"><a class="header" href="#prepost-steps-legacy">Pre/Post Steps (Legacy)</a></h2>
+<blockquote>
+<p><strong>Deprecated</strong>: Pre/post steps are maintained for backward compatibility. New workflows should use state <code>operations</code> instead.</p>
+</blockquote>
+<p>Steps execute before or after the main command:</p>
+<pre><code class="language-toml">[[workflow.states.pre_steps]]
+kind = "step"
+id = "run-tests"
+type = "shell"
+command = "cargo test"
+timeout_seconds = 300
+
+[[workflow.states.pre_steps]]
+kind = "check"
+id = "verify-env"
+type = "env_var_set"
+name = "API_KEY"
+on_false = "fail"
+</code></pre>
+<h3 id="step-types"><a class="header" href="#step-types">Step Types</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Type</th><th>Description</th><th>Required Fields</th></tr>
+</thead>
+<tbody>
+<tr><td><code>shell</code></td><td>Run shell command</td><td><code>command</code></td></tr>
+<tr><td><code>builtin</code></td><td>Built-in action</td><td><code>action</code>, varies by action</td></tr>
+<tr><td><code>agent</code></td><td>AI agent execution</td><td><code>prompt</code></td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="check-types"><a class="header" href="#check-types">Check Types</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Type</th><th>Description</th><th>Required Fields</th></tr>
+</thead>
+<tbody>
+<tr><td><code>file_exists</code></td><td>File exists</td><td><code>path</code></td></tr>
+<tr><td><code>directory_exists</code></td><td>Directory exists</td><td><code>path</code></td></tr>
+<tr><td><code>env_var_set</code></td><td>Environment variable exists</td><td><code>name</code></td></tr>
+<tr><td><code>env_equals</code></td><td>Env var equals value</td><td><code>name</code>, <code>env_value</code></td></tr>
+<tr><td><code>command_exists</code></td><td>Command in PATH</td><td><code>command</code></td></tr>
+<tr><td><code>file_contains</code></td><td>File contains string</td><td><code>path</code>, <code>content</code></td></tr>
+<tr><td><code>file_matches</code></td><td>File matches regex</td><td><code>path</code>, <code>pattern</code></td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="stepcheck-fields"><a class="header" href="#stepcheck-fields">Step/Check Fields</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>kind</code></td><td>String</td><td>“step” or “check”</td></tr>
+<tr><td><code>id</code></td><td>String</td><td>Unique identifier</td></tr>
+<tr><td><code>type</code></td><td>String</td><td>Step/check type</td></tr>
+<tr><td><code>depends_on</code></td><td>Array</td><td>Dependencies (step IDs)</td></tr>
+<tr><td><code>timeout_seconds</code></td><td>Number</td><td>Execution timeout</td></tr>
+<tr><td><code>retry_count</code></td><td>Number</td><td>Number of retries</td></tr>
+<tr><td><code>retry_delay_seconds</code></td><td>Number</td><td>Delay between retries</td></tr>
+<tr><td><code>on_false</code></td><td>String</td><td>For checks: “fail” or “skip”</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="approval-gates"><a class="header" href="#approval-gates">Approval Gates</a></h2>
+<p>Pause workflow for human approval:</p>
+<pre><code class="language-toml">[[workflow.states]]
+name = "await_approval"
+
+[workflow.states.approval]
+gate_id = "deploy_approval"
+message = "Ready to deploy to production. Approve?"
+required_code = "DEPLOY"  # Optional confirmation code
+timeout_seconds = 86400   # 24 hours
+</code></pre>
+<h3 id="approval-fields"><a class="header" href="#approval-fields">Approval Fields</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>gate_id</code></td><td>String</td><td>Yes</td><td>Unique approval identifier</td></tr>
+<tr><td><code>message</code></td><td>String</td><td>Yes</td><td>Message shown to user</td></tr>
+<tr><td><code>required_code</code></td><td>String</td><td>No</td><td>Confirmation code to type</td></tr>
+<tr><td><code>timeout_seconds</code></td><td>Number</td><td>No</td><td>Auto-reject after timeout</td></tr>
+<tr><td><code>on_timeout</code></td><td>String</td><td>No</td><td>State on timeout (else on_failure)</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="loop-configuration"><a class="header" href="#loop-configuration">Loop Configuration</a></h2>
+<p>Enable state looping with escape conditions:</p>
+<pre><code class="language-toml">[[workflow.states]]
+name = "retry_deploy"
+loop_enabled = true
+loop_counter = "deploy_attempts"
+
+[[workflow.states.escape_conditions]]
+counter_value = 3
+action = "approval"
+approval_gate = "manual_check"
+message = "Failed 3 times. Continue?"
+
+[[workflow.states.escape_conditions]]
+counter_value = 10
+action = "abort"
+error_message = "Maximum retries exceeded"
+</code></pre>
+<h3 id="escape-condition-fields"><a class="header" href="#escape-condition-fields">Escape Condition Fields</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>counter_value</code></td><td>Number</td><td>Yes</td><td>Counter threshold</td></tr>
+<tr><td><code>action</code></td><td>String</td><td>Yes</td><td>“continue”, “transition”, “approval”, “abort”</td></tr>
+<tr><td><code>target_state</code></td><td>String</td><td>For transition</td><td>Target state name</td></tr>
+<tr><td><code>approval_gate</code></td><td>String</td><td>For approval</td><td>Approval gate ID</td></tr>
+<tr><td><code>message</code></td><td>String</td><td>No</td><td>Display message</td></tr>
+<tr><td><code>error_message</code></td><td>String</td><td>For abort</td><td>Error message</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="retry-configuration"><a class="header" href="#retry-configuration">Retry Configuration</a></h2>
+<p>Automatic retry on failure:</p>
+<pre><code class="language-toml">[[workflow.states]]
+name = "flaky_operation"
+
+[workflow.states.retry]
+max_retries = 5
+retry_delay = "10s"
+timeout = "2m"
+
+[[workflow.states.retry.retry_conditions]]
+retry_count = 3
+action = "approval"
+approval_gate = "retry_approval"
+message = "Failed 3 times. Approve to continue retrying?"
+</code></pre>
+<h3 id="retry-fields"><a class="header" href="#retry-fields">Retry Fields</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>max_retries</code></td><td>Number</td><td>Yes</td><td>Maximum retry attempts</td></tr>
+<tr><td><code>retry_delay</code></td><td>String</td><td>Yes</td><td>Delay between retries (“5s”, “1m”)</td></tr>
+<tr><td><code>timeout</code></td><td>String</td><td>No</td><td>Per-attempt timeout</td></tr>
+<tr><td><code>retry_conditions</code></td><td>Array</td><td>No</td><td>Conditional behavior</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="retry-condition-fields"><a class="header" href="#retry-condition-fields">Retry Condition Fields</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>retry_count</code></td><td>Number</td><td>Retry count threshold</td></tr>
+<tr><td><code>action</code></td><td>String</td><td>“continue”, “transition”, “approval”</td></tr>
+<tr><td><code>timeout</code></td><td>String</td><td>Override timeout at this count</td></tr>
+<tr><td><code>target_state</code></td><td>String</td><td>For transition</td></tr>
+<tr><td><code>approval_gate</code></td><td>String</td><td>For approval</td></tr>
+<tr><td><code>message</code></td><td>String</td><td>Display message</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="terminal-states"><a class="header" href="#terminal-states">Terminal States</a></h2>
+<p>Terminal states end the workflow. By convention, terminal state names must end with:</p>
+<ul>
+<li><code>_success</code> - Successful completion</li>
+<li><code>_failed</code> - Failure</li>
+<li><code>_completed</code> - Neutral completion</li>
+<li><code>_cancelled</code> - User cancelled</li>
+</ul>
+<pre><code class="language-toml">[[workflow.states]]
+name = "deploy_success"
+description = "Deployment completed successfully"
+# No on_success/on_failure - this is terminal
+</code></pre>
+<hr>
+<h2 id="duration-strings"><a class="header" href="#duration-strings">Duration Strings</a></h2>
+<p>Duration fields accept strings in the format:</p>
+<ul>
+<li><code>"5s"</code> - 5 seconds</li>
+<li><code>"2m"</code> - 2 minutes</li>
+<li><code>"1h"</code> - 1 hour</li>
+</ul>
+<hr>
+<h2 id="complete-example-1"><a class="header" href="#complete-example-1">Complete Example</a></h2>
+<p>The production <code>issue-to-pr</code> workflow in <code>.nia/config/workflows/issue-to-pr.toml</code> demonstrates advanced patterns:</p>
+<p><strong>Key Features</strong>:</p>
+<ul>
+<li>Iterative code generation with loop logic and <code>tasks_complete</code> check</li>
+<li>Counter-based context clearing using <code>counter_matches</code> check (every 3rd iteration)</li>
+<li>Loop detection configuration with higher thresholds for code generation</li>
+<li>Per-state <code>max_visits</code> overrides for iterative states</li>
+<li>Multiple approval gates for human oversight</li>
+<li>Automated PR creation and review</li>
+</ul>
+<p><strong>Example Patterns from issue-to-pr.toml</strong>:</p>
+<p><strong>Loop Detection Configuration</strong>:</p>
+<pre><code class="language-toml">[workflow.loop_detection]
+max_transitions = 150       # Allow longer workflow due to looped code creation
+on_loop_detected = "approval_gate"  # Allow recovery instead of immediate failure
+</code></pre>
+<p><strong>Iterative Code Generation with Task Checking</strong>:</p>
+<pre><code class="language-toml">[[workflow.states]]
+name = "create_code"
+max_visits = 12              # Override global threshold
+command = { target = "code", operation = "create" }
+on_success = "check_tasks"
+
+[[workflow.states]]
+name = "check_tasks"
+operation = { id = "tasks-done", type = "tasks_complete", on_false = "fail" }
+on_success = "code_review"          # All done, exit loop
+on_failure = "context_counter"       # Tasks remain, check counter
+
+[[workflow.states]]
+name = "context_counter"
+operation = {
+    id = "context_check",
+    type = "counter_matches",
+    counter_name = "code_iterations",
+    counter_expression = "% 3 == 0",
+    on_false = "fail"
+}
+on_success = "create_code_clear"   # Counter % 3 == 0, use --clear
+on_failure = "create_code"          # Counter % 3 != 0, continue normally
+</code></pre>
+<p><strong>View the Full Example</strong>:</p>
+<pre><code class="language-bash">cat .nia/config/workflows/issue-to-pr.toml
+</code></pre>
+<hr>
+<h2 id="validation"><a class="header" href="#validation">Validation</a></h2>
+<p>Workflows are validated when loaded:</p>
+<ol>
+<li><strong>Schema validation</strong> - Valid TOML syntax and required fields</li>
+<li><strong>Semantic validation</strong> - All transition targets exist, no orphan states</li>
+<li><strong>Loop validation</strong> - Loops have abort/transition escape conditions</li>
+<li><strong>Terminal validation</strong> - Terminal states follow naming convention</li>
+</ol>
+<p>If validation fails, you’ll see detailed error messages with line numbers and suggestions.</p>
+<h2 id="see-also"><a class="header" href="#see-also">See Also</a></h2>
+<ul>
+<li><a href="../workflows/simple-workflow.html">Creating Your First Workflow</a></li>
+<li><a href="../workflows/loops-retries.html">Loops and Retries</a></li>
+<li><a href="../workflows/advanced-workflows.html">Advanced Patterns</a></li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../reference/commands.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../reference/workflow-steps.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../reference/commands.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../reference/workflow-steps.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-c2a407aa.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../user-docs/theme/custom-aab95659.js"></script>
+
+
+
+    </div>
+    </body>
+</html>

@@ -1,0 +1,99 @@
+/* Hide auto-generated section numbers in the sidebar TOC */
+.chapter .chapter-item strong[aria-hidden="true"] {
+    display: none;
+}
+
+/* Collapsible category headers: keep bold styling + full color and make the
+   whole header look clickable (the bare <span> is a draft/category title). */
+.chapter .chapter-link-wrapper > span {
+    font-weight: bold;
+    color: var(--sidebar-fg);
+    opacity: 1;
+    cursor: pointer;
+}
+
+.chapter .chapter-link-wrapper > span:hover {
+    color: var(--sidebar-active);
+}
+
+/* =========================================================================
+   Tabbed content
+   Authored in markdown as:
+     <div class="nia-tabs" data-group="os">
+     <div class="nia-tab" data-title="Windows">
+     ...markdown (blank line above and below)...
+     </div>
+     <div class="nia-tab" data-title="Linux / macOS">
+     ...
+     </div>
+     </div>
+   The tab bar and switching behaviour are built by custom.js at runtime.
+   ========================================================================= */
+.nia-tabs {
+    margin: 1rem 0 1.5rem;
+    border: 1px solid var(--table-border-color, rgba(128, 128, 128, 0.3));
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+/* Before JS enhances the block, show panels stacked (progressive enhancement)
+   but hide the raw data-title so nothing looks broken without scripts. */
+.nia-tab {
+    padding: 0 1rem;
+}
+
+.nia-tablist {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+    background: var(--quote-bg, rgba(128, 128, 128, 0.08));
+    border-bottom: 1px solid var(--table-border-color, rgba(128, 128, 128, 0.3));
+}
+
+.nia-tab-button {
+    appearance: none;
+    border: none;
+    background: transparent;
+    color: var(--fg);
+    font: inherit;
+    font-weight: 600;
+    line-height: 1.2;
+    padding: 0.55rem 1rem;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    opacity: 0.65;
+    transition: opacity 0.15s ease, color 0.15s ease;
+}
+
+.nia-tab-button:hover {
+    opacity: 1;
+    background: rgba(128, 128, 128, 0.1);
+}
+
+.nia-tab-button.is-active {
+    opacity: 1;
+    color: var(--sidebar-active, var(--links));
+    border-bottom-color: var(--sidebar-active, var(--links));
+}
+
+.nia-tab-button:focus-visible {
+    outline: 2px solid var(--sidebar-active, var(--links));
+    outline-offset: -2px;
+}
+
+.nia-tabs.nia-ready .nia-tab-panel {
+    padding: 0.25rem 1rem 0.5rem;
+}
+
+.nia-tab-panel[hidden] {
+    display: none;
+}
+
+.nia-tab-panel > :first-child {
+    margin-top: 0.6rem;
+}
+
+.nia-tab-panel > :last-child {
+    margin-bottom: 0.6rem;
+}

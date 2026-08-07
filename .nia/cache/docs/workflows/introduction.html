@@ -1,0 +1,660 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Introduction to Workflows - Nia CLI User Guide</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="User documentation for Nia agentic SDLC CLI">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-2459343d.css">
+        <link rel="stylesheet" href="../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../user-docs/theme/custom-38873017.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-e42586be.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-b4caf93b.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Nia CLI User Guide</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/telerik/project-nia" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="introduction-to-workflows"><a class="header" href="#introduction-to-workflows">Introduction to Workflows</a></h1>
+<p>Stateful workflows in nia allow you to define complex, multi-step automation sequences using simple TOML configuration files—no coding required.</p>
+<h2 id="what-are-workflows"><a class="header" href="#what-are-workflows">What Are Workflows?</a></h2>
+<p>Workflows are automated sequences of nia commands and operations that:</p>
+<ul>
+<li><strong>Execute multiple steps</strong> - Chain together nia commands, shell scripts, and checks</li>
+<li><strong>Handle failures gracefully</strong> - Automatic retries, loops, and fallback strategies</li>
+<li><strong>Pause for approval</strong> - Human decision points at critical moments</li>
+<li><strong>Resume automatically</strong> - Pick up where they left off after interruptions</li>
+<li><strong>Track state persistently</strong> - Full audit trail of every state transition</li>
+</ul>
+<h2 id="why-use-workflows"><a class="header" href="#why-use-workflows">Why Use Workflows?</a></h2>
+<p>Workflows are ideal for:</p>
+<p>✅ <strong>Repeatable processes</strong> - Codify your team’s best practices<br>✅ <strong>Multi-step operations</strong> - Issue → Code → PR pipelines<br>✅ <strong>Deployment automation</strong> - Build → Test → Deploy → Verify<br>✅ <strong>Approval-gated processes</strong> - Require human sign-off at key points<br>✅ <strong>Retry-heavy operations</strong> - Handle transient failures automatically</p>
+<p>❌ <strong>Not needed for:</strong></p>
+<ul>
+<li>Single, one-off commands</li>
+<li>Simple linear tasks without failure handling</li>
+<li>Ad-hoc exploratory work</li>
+</ul>
+<h2 id="built-in-workflows"><a class="header" href="#built-in-workflows">Built-in Workflows</a></h2>
+<p>Nia includes 10 production-ready workflows you can use immediately:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Workflow</th><th>Description</th><th>Use Case</th></tr>
+</thead>
+<tbody>
+<tr><td><code>code-to-review</code></td><td>Iterative code generation with review and auto-fix</td><td>Code development</td></tr>
+<tr><td><code>issue-to-plan</code></td><td>Issue and requirements drafting with implementation planning</td><td>Planning phase</td></tr>
+<tr><td><code>issue-to-pr</code></td><td>Complete issue-to-PR lifecycle with iterative code generation</td><td>End-to-end development</td></tr>
+<tr><td><code>issue-to-pr-lite</code></td><td>Lightweight issue-to-PR with streamlined approval gates</td><td>Tutorials and simple tasks</td></tr>
+<tr><td><code>issue-to-review</code></td><td>Full issue resolution with comprehensive code review</td><td>Complex issues requiring review</td></tr>
+<tr><td><code>issue-to-review-lite</code></td><td>Lightweight issue resolution with streamlined review</td><td>Quick fixes and simple issues</td></tr>
+<tr><td><code>pr-create-publish</code></td><td>Create PR from existing changes and publish</td><td>PR creation from local changes</td></tr>
+<tr><td><code>pr-review-merge</code></td><td>Review existing PR and merge</td><td>PR review workflow</td></tr>
+<tr><td><code>pr-to-merge</code></td><td>Handles PR creation, remediation and merging</td><td>PR management</td></tr>
+<tr><td><code>ticket-to-response</code></td><td>Complete ticket triage and response workflow</td><td>Support tickets</td></tr>
+</tbody>
+</table>
+</div>
+<p>List available workflows:</p>
+<pre><code class="language-bash">nia workflow list
+</code></pre>
+<p>View detailed information:</p>
+<pre><code class="language-bash">nia workflow list --verbose
+</code></pre>
+<h2 id="running-workflows"><a class="header" href="#running-workflows">Running Workflows</a></h2>
+<h3 id="basic-execution"><a class="header" href="#basic-execution">Basic Execution</a></h3>
+<pre><code class="language-bash"># Run a workflow
+nia workflow run &lt;workflow-name&gt;
+
+# Example
+nia workflow run issue-to-pr
+</code></pre>
+<h3 id="available-options"><a class="header" href="#available-options">Available Options</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Option</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>--start-from &lt;STEP_NAME&gt;</code></td><td>Start from a specific step (for recovery)</td></tr>
+<tr><td><code>--bypass-approvals</code></td><td>Skip approval gates (for CI/automation)</td></tr>
+<tr><td><code>--dry-run</code></td><td>Validate workflow without executing</td></tr>
+<tr><td><code>--quiet</code> / <code>-q</code></td><td>Suppress output except errors</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="examples"><a class="header" href="#examples">Examples</a></h3>
+<pre><code class="language-bash"># Standard execution
+nia workflow run issue-to-pr
+
+# Skip approval gates (CI mode)
+nia workflow run issue-to-pr --bypass-approvals
+
+# Validate without executing
+nia workflow run issue-to-pr --dry-run
+
+# Resume from a specific state
+nia workflow run issue-to-pr --start-from create_code
+</code></pre>
+<h2 id="key-concepts"><a class="header" href="#key-concepts">Key Concepts</a></h2>
+<h3 id="states"><a class="header" href="#states">States</a></h3>
+<p>A workflow is a finite state machine composed of <strong>states</strong>. Each state represents a single step and can:</p>
+<ul>
+<li>Execute a nia command (<code>nia issue draft</code>, <code>nia pr create</code>, etc.)</li>
+<li>Run shell scripts or checks before/after the command</li>
+<li>Request human approval before proceeding</li>
+<li>Transition to different states based on success or failure</li>
+</ul>
+<pre><code class="language-toml">[[workflow.states]]
+name = "draft_issue"
+description = "Create issue draft"
+
+[workflow.states.command]
+target = "issue"
+operation = "draft"
+
+on_success = "review_issue"
+on_failure = "draft_failed"
+</code></pre>
+<h3 id="transitions"><a class="header" href="#transitions">Transitions</a></h3>
+<p>States connect via <strong>transitions</strong> that define the flow:</p>
+<ul>
+<li><code>on_success</code> - Next state when operation succeeds</li>
+<li><code>on_failure</code> - Next state when operation fails</li>
+</ul>
+<p>The workflow engine automatically chooses the path based on command results.</p>
+<h3 id="terminal-states"><a class="header" href="#terminal-states">Terminal States</a></h3>
+<p>Workflows end at <strong>terminal states</strong> - states without any <code>on_success</code> or <code>on_failure</code> transitions. By convention, terminal state names end with:</p>
+<ul>
+<li><code>_success</code> - Successful completion</li>
+<li><code>_failed</code> - Failure</li>
+<li><code>_completed</code> - Neutral completion</li>
+<li><code>_cancelled</code> - User cancelled</li>
+</ul>
+<h3 id="loops-and-retries"><a class="header" href="#loops-and-retries">Loops and Retries</a></h3>
+<p><strong>Retries</strong> automatically re-execute a failed operation:</p>
+<pre><code class="language-toml">[workflow.states.retry]
+max_retries = 3
+retry_delay = "30s"
+</code></pre>
+<p><strong>Loops</strong> allow states to transition back to themselves with escape conditions to prevent infinite loops:</p>
+<pre><code class="language-toml">loop_enabled = true
+loop_counter = "attempts"
+
+[[workflow.states.escape_conditions]]
+counter_value = 10
+action = "abort"
+error_message = "Maximum attempts exceeded"
+</code></pre>
+<h3 id="approval-gates"><a class="header" href="#approval-gates">Approval Gates</a></h3>
+<p>Workflows can pause for human approval:</p>
+<pre><code class="language-toml">[workflow.states.approval]
+gate_id = "deploy_approval"
+message = "Ready to deploy to production. Approve?"
+required_code = "DEPLOY-PROD"  # Optional confirmation code
+</code></pre>
+<h2 id="quick-example"><a class="header" href="#quick-example">Quick Example</a></h2>
+<p>Here’s a minimal workflow that drafts an issue:</p>
+<pre><code class="language-toml">workflow_schema_version = "1.0.0"
+
+[workflow]
+name = "quick-example"
+description = "A minimal workflow"
+version = "1.0.0"
+
+[workflow.initial_state]
+name = "do_work"
+
+[[workflow.states]]
+name = "do_work"
+description = "Draft an issue"
+
+[workflow.states.command]
+target = "issue"
+operation = "draft"
+
+on_success = "done_success"
+on_failure = "done_failed"
+
+[[workflow.states]]
+name = "done_success"
+description = "Successfully created issue"
+
+[[workflow.states]]
+name = "done_failed"
+description = "Failed to create issue"
+</code></pre>
+<p>Save this to <code>.nia/config/workflows/quick-example.toml</code> and run:</p>
+<pre><code class="language-bash">nia workflow run quick-example
+</code></pre>
+<h2 id="how-workflows-execute"><a class="header" href="#how-workflows-execute">How Workflows Execute</a></h2>
+<ol>
+<li><strong>Load</strong> - Workflow file is validated and loaded</li>
+<li><strong>Initialize</strong> - Start at <code>initial_state</code></li>
+<li><strong>Execute</strong> - Run command/steps in current state</li>
+<li><strong>Transition</strong> - Move to next state based on result</li>
+<li><strong>Repeat</strong> - Continue until terminal state reached</li>
+<li><strong>Persist</strong> - Every transition logged for resumption</li>
+</ol>
+<h3 id="state-persistence"><a class="header" href="#state-persistence">State Persistence</a></h3>
+<p>Workflows use transaction logs to track every state change. If interrupted:</p>
+<pre><code class="language-bash"># Resume exactly where you left off
+nia workflow run my-workflow
+</code></pre>
+<p><strong>Note</strong>: Running <code>nia workflow run &lt;workflow-name&gt;</code> without <code>--start-from</code> will start from the initial state, not from where the workflow was interrupted. You must explicitly use the <code>--start-from</code> flag to resume from a specific state.</p>
+<h3 id="discovering-workflow-states"><a class="header" href="#discovering-workflow-states">Discovering Workflow States</a></h3>
+<p>Before resuming or debugging a workflow, you can list all available states:</p>
+<pre><code class="language-bash">nia workflow run &lt;workflow-name&gt; --list-states
+</code></pre>
+<p>This displays:</p>
+<ul>
+<li>State names (exact strings for <code>--start-from</code>)</li>
+<li>State types (command, approval, operation, check, success, failed, cancelled)</li>
+<li>Descriptions explaining each state’s purpose</li>
+<li>Initial state marker (*)</li>
+</ul>
+<p>Example output:</p>
+<pre><code>Workflow States: issue-to-pr
+════════════════════════════
+
+  Name                         Type         Description
+  ────                         ────         ───────────
+  draft_issue*                 command      Drafting issue description
+  await_draft_approval         approval     Review &amp; edit issue before planning
+  plan_implementation          command      Creating implementation plan
+  await_plan_approval          approval     Review &amp; edit plan before coding
+  create_code                  command      Creating code and tests
+  completed                    success      Workflow completed successfully
+  draft_failed                 failed       Draft generation failed
+
+Total: 7 states
+
+Use state names with --start-from to resume from a specific state:
+  nia workflow run issue-to-pr --start-from &lt;state-name&gt;
+</code></pre>
+<p>Use this information to:</p>
+<ul>
+<li>Resume workflows: <code>nia workflow run issue-to-pr --start-from create_code</code></li>
+<li>Understand workflow structure before execution</li>
+<li>Debug workflow execution issues</li>
+</ul>
+<h3 id="resuming-workflows"><a class="header" href="#resuming-workflows">Resuming Workflows</a></h3>
+<p>To resume from a specific step, use:</p>
+<pre><code class="language-bash">nia workflow run my-workflow --start-from awaiting_approval
+</code></pre>
+<p>To see which state to resume from, check the error message when a workflow fails - it provides a helpful hint with the exact command to retry. You can also use <code>--list-states</code> to list all available state names.</p>
+<h2 id="when-to-use-each-feature"><a class="header" href="#when-to-use-each-feature">When to Use Each Feature</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Feature</th><th>Use When</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Basic States</strong></td><td>Linear sequences of commands</td></tr>
+<tr><td><strong>Retries</strong></td><td>Transient failures (network, rate limits)</td></tr>
+<tr><td><strong>Loops</strong></td><td>Polling conditions, iterative processes</td></tr>
+<tr><td><strong>Approval Gates</strong></td><td>Require human decisions (prod deploys)</td></tr>
+<tr><td><strong>Pre/Post Steps</strong></td><td>Environment setup, validation checks</td></tr>
+<tr><td><strong>Escape Conditions</strong></td><td>Safety limits on loops/retries</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="workflow-discovery"><a class="header" href="#workflow-discovery">Workflow Discovery</a></h2>
+<p>List all available workflows:</p>
+<pre><code class="language-bash">nia workflow list
+</code></pre>
+<p>View workflow details:</p>
+<pre><code class="language-bash">nia workflow status my-workflow
+</code></pre>
+<h2 id="built-in-examples"><a class="header" href="#built-in-examples">Built-in Examples</a></h2>
+<p>nia bundles several production-ready workflows that are available immediately without any setup:</p>
+<p><strong><code>issue-to-plan</code></strong> - Generate implementation plan from issue<br><strong><code>issue-to-pr</code></strong> - Complete issue → PR automation with planning, coding, review, and PR creation<br><strong><code>code-to-review</code></strong> - Iterative code creation with automated review and approval gates<br><strong><code>pr-to-merge</code></strong> - PR review automation with merge approval<br><strong><code>ticket-to-response</code></strong> - Support ticket response workflow</p>
+<p>View available workflows:</p>
+<pre><code class="language-bash">nia workflow list
+</code></pre>
+<p>Export for customization:</p>
+<pre><code class="language-bash">nia config export --workflows
+</code></pre>
+<p>Workflows are automatically loaded from two sources:</p>
+<ol>
+<li><strong>Built-in workflows</strong> (bundled with nia binary) - marked as “(built-in)” in <code>nia workflow list</code></li>
+<li><strong>User workflows</strong> in <code>.nia/config/workflows/</code> - override built-ins with the same name</li>
+</ol>
+<p>This means you can customize specific workflows by exporting and editing them, while keeping others at their default built-in versions.</p>
+<h2 id="production-example"><a class="header" href="#production-example">Production Example</a></h2>
+<p>The nia project uses workflows for its own development. The <strong><code>issue-to-pr</code></strong> workflow demonstrates production patterns:</p>
+<ul>
+<li><strong>Iterative code generation</strong> - Loops until all tasks in <code>tasks.md</code> are complete</li>
+<li><strong>Automated task checking</strong> - Uses <code>tasks_complete</code> check type to auto-detect completion</li>
+<li><strong>Counter-based context clearing</strong> - Clears context every 3rd iteration using <code>counter_matches</code></li>
+<li><strong>Loop detection configuration</strong> - Higher thresholds for code generation states</li>
+<li><strong>Multiple approval gates</strong> - Human oversight at issue draft, plan, and PR stages</li>
+<li><strong>Shell script integration</strong> - Automated PR creation and description uploads</li>
+</ul>
+<p>View the full workflow:</p>
+<pre><code class="language-bash">cat .nia/config/workflows/issue-to-pr.toml
+</code></pre>
+<p>Run the workflow:</p>
+<pre><code class="language-bash">nia workflow run issue-to-pr
+</code></pre>
+<p><strong>Key Features Demonstrated:</strong></p>
+<ol>
+<li><strong>Loop Detection Config</strong>:</li>
+</ol>
+<pre><code class="language-toml">[workflow.loop_detection]
+max_transitions = 150       # Allow longer workflow
+on_loop_detected = "approval_gate"  # Allow recovery
+</code></pre>
+<ol start="2">
+<li><strong>Per-State Visit Overrides</strong>:</li>
+</ol>
+<pre><code class="language-toml">[[workflow.states]]
+name = "create_code"
+max_visits = 12  # Allow more iterations for code generation
+</code></pre>
+<ol start="3">
+<li><strong>Automated Task Checking</strong>:</li>
+</ol>
+<pre><code class="language-toml">[[workflow.states]]
+name = "check_tasks"
+operation = { id = "tasks-done", type = "tasks_complete", on_false = "fail" }
+on_success = "code_review"      # All done, exit loop
+on_failure = "create_code"       # Tasks remain, continue loop
+</code></pre>
+<ol start="4">
+<li><strong>Counter-Based Logic</strong>:</li>
+</ol>
+<pre><code class="language-toml">[[workflow.states]]
+name = "context_counter"
+operation = {
+    id = "context_check",
+    type = "counter_matches",
+    counter_name = "code_iterations",
+    counter_expression = "% 3 == 0",
+    on_false = "fail"
+}
+on_success = "create_code_clear"   # Use --clear flag
+on_failure = "create_code"          # Regular operation
+</code></pre>
+<p>This workflow handles real-world complexity: code generation typically completes 1-3 tasks per run, requiring multiple iterations with automatic task checking and periodic context clearing for optimal results.</p>
+<h2 id="getting-started"><a class="header" href="#getting-started">Getting Started</a></h2>
+<p>Ready to create your first workflow?</p>
+<ol>
+<li><a href="./simple-workflow.html">Creating Your First Workflow</a> - Step-by-step tutorial</li>
+<li><a href="./loops-retries.html">Loops and Retries</a> - Handle failures gracefully</li>
+<li><a href="./advanced-workflows.html">Advanced Patterns</a> - Multi-stage approvals and complex logic</li>
+<li><a href="../../reference/workflow-schema.html">Schema Reference</a> - Complete TOML reference</li>
+</ol>
+<h2 id="real-world-example"><a class="header" href="#real-world-example">Real-World Example</a></h2>
+<p>Here’s a real workflow for issue management:</p>
+<pre><code class="language-toml">workflow_schema_version = "1.0.0"
+
+[workflow]
+name = "issue-to-pr"
+description = "Take issue from draft to merged PR"
+version = "1.0.0"
+
+[workflow.initial_state]
+name = "draft"
+
+# Draft the issue
+[[workflow.states]]
+name = "draft"
+[workflow.states.command]
+target = "issue"
+operation = "draft"
+on_success = "review"
+on_failure = "draft_failed"
+
+# Review the draft
+[[workflow.states]]
+name = "review"
+[workflow.states.command]
+target = "issue"
+operation = "review"
+on_success = "approve_implementation"
+on_failure = "review_failed"
+
+# Get approval to implement
+[[workflow.states]]
+name = "approve_implementation"
+[workflow.states.approval]
+gate_id = "implement"
+message = "Issue reviewed. Approve implementation?"
+on_success = "implement"
+on_failure = "implementation_declined"
+
+# Implement the code
+[[workflow.states]]
+name = "implement"
+[workflow.states.command]
+target = "code"
+operation = "create"
+on_success = "create_pr"
+on_failure = "implementation_failed"
+
+# Create pull request
+[[workflow.states]]
+name = "create_pr"
+[workflow.states.command]
+target = "pr"
+operation = "create"
+on_success = "pr_created_success"
+on_failure = "pr_failed"
+
+# Terminal states
+[[workflow.states]]
+name = "pr_created_success"
+[[workflow.states]]
+name = "draft_failed"
+[[workflow.states]]
+name = "review_failed"
+[[workflow.states]]
+name = "implementation_declined"
+[[workflow.states]]
+name = "implementation_failed"
+[[workflow.states]]
+name = "pr_failed"
+</code></pre>
+<p>This workflow:</p>
+<ul>
+<li>Drafts and reviews an issue</li>
+<li>Pauses for human approval</li>
+<li>Creates code implementation</li>
+<li>Opens a pull request</li>
+<li>Handles failures at each step</li>
+</ul>
+<p>Run it with:</p>
+<pre><code class="language-bash">nia workflow run issue-to-pr
+</code></pre>
+<h2 id="next-steps"><a class="header" href="#next-steps">Next Steps</a></h2>
+<p>Choose your path:</p>
+<ul>
+<li><strong>New to workflows?</strong> Start with <a href="./simple-workflow.html">Creating Your First Workflow</a></li>
+<li><strong>Need failure handling?</strong> See <a href="./loops-retries.html">Loops and Retries</a></li>
+<li><strong>Building complex pipelines?</strong> Check out <a href="./advanced-workflows.html">Advanced Patterns</a></li>
+<li><strong>Want complete reference?</strong> Read <a href="../../reference/workflow-schema.html">Schema Documentation</a></li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../commands/ticket.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../workflows/simple-workflow.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../commands/ticket.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../workflows/simple-workflow.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-c2a407aa.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../user-docs/theme/custom-aab95659.js"></script>
+
+
+
+    </div>
+    </body>
+</html>

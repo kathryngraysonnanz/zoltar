@@ -1,0 +1,692 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Workflow Steps &amp; Checks - Nia CLI User Guide</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="User documentation for Nia agentic SDLC CLI">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-2459343d.css">
+        <link rel="stylesheet" href="../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../user-docs/theme/custom-38873017.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-e42586be.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-b4caf93b.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Nia CLI User Guide</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/telerik/project-nia" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="workflow-steps-and-checks"><a class="header" href="#workflow-steps-and-checks">Workflow Steps and Checks</a></h1>
+<blockquote>
+<p><strong>Looking for command hooks?</strong><br>To add pre/post steps to individual commands (like <code>nia ask</code> or <code>nia issue draft</code>), see
+<a href="../advanced/command-hooks.html">Command Hooks</a>. This page focuses on workflow-level
+orchestration that coordinates multiple commands.</p>
+</blockquote>
+<p>Nia supports user-defined pre- and post-execution steps with conditional
+validation logic in workflow definitions. This enables you to:</p>
+<ul>
+<li><strong>Orchestrate multiple commands</strong> in a coordinated sequence</li>
+<li><strong>Set up workflow-level resources</strong> (branches, environments, configurations)</li>
+<li><strong>Validate workflow prerequisites</strong> before starting multi-step processes</li>
+<li><strong>Clean up workflow artifacts</strong> after completion</li>
+<li><strong>Create conditional workflows</strong> based on state and outcomes</li>
+</ul>
+<h2 id="quick-start"><a class="header" href="#quick-start">Quick Start</a></h2>
+<p>Add steps to a workflow definition file (<code>.nia/workflows/*.toml</code>):</p>
+<pre><code class="language-toml"># Workflow definition file example
+schema_version = "2.1.0"
+
+[metadata]
+name = "Feature Development Workflow"
+version = "1.0.0"
+
+# Workflow-level pre-steps (run once at workflow start)
+[[pre]]
+kind = "step"
+id = "create-feature-branch"
+type = "shell"
+command = "git checkout -b feature/$FEATURE_NAME"
+
+# Workflow steps (nia commands)
+[[steps]]
+command = "issue draft"
+
+[[steps]]
+command = "code create"
+
+# Workflow-level post-steps (run once at workflow end)
+[[post]]
+kind = "step"
+id = "create-pr"
+type = "shell"
+command = "gh pr create --fill"
+</code></pre>
+<p>For command-specific pre/post (that run every time a command executes),
+see <a href="../advanced/command-hooks.html">Command Hooks</a>.</p>
+<h2 id="workflow-specific-vs-command-specific-steps"><a class="header" href="#workflow-specific-vs-command-specific-steps">Workflow-Specific vs Command-Specific Steps</a></h2>
+<p>Understanding the difference between these two layers is essential for effective workflow design:</p>
+<h3 id="workflow-specific-steps"><a class="header" href="#workflow-specific-steps">Workflow-Specific Steps</a></h3>
+<p>Workflow-specific steps are defined in workflow definition files (<code>.nia/workflows/*.toml</code>) and run <strong>only</strong> as part of that specific workflow. These orchestrate multiple commands and manage workflow-level resources.</p>
+<pre><code class="language-toml"># In .nia/workflows/feature.toml
+schema_version = "2.1.0"
+
+[metadata]
+name = "Feature Workflow"
+version = "1.0.0"
+
+# Only runs as part of this workflow
+[[pre]]
+kind = "step"
+id = "workflow-setup"
+type = "shell"
+command = "git checkout -b feature/new-issue"
+
+[[steps]]
+command = "issue draft"
+
+[[steps]]
+command = "issue approve"
+
+# Only runs as part of this workflow
+[[post]]
+kind = "step"
+id = "workflow-cleanup"
+type = "shell"
+command = "git push origin feature/new-issue"
+</code></pre>
+<p><strong>Use workflow-specific steps for:</strong></p>
+<ul>
+<li>Multi-command orchestration</li>
+<li>Workflow-level resource management (branches, environments)</li>
+<li>Conditional logic that spans multiple commands</li>
+<li>Setup/teardown that’s specific to the workflow’s purpose</li>
+</ul>
+<h3 id="command-specific-steps-command-hooks"><a class="header" href="#command-specific-steps-command-hooks">Command-Specific Steps (Command Hooks)</a></h3>
+<p>Command-specific steps are defined in <code>commands.toml</code> and run <strong>every time</strong> a nia command executes, regardless of invocation method. These ensure command-level prerequisites and cleanup.</p>
+<p>For detailed information on command hooks, see <a href="../advanced/command-hooks.html">Command Hooks</a>.</p>
+<h3 id="execution-flow"><a class="header" href="#execution-flow">Execution Flow</a></h3>
+<p>When a workflow executes a command, both layers coordinate:</p>
+<pre><code>Workflow Executor starts
+├─ Execute workflow pre-steps (git checkout)
+├─ Call nia command handler
+│   ├─ Execute command pre-hooks (from commands.toml)
+│   ├─ Execute agent
+│   └─ Execute command post-hooks (from commands.toml)
+└─ Execute workflow post-steps (git push)
+</code></pre>
+<p>This layered architecture ensures:</p>
+<ul>
+<li><strong>Command-level requirements</strong> are always met</li>
+<li><strong>Workflow-level orchestration</strong> coordinates multiple commands</li>
+<li><strong>Both layers compose</strong> without conflicts</li>
+</ul>
+<h2 id="step-types"><a class="header" href="#step-types">Step Types</a></h2>
+<h3 id="shell-steps"><a class="header" href="#shell-steps">Shell Steps</a></h3>
+<p>Execute shell commands. Supports platform-specific variants.</p>
+<pre><code class="language-toml">[[workflows.operations.pre]]
+kind = "step"
+id = "install-deps"
+type = "shell"
+command = "npm install"
+
+# Or with platform-specific commands:
+command_linux = "apt-get install -y jq"
+command_macos = "brew install jq"
+command_windows = "choco install jq"
+</code></pre>
+<h4 id="security-considerations"><a class="header" href="#security-considerations">Security Considerations</a></h4>
+<p><strong>⚠️ Command Injection Risk</strong></p>
+<p>Shell commands execute with your user’s permissions and have access to environment
+variables. Be cautious when:</p>
+<ul>
+<li><strong>Using environment variables in commands</strong> - Malicious values can lead to command injection</li>
+<li><strong>Executing commands from untrusted sources</strong> - Validate all inputs</li>
+<li><strong>Processing user-controlled paths or filenames</strong> - Sanitize before use</li>
+</ul>
+<p><strong>Example of unsafe pattern:</strong></p>
+<pre><code class="language-toml">[[workflows.operations.pre]]
+kind = "step"
+type = "shell"
+command = "echo $USER_INPUT"  # ⚠️ Unsafe if USER_INPUT contains shell metacharacters
+</code></pre>
+<p>If <code>USER_INPUT</code> contains <code>; rm -rf /</code> or similar commands, they will be executed.</p>
+<p><strong>Best Practices:</strong></p>
+<ol>
+<li><strong>Prefer built-in operations</strong> for file system tasks - they’re safer and cross-platform</li>
+<li><strong>Validate environment variables</strong> before using them in shell commands</li>
+<li><strong>Use absolute paths</strong> when possible to avoid PATH injection</li>
+<li><strong>Quote variables carefully</strong> though this doesn’t fully protect against injection</li>
+<li><strong>Minimize shell step usage</strong> - only use when necessary</li>
+</ol>
+<p>For security-sensitive operations, always prefer built-in operations over shell commands.</p>
+<h3 id="built-in-steps"><a class="header" href="#built-in-steps">Built-in Steps</a></h3>
+<p>Cross-platform file operations that work consistently everywhere.</p>
+<pre><code class="language-toml">[[workflows.operations.pre]]
+kind = "step"
+id = "create-output"
+type = "builtin"
+action = "make_directory"
+path = "output/reports"
+</code></pre>
+<p><strong>Available actions:</strong></p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Action</th><th>Description</th><th>Required Fields</th></tr>
+</thead>
+<tbody>
+<tr><td><code>make_directory</code></td><td>Create directory with parents</td><td><code>path</code></td></tr>
+<tr><td><code>make_file</code></td><td>Create empty file</td><td><code>path</code></td></tr>
+<tr><td><code>remove_file</code></td><td>Delete file</td><td><code>path</code></td></tr>
+<tr><td><code>remove_directory</code></td><td>Delete directory recursively</td><td><code>path</code></td></tr>
+<tr><td><code>copy_file</code></td><td>Copy file</td><td><code>source</code>, <code>destination</code></td></tr>
+<tr><td><code>write_file</code></td><td>Write content to file</td><td><code>path</code>, <code>content</code></td></tr>
+<tr><td><code>append_file</code></td><td>Append content to file</td><td><code>path</code>, <code>content</code></td></tr>
+<tr><td><code>set_env</code></td><td>Set environment variable (†)</td><td><code>env_name</code>, <code>env_value</code></td></tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<p><strong>†</strong> Note: <code>set_env</code> sets environment variables in the workflow’s execution context.
+These variables are available to subsequent steps, the agent execution, and post-steps.
+This is implemented via the step context, not as a file system operation.</p>
+</blockquote>
+<p><strong>Examples:</strong></p>
+<pre><code class="language-toml"># Copy a file
+[[workflows.operations.pre]]
+kind = "step"
+id = "backup-config"
+type = "builtin"
+action = "copy_file"
+source = "config.toml"
+destination = "config.toml.bak"
+
+# Write content to a file
+[[workflows.operations.pre]]
+kind = "step"
+id = "create-readme"
+type = "builtin"
+action = "write_file"
+path = "output/README.md"
+content = "# Generated Output\n\nThis directory contains generated files."
+
+# Set an environment variable
+[[workflows.operations.pre]]
+kind = "step"
+id = "set-api-key"
+type = "builtin"
+action = "set_env"
+env_name = "API_KEY"
+env_value = "secret-value"
+</code></pre>
+<h3 id="agent-steps-advanced"><a class="header" href="#agent-steps-advanced">Agent Steps (Advanced)</a></h3>
+<p>Execute an AI agent prompt as part of the workflow.</p>
+<pre><code class="language-toml">[[workflows.operations.pre]]
+kind = "step"
+id = "analyze-context"
+type = "agent"
+prompt = "Analyze the provided context and summarize key requirements."
+</code></pre>
+<h2 id="check-types"><a class="header" href="#check-types">Check Types</a></h2>
+<p>Checks probe environment state without modifying it.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Check Type</th><th>Description</th><th>Fields</th></tr>
+</thead>
+<tbody>
+<tr><td><code>file_exists</code></td><td>File exists</td><td><code>path</code></td></tr>
+<tr><td><code>directory_exists</code></td><td>Directory exists</td><td><code>path</code></td></tr>
+<tr><td><code>path_exists</code></td><td>Path (file or dir) exists</td><td><code>path</code></td></tr>
+<tr><td><code>file_contains</code></td><td>File contains substring</td><td><code>path</code>, <code>content</code></td></tr>
+<tr><td><code>file_matches</code></td><td>File matches regex</td><td><code>path</code>, <code>pattern</code></td></tr>
+<tr><td><code>env_exists</code></td><td>Env var is set</td><td><code>env_name</code></td></tr>
+<tr><td><code>env_equals</code></td><td>Env var equals value</td><td><code>env_name</code>, <code>env_value</code></td></tr>
+<tr><td><code>command_exists</code></td><td>Command in PATH</td><td><code>path</code> (command name)</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="check-behavior"><a class="header" href="#check-behavior">Check Behavior</a></h3>
+<ul>
+<li><code>on_false = "fail"</code> (default): Stop workflow with error</li>
+<li><code>on_false = "skip"</code>: Skip remaining pre-items, proceed to command</li>
+</ul>
+<pre><code class="language-toml">[[workflows.operations.pre]]
+kind = "check"
+id = "has-config"
+type = "file_exists"
+path = ".nia/config.toml"
+on_false = "skip"  # Missing config is OK, use defaults
+</code></pre>
+<h2 id="step-dependencies"><a class="header" href="#step-dependencies">Step Dependencies</a></h2>
+<p>Steps can depend on other steps or require checks to pass:</p>
+<pre><code class="language-toml">[[workflows.operations.pre]]
+kind = "step"
+id = "step-a"
+type = "builtin"
+action = "make_directory"
+path = "output"
+
+[[workflows.operations.pre]]
+kind = "step"
+id = "step-b"
+type = "shell"
+command = "echo 'setup complete' &gt; output/status.txt"
+depends_on = "step-a"  # Waits for step-a to complete
+
+[[workflows.operations.pre]]
+kind = "step"
+id = "step-c"
+type = "shell"
+command = "process.sh"
+requires_check = "has-tool"  # Only runs if check passed
+</code></pre>
+<h2 id="execution-order"><a class="header" href="#execution-order">Execution Order</a></h2>
+<h3 id="for-workflow-executed-commands"><a class="header" href="#for-workflow-executed-commands">For Workflow-Executed Commands</a></h3>
+<p>When a workflow definition executes commands (e.g., multi-step feature workflow):</p>
+<ol>
+<li><strong>Workflow Pre-items</strong> - Workflow-level setup from definition file</li>
+<li><strong>Command Pre-hooks</strong> - Command-specific setup from commands.toml (see <a href="../advanced/command-hooks.html">Command Hooks</a>)</li>
+<li><strong>Command Execution</strong> - The actual agent execution</li>
+<li><strong>Command Post-hooks</strong> - Command-specific cleanup from commands.toml</li>
+<li><strong>Workflow Post-items</strong> - Workflow-level cleanup from definition file</li>
+</ol>
+<p>All items execute in definition order. Steps and checks can be interleaved, and all
+execute in the same thread/process so environment variables and working directory
+changes persist throughout the workflow.</p>
+<h2 id="environment-persistence"><a class="header" href="#environment-persistence">Environment Persistence</a></h2>
+<p>Environment modifications in pre-steps are visible to subsequent steps and the agent:</p>
+<pre><code class="language-toml">[[workflows.operations.pre]]
+kind = "step"
+id = "set-env"
+type = "builtin"
+action = "set_env"
+env_name = "MY_VAR"
+env_value = "value"
+# MY_VAR is now available to subsequent steps and agent
+</code></pre>
+<p><strong>Note</strong>: Shell commands that set environment variables using <code>export</code> only
+affect that specific shell invocation. Use the <code>set_env</code> built-in action for
+cross-step persistence.</p>
+<h2 id="error-handling"><a class="header" href="#error-handling">Error Handling</a></h2>
+<ul>
+<li><strong>Step failure</strong> halts the workflow immediately</li>
+<li><strong>Check failure</strong> with <code>on_false="fail"</code> halts the workflow</li>
+<li><strong>Check failure</strong> with <code>on_false="skip"</code> skips remaining pre-items and continues to command</li>
+<li><strong>Post-step/check failure</strong> is logged but doesn’t fail the workflow</li>
+</ul>
+<h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
+<p>The following examples demonstrate workflow-level orchestration. For command-specific setup and validation examples, see <a href="../advanced/command-hooks.html">Command Hooks</a>.</p>
+<h3 id="example-1-multi-command-feature-workflow"><a class="header" href="#example-1-multi-command-feature-workflow">Example 1: Multi-Command Feature Workflow</a></h3>
+<p>Orchestrate multiple commands with workflow-level git operations:</p>
+<pre><code class="language-toml">schema_version = "2.1.0"
+
+[metadata]
+name = "Feature Development"
+version = "1.0.0"
+
+# Workflow-level setup
+[[pre]]
+kind = "step"
+id = "create-branch"
+type = "shell"
+command = "git checkout -b feature/$FEATURE_NAME"
+
+[[pre]]
+kind = "check"
+id = "branch-created"
+type = "shell"
+command = "git branch --show-current | grep feature/"
+on_false = "fail"
+
+# Execute commands
+[[steps]]
+command = "issue draft"
+
+[[steps]]
+command = "code create"
+
+[[steps]]
+command = "code review"
+
+# Workflow-level cleanup
+[[post]]
+kind = "step"
+id = "push-branch"
+type = "shell"
+command = "git push -u origin feature/$FEATURE_NAME"
+
+[[post]]
+kind = "step"
+id = "create-pr"
+type = "shell"
+command = "gh pr create --fill"
+</code></pre>
+<h3 id="example-2-conditional-workflow-based-on-environment"><a class="header" href="#example-2-conditional-workflow-based-on-environment">Example 2: Conditional Workflow Based on Environment</a></h3>
+<h3 id="example-2-conditional-workflow-based-on-environment-1"><a class="header" href="#example-2-conditional-workflow-based-on-environment-1">Example 2: Conditional Workflow Based on Environment</a></h3>
+<p>Different workflow paths based on CI vs local development:</p>
+<pre><code class="language-toml">schema_version = "2.1.0"
+
+[metadata]
+name = "PR Workflow"
+version = "1.0.0"
+
+# Check environment
+[[pre]]
+kind = "check"
+id = "is-ci"
+type = "env_equals"
+env_name = "CI"
+env_value = "true"
+on_false = "skip"
+
+# CI-specific setup
+[[pre]]
+kind = "step"
+id = "ci-setup"
+type = "shell"
+command = "npm ci &amp;&amp; npm run lint"
+requires_check = "is-ci"
+
+# Local-specific setup
+[[pre]]
+kind = "step"
+id = "local-setup"
+type = "shell"
+command = "npm install"
+depends_on = "failed(is-ci)"
+
+[[steps]]
+command = "pr review"
+
+[[steps]]
+command = "pr merge"
+
+# CI-specific notifications
+[[post]]
+kind = "step"
+id = "notify-team"
+type = "shell"
+command = "slack-notify 'PR merged' #team-channel"
+requires_check = "is-ci"
+</code></pre>
+<h3 id="example-3-workflow-with-fallback-logic"><a class="header" href="#example-3-workflow-with-fallback-logic">Example 3: Workflow with Fallback Logic</a></h3>
+<p>Handle missing resources with fallback steps:</p>
+<pre><code class="language-toml">schema_version = "2.1.0"
+
+[metadata]
+name = "Documentation Update"
+version = "1.0.0"
+
+# Try to load custom template
+[[pre]]
+kind = "check"
+id = "has-custom-template"
+type = "file_exists"
+path = ".nia/templates/docs.md"
+on_false = "skip"
+
+# Use custom template if available
+[[pre]]
+kind = "step"
+id = "load-custom"
+type = "builtin"
+action = "copy_file"
+source = ".nia/templates/docs.md"
+destination = "templates/current.md"
+requires_check = "has-custom-template"
+
+# Fallback to default template
+[[pre]]
+kind = "step"
+id = "load-default"
+type = "builtin"
+action = "write_file"
+path = "templates/current.md"
+content = "# Default Documentation Template"
+depends_on = "failed(load-custom)"
+
+[[steps]]
+command = "docs update"
+
+[[post]]
+kind = "step"
+id = "cleanup-template"
+type = "builtin"
+action = "remove_file"
+path = "templates/current.md"
+</code></pre>
+<p>For more examples including command-level validation and setup, see <a href="../advanced/command-hooks.html">Command Hooks</a>.</p>
+<h2 id="debugging"><a class="header" href="#debugging">Debugging</a></h2>
+<p>View step execution in the transaction log:</p>
+<pre><code class="language-bash">cat .nia/work/job_123/logs/transaction.jsonl | jq 'select(.event_type == "step_execution")'
+</code></pre>
+<p>Each step logs:</p>
+<ul>
+<li><code>step_id</code>: Step identifier</li>
+<li><code>type</code>: shell, builtin, or agent</li>
+<li><code>phase</code>: pre or post</li>
+<li><code>outcome</code>: success, failure, or skipped</li>
+<li><code>duration_ms</code>: Execution time</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../reference/workflow-schema.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../reference/context-merging.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../reference/workflow-schema.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../reference/context-merging.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-c2a407aa.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../user-docs/theme/custom-aab95659.js"></script>
+
+
+
+    </div>
+    </body>
+</html>

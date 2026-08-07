@@ -1,0 +1,1176 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Installation - Nia CLI User Guide</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="User documentation for Nia agentic SDLC CLI">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-2459343d.css">
+        <link rel="stylesheet" href="../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../user-docs/theme/custom-38873017.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-e42586be.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-b4caf93b.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Nia CLI User Guide</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/telerik/project-nia" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="installation"><a class="header" href="#installation">Installation</a></h1>
+<p>Nia CLI is a Rust-based command-line utility for agentic software development life cycle (SDLC) workflows. This article explains how to select a supported platform, download and install Nia, verify the installation, and remove it when necessary.</p>
+<h2 id="before-you-begin"><a class="header" href="#before-you-begin">Before You Begin</a></h2>
+<p>Use the following sequence to complete the installation:</p>
+<ol>
+<li>Check the prerequisites and confirm your platform support tier.</li>
+<li>Download Nia from the public release repository.</li>
+<li>Choose the recommended quick install, a manual release asset, or a Linux package.</li>
+<li>Install any required companion software described in this article.</li>
+<li>Verify that the <code>nia</code> command runs in a new terminal.</li>
+</ol>
+<p>The quick-install scripts are the recommended option for most users. Use the manual, package, or container procedures when your environment requires them.</p>
+<h2 id="prerequisites"><a class="header" href="#prerequisites">Prerequisites</a></h2>
+<h3 id="environment-requirements"><a class="header" href="#environment-requirements">Environment Requirements</a></h3>
+<blockquote>
+<p><strong>WARNING: BETA SOFTWARE WARNING</strong></p>
+<p>Nia is beta software with <strong>autonomous agent capabilities</strong>. Before installing,
+understand the following:</p>
+</blockquote>
+<h4 id="autonomous-actions"><a class="header" href="#autonomous-actions">Autonomous Actions</a></h4>
+<p>Nia can perform the following actions <strong>without individual confirmation</strong>:</p>
+<ul>
+<li><strong>Command Execution</strong>: Run shell commands on your system</li>
+<li><strong>File Modifications</strong>: Create, edit, and delete files in your workspace</li>
+<li><strong>Git Operations</strong>: Create commits, branches, and push changes</li>
+<li><strong>Network Calls</strong>: Make HTTP requests to external services and APIs</li>
+</ul>
+<h4 id="recommended-environment"><a class="header" href="#recommended-environment">Recommended Environment</a></h4>
+<p>Install and run Nia <strong>ONLY</strong> in isolated development environments:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Recommended</th><th>Not Recommended</th></tr>
+</thead>
+<tbody>
+<tr><td>Docker containers</td><td>Production machines</td></tr>
+<tr><td>Virtual machines</td><td>Systems with production access</td></tr>
+<tr><td>GitHub Codespaces</td><td>Personal computers with sensitive data</td></tr>
+<tr><td>Disposable dev machines</td><td>Shared development servers</td></tr>
+</tbody>
+</table>
+</div>
+<h4 id="user-responsibility"><a class="header" href="#user-responsibility">User Responsibility</a></h4>
+<p>You are responsible for:</p>
+<ol>
+<li><strong>Reviewing agent output</strong> before accepting changes</li>
+<li><strong>Configuring constraints</strong> via workflow configuration</li>
+<li><strong>Limiting scope</strong> using project.toml settings</li>
+<li><strong>Validating actions</strong> in code review before merging</li>
+</ol>
+<p>For information on configuring agent behavior, see:</p>
+<ul>
+<li><a href="../reference/workflow-schema.html">Workflow Configuration</a></li>
+<li><a href="../agents/setup.html">Agent Setup</a></li>
+</ul>
+<hr>
+<h3 id="system-requirements"><a class="header" href="#system-requirements">System Requirements</a></h3>
+<p>Before installing Nia CLI, ensure you have:</p>
+<ul>
+<li>A 64-bit operating system (Linux, macOS, or Windows)</li>
+<li>Terminal/command prompt access</li>
+<li>Internet connection (for initial download)</li>
+<li><strong>PowerShell 6 or later</strong> (Windows only) — Windows ships with PowerShell 5.1 by default, which is not compatible with nia. Install PowerShell 7 via:
+<ul>
+<li><strong>WinGet</strong>: <code>winget install Microsoft.PowerShell</code>.</li>
+<li><strong>PowerShell GitHub Releases</strong>: Download PowerShell from <a href="https://github.com/PowerShell/PowerShell/releases">PowerShell GitHub Releases</a>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="related-documentation"><a class="header" href="#related-documentation">Related Documentation</a></h3>
+<ul>
+<li><strong><a href="../reference/workflow-schema.html">Workflow Configuration</a></strong>: Configure workflow behavior and constraints</li>
+<li><strong><a href="../agents/setup.html">Agent Setup</a></strong>: Configure AI agent behavior</li>
+<li><strong><a href="../troubleshooting/common-issues.html">Troubleshooting</a></strong>: Common issues and solutions</li>
+</ul>
+<h2 id="platform-support"><a class="header" href="#platform-support">Platform Support</a></h2>
+<p>Nia CLI is available for the following platforms:</p>
+<h3 id="support-tiers"><a class="header" href="#support-tiers">Support Tiers</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Tier</th><th>Definition</th><th>What This Means</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Tier 1</strong></td><td>Fully Supported</td><td>Automated testing, guaranteed compatibility, priority support</td></tr>
+<tr><td><strong>Tier 2</strong></td><td>Supported</td><td>Manual or CI testing, bugs fixed, documented</td></tr>
+<tr><td><strong>Tier 3</strong></td><td>Community Supported</td><td>Expected to work, community-tested, best-effort support</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="platform-matrix"><a class="header" href="#platform-matrix">Platform Matrix</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Platform</th><th>Architecture</th><th>Tier</th><th>Binary Name</th></tr>
+</thead>
+<tbody>
+<tr><td>Linux</td><td>x86_64</td><td>Tier 1</td><td><code>nia-*-x86_64-linux</code></td></tr>
+<tr><td>Linux</td><td>aarch64 (ARM64)</td><td>Tier 2</td><td><code>nia-*-aarch64-linux</code></td></tr>
+<tr><td>macOS Intel</td><td>x86_64</td><td>Tier 1</td><td><code>nia-*-x86_64-darwin</code></td></tr>
+<tr><td>macOS Apple Silicon</td><td>aarch64</td><td>Tier 1</td><td><code>nia-*-aarch64-darwin</code></td></tr>
+<tr><td>Windows 11</td><td>x86_64</td><td>Tier 1</td><td><code>nia-*-x86_64-windows.exe</code></td></tr>
+<tr><td>Windows Server 2025</td><td>x86_64</td><td>Tier 1</td><td><code>nia-*-x86_64-windows.exe</code></td></tr>
+<tr><td>Windows Server 2022</td><td>x86_64</td><td>Tier 2</td><td><code>nia-*-x86_64-windows.exe</code></td></tr>
+<tr><td>Windows 10</td><td>x86_64</td><td>Tier 3</td><td><code>nia-*-x86_64-windows.exe</code></td></tr>
+<tr><td>Windows Server 2019</td><td>x86_64</td><td>Tier 3</td><td><code>nia-*-x86_64-windows.exe</code></td></tr>
+<tr><td>Windows Server 2016</td><td>x86_64</td><td>Tier 3</td><td><code>nia-*-x86_64-windows.exe</code></td></tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<p><strong>Note</strong>: Windows Server editions use the same binary as Windows 11 but may require additional configuration. See <a href="#windows-server-installation">Installing on Windows Server</a>.</p>
+</blockquote>
+<blockquote>
+<p><strong>PowerShell Requirement</strong>: All Windows platforms (Windows 10, 11, Server 2016-2025) require <strong>PowerShell 6 or later</strong>. Windows ships with PowerShell 5.1 by default, which is not compatible. See <a href="#prerequisites">Prerequisites</a> for installation instructions.</p>
+</blockquote>
+<h3 id="version-compatibility"><a class="header" href="#version-compatibility">Version Compatibility</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Windows Edition</th><th>Nia 2.6+</th><th>Nia 2.5</th><th>Notes</th></tr>
+</thead>
+<tbody>
+<tr><td>Windows 11</td><td>✅</td><td>✅</td><td>Primary target</td></tr>
+<tr><td>Windows Server 2025</td><td>✅</td><td>⚠️</td><td>Full support starting v2.6</td></tr>
+<tr><td>Windows Server 2022</td><td>✅</td><td>✅</td><td>Tested in CI</td></tr>
+<tr><td>Windows 10</td><td>✅</td><td>✅</td><td>Community supported</td></tr>
+<tr><td>Windows Server 2019</td><td>⚠️</td><td>⚠️</td><td>Community supported, may work</td></tr>
+<tr><td>Windows Server 2016</td><td>⚠️</td><td>⚠️</td><td>Legacy, may require workarounds</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Legend:</strong></p>
+<ul>
+<li>✅ = Fully supported and tested</li>
+<li>⚠️ = May work but not guaranteed, requires community validation or workarounds</li>
+</ul>
+<blockquote>
+<p><strong>Important</strong>: All Windows editions require PowerShell 6 or later. Older PowerShell versions (5.1 and earlier) are not supported regardless of Windows version.</p>
+</blockquote>
+<h2 id="installation-methods"><a class="header" href="#installation-methods">Installation Methods</a></h2>
+<h3 id="use-the-quick-installer"><a class="header" href="#use-the-quick-installer">Use the Quick Installer</a></h3>
+<p>The quick installer detects the release asset for your platform and provides the shortest installation path. Nia releases are published in the public <a href="https://github.com/telerik/project-nia"><code>telerik/project-nia</code></a> repository.</p>
+<h4 id="install-with-github-cli"><a class="header" href="#install-with-github-cli">Install with GitHub CLI</a></h4>
+<p><em>Linux/macOS:</em></p>
+<pre><code class="language-bash">gh release download --repo telerik/project-nia --pattern 'install.sh' &amp;&amp; sh install.sh
+</code></pre>
+<p><em>Windows (PowerShell 6+):</em></p>
+<pre><code class="language-powershell">gh release download --repo telerik/project-nia --pattern 'install.ps1'
+.\install.ps1
+</code></pre>
+<h4 id="choose-installer-options"><a class="header" href="#choose-installer-options">Choose Installer Options</a></h4>
+<p>After downloading the installer, pass options to select a release channel, version, destination, or output mode:</p>
+<p><em>Linux/macOS:</em></p>
+<pre><code class="language-bash">gh release download --repo telerik/project-nia --pattern 'install.sh'
+sh install.sh --version 4.0.1              # Install specific version
+sh install.sh --pre-release                 # Install pre-release
+sh install.sh --install-dir ~/.local/bin   # Custom directory
+sh install.sh --skip-verify                # Skip verification (not recommended)
+sh install.sh --quiet                      # Quiet mode for CI/CD
+</code></pre>
+<p><em>Windows PowerShell:</em></p>
+<pre><code class="language-powershell">gh release download --repo telerik/project-nia --pattern 'install.ps1'
+.\install.ps1 -Version '4.0.1'             # Install specific version
+.\install.ps1 -PreRelease                  # Install pre-release
+.\install.ps1 -InstallDir "$env:LOCALAPPDATA\Programs\nia"  # Custom directory
+.\install.ps1 -SkipVerify                  # Skip verification (not recommended)
+.\install.ps1 -Quiet                       # Quiet mode for CI/CD
+</code></pre>
+<hr>
+<h3 id="install-from-a-binary-release"><a class="header" href="#install-from-a-binary-release">Install from a Binary Release</a></h3>
+<p>Use a binary release when you need to manage the executable yourself or distribute it through an internal software process. Download the asset for your operating system and architecture, then follow the matching procedure.</p>
+<h4 id="install-on-linux-x86_64"><a class="header" href="#install-on-linux-x86_64">Install on Linux (x86_64)</a></h4>
+<pre><code class="language-bash"># Download latest release
+gh release download --repo telerik/project-nia --pattern 'nia-*-x86_64-linux'
+chmod +x nia-*-x86_64-linux
+sudo mv nia-*-x86_64-linux /usr/local/bin/nia
+nia --version
+</code></pre>
+<h4 id="install-on-linux-aarch64arm64"><a class="header" href="#install-on-linux-aarch64arm64">Install on Linux (aarch64/ARM64)</a></h4>
+<p>For ARM64 Linux systems (e.g., AWS Graviton, Raspberry Pi 4+, Linux containers on Apple Silicon):</p>
+<pre><code class="language-bash"># Download latest release
+gh release download --repo telerik/project-nia --pattern 'nia-*-aarch64-linux'
+chmod +x nia-*-aarch64-linux
+sudo mv nia-*-aarch64-linux /usr/local/bin/nia
+nia --version
+</code></pre>
+<blockquote>
+<p><strong>Note</strong>: Use this binary for Linux ARM64 systems and containers. For native macOS execution on Apple Silicon, use the aarch64-darwin binary instead.</p>
+</blockquote>
+<h4 id="detect-your-macos-architecture"><a class="header" href="#detect-your-macos-architecture">Detect Your macOS Architecture</a></h4>
+<pre><code class="language-bash"># Check your Mac's architecture
+uname -m
+# Output: x86_64 = Intel Mac
+# Output: arm64 = Apple Silicon Mac (M1/M2/M3/M4)
+</code></pre>
+<h4 id="install-on-macos-intel-x86_64"><a class="header" href="#install-on-macos-intel-x86_64">Install on macOS (Intel x86_64)</a></h4>
+<p>For Intel Macs:</p>
+<pre><code class="language-bash"># Download latest release
+gh release download --repo telerik/project-nia --pattern 'nia-*-x86_64-darwin'
+
+# Make executable
+chmod +x nia-*-x86_64-darwin
+
+# Remove macOS quarantine attribute (required for unsigned binaries)
+xattr -d com.apple.quarantine nia-*-x86_64-darwin
+
+# Alternative: Control-click the file in Finder → Open → confirm
+
+# Move to PATH
+sudo mv nia-*-x86_64-darwin /usr/local/bin/nia
+
+# Verify installation
+nia --version
+</code></pre>
+<p><strong>Note</strong>: macOS Gatekeeper will initially block the binary because it’s not signed with an Apple Developer certificate. Use the <code>xattr</code> command or Control-click method to bypass this security warning. This is safe for nia as all binaries are GPG signed for verification.</p>
+<h4 id="install-on-macos-apple-silicon-aarch64"><a class="header" href="#install-on-macos-apple-silicon-aarch64">Install on macOS (Apple Silicon aarch64)</a></h4>
+<p>For Apple Silicon Macs (M1/M2/M3/M4):</p>
+<pre><code class="language-bash"># Download latest release
+gh release download --repo telerik/project-nia --pattern 'nia-*-aarch64-darwin'
+
+# Make executable
+chmod +x nia-*-aarch64-darwin
+
+# Remove macOS quarantine attribute (required for unsigned binaries)
+xattr -d com.apple.quarantine nia-*-aarch64-darwin
+
+# Alternative: Control-click the file in Finder → Open → confirm
+
+# Move to PATH
+sudo mv nia-*-aarch64-darwin /usr/local/bin/nia
+
+# Verify installation
+nia --version
+</code></pre>
+<p><strong>Note</strong>: Apple Silicon Macs can run Intel binaries via Rosetta 2, but native aarch64 binaries provide better performance. Always use the aarch64 version for Apple Silicon.</p>
+<h4 id="install-on-windows-11-client"><a class="header" href="#install-on-windows-11-client">Install on Windows 11 Client</a></h4>
+<blockquote>
+<p><strong>Note</strong>: These instructions are for Windows 11 desktop/laptop systems. For Windows Server, see <a href="#windows-server-installation">Windows Server Installation</a> below.</p>
+</blockquote>
+<blockquote>
+<p><strong>Prerequisite</strong>: Verify you have PowerShell 6 or later before proceeding:</p>
+<pre><code class="language-powershell">$PSVersionTable.PSVersion.Major  # Must be 6 or higher
+</code></pre>
+<p>If you see <code>5</code>, install PowerShell 7: <code>winget install Microsoft.PowerShell</code>, then run commands in the new <code>pwsh</code> terminal.</p>
+</blockquote>
+<pre><code class="language-powershell"># Download latest release
+gh release download --repo telerik/project-nia --pattern 'nia-*-x86_64-windows.exe'
+
+# Create programs directory if it doesn't exist
+New-Item -ItemType Directory -Force -Path "$env:LOCALAPPDATA\Programs"
+
+# Move to local programs directory
+Move-Item nia-*-x86_64-windows.exe "$env:LOCALAPPDATA\Programs\nia.exe"
+
+# Add to user PATH (if not already present)
+$userPath = [Environment]::GetEnvironmentVariable("Path", "User")
+if ($userPath -notlike "*$env:LOCALAPPDATA\Programs*") {
+    [Environment]::SetEnvironmentVariable("Path", "$userPath;$env:LOCALAPPDATA\Programs", "User")
+}
+
+# Restart PowerShell, then verify:
+nia --version
+</code></pre>
+<h4 id="install-on-windows-server"><a class="header" href="#install-on-windows-server">Install on Windows Server</a></h4>
+<p>Windows Server editions (2019, 2022, 2025) use the same binary as Windows 11 but require additional steps due to stricter default security policies.</p>
+<blockquote>
+<p><strong>Support Level</strong>: Windows Server 2025 is <strong>Tier 1 (Fully Supported)</strong>, Server 2022 is <strong>Tier 2 (Supported)</strong>, and Server 2019/2016 are <strong>Tier 3 (Community Supported)</strong>. See <a href="#platform-support">Platform Support</a> for details.</p>
+</blockquote>
+<blockquote>
+<p><strong>PowerShell Requirement</strong>: Windows Server ships with PowerShell 5.1, which is <strong>not compatible</strong> with nia. You must install PowerShell 7 before proceeding:</p>
+<pre><code class="language-powershell"># Check current version
+$PSVersionTable.PSVersion.Major  # Must be 6 or higher
+
+# Install PowerShell 7 (requires admin)
+winget install Microsoft.PowerShell
+
+# After installation, use pwsh.exe instead of powershell.exe
+pwsh
+</code></pre>
+<p>All subsequent commands must be run in <code>pwsh</code> (PowerShell 7), not <code>powershell</code> (PowerShell 5.1).</p>
+</blockquote>
+<h5 id="download-the-binary"><a class="header" href="#download-the-binary">Download the Binary</a></h5>
+<pre><code class="language-powershell"># Download latest release
+gh release download --repo telerik/project-nia --pattern 'nia-*-x86_64-windows.exe'
+</code></pre>
+<p>If <code>gh</code> (GitHub CLI) is not available, download manually from <a href="https://github.com/telerik/project-nia/releases">GitHub Releases</a>.</p>
+<h5 id="create-the-installation-directory"><a class="header" href="#create-the-installation-directory">Create the Installation Directory</a></h5>
+<pre><code class="language-powershell"># Create program directory (run as Administrator)
+New-Item -ItemType Directory -Force -Path "C:\Program Files\Nia"
+
+# Move binary to installation directory
+Move-Item nia-*-x86_64-windows.exe "C:\Program Files\Nia\nia.exe"
+</code></pre>
+<h5 id="add-nia-to-the-system-path"><a class="header" href="#add-nia-to-the-system-path">Add Nia to the System PATH</a></h5>
+<pre><code class="language-powershell"># Add to system PATH (run as Administrator)
+$niaPath = "C:\Program Files\Nia"
+$currentPath = [Environment]::GetEnvironmentVariable("Path", "Machine")
+
+if ([string]::IsNullOrEmpty($currentPath)) {
+    # No existing PATH: set it to the Nia directory
+    $newPath = $niaPath
+} elseif ($currentPath.Split(';') -notcontains $niaPath) {
+    # Append Nia directory if it is not already present
+    $newPath = "$currentPath;$niaPath"
+} else {
+    # Nia directory already present: leave PATH unchanged
+    $newPath = $currentPath
+}
+[Environment]::SetEnvironmentVariable("Path", $newPath, "Machine")
+
+# Restart PowerShell to apply changes
+</code></pre>
+<blockquote>
+<p><strong>Important</strong>: On Windows Server, add to <strong>System</strong> PATH rather than User PATH for consistent behavior across all sessions and services.</p>
+</blockquote>
+<h5 id="verify-the-installation"><a class="header" href="#verify-the-installation">Verify the Installation</a></h5>
+<pre><code class="language-powershell"># Open a new PowerShell window, then verify:
+nia.exe --version
+
+# If the above fails, try with explicit path:
+&amp; "C:\Program Files\Nia\nia.exe" --version
+</code></pre>
+<blockquote>
+<p><strong>Note</strong>: Always use <code>nia.exe</code> (with extension) in scripts and automation on Windows Server. The extension-less <code>nia</code> command may not resolve correctly in all contexts.</p>
+</blockquote>
+<h5 id="handle-security-warnings"><a class="header" href="#handle-security-warnings">Handle Security Warnings</a></h5>
+<p>If you encounter security warnings, see <a href="../troubleshooting/common-issues.html#windows-server-specific-issues">Windows Server Troubleshooting</a>.</p>
+<p><strong>Common scenarios</strong>:</p>
+<ul>
+<li>SmartScreen blocking execution</li>
+<li>Execution Policy restrictions</li>
+<li>Group Policy blocking unsigned binaries</li>
+</ul>
+<h4 id="install-on-server-core"><a class="header" href="#install-on-server-core">Install on Server Core</a></h4>
+<p>For Windows Server Core (no GUI):</p>
+<pre><code class="language-powershell"># All steps above work in Server Core
+# Verification:
+nia.exe --version
+
+# If needed, bypass SmartScreen via PowerShell:
+Unblock-File -Path "C:\Program Files\Nia\nia.exe"
+</code></pre>
+<h4 id="resolve-the-nia-command-on-windows"><a class="header" href="#resolve-the-nia-command-on-windows">Resolve the Nia Command on Windows</a></h4>
+<p>Understanding how Windows resolves the <code>nia</code> command helps avoid common issues:</p>
+<h5 id="choose-a-command-format"><a class="header" href="#choose-a-command-format">Choose a Command Format</a></h5>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Format</th><th>Description</th><th>When to Use</th></tr>
+</thead>
+<tbody>
+<tr><td><code>nia</code></td><td>Extension-less</td><td>Works in most interactive shells on Windows 11</td></tr>
+<tr><td><code>nia.exe</code></td><td>Explicit extension</td><td>Recommended for scripts, automation, and Windows Server</td></tr>
+<tr><td><code>.\nia.exe</code></td><td>Relative path</td><td>Required when running from current directory</td></tr>
+<tr><td>Full path</td><td>Absolute path</td><td>Most reliable, works in all contexts</td></tr>
+</tbody>
+</table>
+</div>
+<h5 id="follow-command-recommendations"><a class="header" href="#follow-command-recommendations">Follow Command Recommendations</a></h5>
+<p>For Interactive Use:</p>
+<ul>
+<li>Windows 11: <code>nia</code> usually works</li>
+<li>Windows Server: Use <code>nia.exe</code> for reliability</li>
+</ul>
+<p>For Scripts and Automation:</p>
+<pre><code class="language-powershell"># Recommended - explicit extension
+nia.exe config validate
+
+# Most reliable - full path
+&amp; "C:\Program Files\Nia\nia.exe" config validate
+</code></pre>
+<p>For CI/CD Pipelines:</p>
+<pre><code class="language-yaml"># GitHub Actions example
+- name: Run Nia
+  run: nia.exe config validate
+  shell: pwsh
+</code></pre>
+<h5 id="troubleshoot-command-resolution"><a class="header" href="#troubleshoot-command-resolution">Troubleshoot Command Resolution</a></h5>
+<p>If <code>nia</code> is not recognized:</p>
+<ol>
+<li>
+<p><strong>Check PATH</strong>:</p>
+<pre><code class="language-powershell">$env:PATH -split ';' | Where-Object { $_ -like '*nia*' }
+</code></pre>
+</li>
+<li>
+<p><strong>Check PATHEXT</strong> (should include .EXE):</p>
+<pre><code class="language-powershell">$env:PATHEXT
+# Expected: .COM;.EXE;.BAT;.CMD;...
+</code></pre>
+</li>
+<li>
+<p><strong>Locate the binary</strong>:</p>
+<pre><code class="language-powershell">Get-Command nia.exe -ErrorAction SilentlyContinue | Select-Object Source
+</code></pre>
+</li>
+<li>
+<p><strong>Use explicit path as workaround</strong>:</p>
+<pre><code class="language-powershell">&amp; (Get-Command nia.exe).Source --version
+</code></pre>
+</li>
+</ol>
+<p><strong>Note:</strong> The <code>gh release download</code> examples require an authenticated <a href="https://cli.github.com/">GitHub CLI</a>. The repository and its release assets are public; use the direct-download quick installer if you do not use GitHub CLI.</p>
+<h3 id="install-a-linux-package"><a class="header" href="#install-a-linux-package">Install a Linux Package</a></h3>
+<p>For supported Linux distributions, use the package that matches your architecture. Package installation integrates Nia with the distribution’s package manager and avoids manually moving the binary.</p>
+<h4 id="debian-or-ubuntu-x86_64"><a class="header" href="#debian-or-ubuntu-x86_64">Debian or Ubuntu (x86_64)</a></h4>
+<pre><code class="language-bash"># Download latest release
+gh release download --repo telerik/project-nia --pattern 'nia_*_amd64.deb'
+
+# Install package
+sudo dpkg -i nia_*_amd64.deb
+
+# Verify installation
+nia --version
+</code></pre>
+<h4 id="debian-or-ubuntu-arm64"><a class="header" href="#debian-or-ubuntu-arm64">Debian or Ubuntu (ARM64)</a></h4>
+<pre><code class="language-bash"># Download latest release
+gh release download --repo telerik/project-nia --pattern 'nia_*_arm64.deb'
+
+# Install package
+sudo dpkg -i nia_*_arm64.deb
+
+# Verify installation
+nia --version
+</code></pre>
+<h4 id="rhel-fedora-or-centos-x86_64"><a class="header" href="#rhel-fedora-or-centos-x86_64">RHEL, Fedora, or CentOS (x86_64)</a></h4>
+<pre><code class="language-bash"># Download latest release
+gh release download --repo telerik/project-nia --pattern 'nia-*x86_64.rpm'
+
+# Install package (Fedora/RHEL 8+)
+sudo dnf install ./nia-*x86_64.rpm
+
+# Or for older systems
+sudo rpm -i nia-*x86_64.rpm
+
+# Verify installation
+nia --version
+</code></pre>
+<h4 id="rhel-fedora-or-centos-arm64"><a class="header" href="#rhel-fedora-or-centos-arm64">RHEL, Fedora, or CentOS (ARM64)</a></h4>
+<pre><code class="language-bash"># Download latest release
+gh release download --repo telerik/project-nia --pattern 'nia-*aarch64.rpm'
+
+# Install package (Fedora/RHEL 8+)
+sudo dnf install ./nia-*aarch64.rpm
+
+# Or for older systems
+sudo rpm -i nia-*aarch64.rpm
+
+# Verify installation
+nia --version
+</code></pre>
+<h2 id="install-github-copilot-cli-on-windows"><a class="header" href="#install-github-copilot-cli-on-windows">Install GitHub Copilot CLI on Windows</a></h2>
+<p>If you use GitHub Copilot CLI for AI-powered workflows, choose an installation method that lets Nia invoke the executable without the command-line length limitations of Windows Command Shell. Nia also supports OpenCode and Claude Code; see <a href="../agents/setup.html">AI Coding Agent Setup</a> for the supported agents and their provider-specific prerequisites.</p>
+<h3 id="supported-installation-methods"><a class="header" href="#supported-installation-methods">Supported Installation Methods</a></h3>
+<p>On Windows, we recommend installing GitHub Copilot CLI using one of these methods:</p>
+<h4 id="install-with-winget-recommended"><a class="header" href="#install-with-winget-recommended">Install with WinGet (Recommended)</a></h4>
+<pre><code class="language-powershell">winget install GitHub.CopilotCLI
+</code></pre>
+<p>This installs a native Windows executable that works reliably with Nia.</p>
+<p><strong>Do Not Use the GitHub CLI Extension on Windows</strong></p>
+<blockquote>
+<p><strong>Warning</strong>: The GitHub CLI extension method (<code>gh extension install github/gh-copilot</code>)
+is <strong>not supported</strong> by nia on Windows.</p>
+</blockquote>
+<p>The <code>gh copilot</code> command uses Windows Command Shell (<code>cmd.exe</code>) internally, which has
+an ~8191 character command-line limit. This limit is frequently exceeded with nia’s
+prompts that include multi-file context, detailed instructions, and XML formatting.</p>
+<p><strong>Symptoms of this issue:</strong></p>
+<ul>
+<li>“The command line is too long” errors</li>
+<li>“batch file arguments are invalid” errors</li>
+<li>Truncated or failed responses from Copilot</li>
+</ul>
+<p><strong>If you have gh extension installed:</strong></p>
+<ol>
+<li>Install via WinGet instead: <code>winget install GitHub.CopilotCLI</code></li>
+<li>Or use npm with automatic wrapper discovery (see below)</li>
+<li>Remove any <code>command = "gh"</code> from your <code>.nia/config/agents.toml</code></li>
+</ol>
+<p>The gh CLI itself works fine for other purposes—only the Copilot extension
+integration with nia is affected.</p>
+<h4 id="install-with-npm"><a class="header" href="#install-with-npm">Install with npm</a></h4>
+<p>You can install GitHub Copilot CLI via npm:</p>
+<pre><code class="language-powershell">npm install -g @githubnext/github-copilot-cli
+</code></pre>
+<p><strong>Automatic Wrapper Discovery</strong>: Nia automatically detects npm installations and
+parses the <code>.cmd</code> wrapper scripts to find the underlying Node.js entry point.
+This allows nia to invoke Node.js directly, bypassing Windows Command Shell
+limitations.</p>
+<p><strong>How it works:</strong></p>
+<ol>
+<li>Nia finds <code>copilot.cmd</code> in your PATH</li>
+<li>Parses the wrapper to extract the Node.js script path</li>
+<li>Invokes <code>node &lt;script&gt;</code> directly instead of using the wrapper</li>
+<li>Logs the discovery process (visible with <code>nia status --verbose</code>)</li>
+</ol>
+<p><strong>No configuration needed</strong> - wrapper discovery is automatic. Nia will log:</p>
+<pre><code class="language-text">Successfully parsed wrapper script, will invoke Node.js directly
+</code></pre>
+<p>If wrapper parsing fails, nia falls back to using the wrapper directly and logs a warning.
+In that case, consider switching to the WinGet installation.</p>
+<h3 id="verify-github-copilot-cli"><a class="header" href="#verify-github-copilot-cli">Verify GitHub Copilot CLI</a></h3>
+<p>After installation, verify everything is working:</p>
+<pre><code class="language-powershell"># Check Nia can find and use the agent
+nia status
+
+# Test a simple command
+nia issue draft --lite
+</code></pre>
+<h3 id="configure-an-alternative-copilot-command"><a class="header" href="#configure-an-alternative-copilot-command">Configure an Alternative Copilot Command</a></h3>
+<p>In most cases, <strong>no configuration is needed</strong> - nia automatically discovers and uses the best invocation method.</p>
+<p>If you need to specify a direct path, you can configure it in <code>.nia/config/agents.toml</code>:</p>
+<pre><code class="language-toml">schema_version = "2.1.0"
+
+[agent]
+default = "github_copilot"
+
+[agent.github_copilot]
+# Specify a direct path to executable
+command = "C:\\Program Files\\GitHub Copilot CLI\\copilot.exe"
+
+model = "gpt-4"
+</code></pre>
+<p><strong>Note</strong>: Do not use <code>command = "gh"</code> - this is not supported and will result in a configuration error.</p>
+<p>See <a href="../agents/custom-agent-configurations.html">Custom Agent Configurations</a> for more details.</p>
+<h2 id="verify-the-installation-1"><a class="header" href="#verify-the-installation-1">Verify the Installation</a></h2>
+<p>Run the version command from a new terminal to confirm that Nia is on your PATH:</p>
+<pre><code class="language-bash">nia --version
+</code></pre>
+<p>You should see output similar to:</p>
+<pre><code class="language-text">nia 4.1.1
+</code></pre>
+<h2 id="container-deployment"><a class="header" href="#container-deployment">Container Deployment</a></h2>
+<h3 id="arm64-containers-on-apple-silicon-dockerpodman"><a class="header" href="#arm64-containers-on-apple-silicon-dockerpodman">ARM64 Containers on Apple Silicon (Docker/Podman)</a></h3>
+<p>When running Linux containers on Apple Silicon Macs (M1/M2/M3/M4), use the <strong>Linux aarch64</strong> packages. The macOS aarch64 binary is for native macOS execution and cannot run inside a Linux container.</p>
+<h4 id="rhel-based-dockerfile"><a class="header" href="#rhel-based-dockerfile">RHEL-Based Dockerfile</a></h4>
+<pre><code class="language-dockerfile">FROM fedora:latest
+
+# Install curl for downloading nia
+RUN dnf install -y curl ca-certificates
+
+# Download and install nia (ARM64)
+RUN curl -fsSL -o /tmp/nia.rpm \
+   $(curl -s https://api.github.com/repos/telerik/project-nia/releases/latest \
+    | grep "browser_download_url.*aarch64.rpm" | cut -d'"' -f4) \
+    &amp;&amp; dnf install -y /tmp/nia.rpm \
+    &amp;&amp; dnf clean all \
+    &amp;&amp; rm /tmp/nia.rpm
+
+# Verify installation
+RUN nia --version
+</code></pre>
+<h4 id="debian-based-dockerfile"><a class="header" href="#debian-based-dockerfile">Debian-Based Dockerfile</a></h4>
+<pre><code class="language-dockerfile">FROM ubuntu:latest
+
+# Install curl for downloading nia
+RUN apt-get update &amp;&amp; apt-get install -y curl ca-certificates
+
+# Download and install nia (ARM64)
+RUN curl -fsSL -o /tmp/nia.deb \
+   $(curl -s https://api.github.com/repos/telerik/project-nia/releases/latest \
+    | grep "browser_download_url.*arm64.deb" | cut -d'"' -f4) \
+    &amp;&amp; apt-get install -y /tmp/nia.deb \
+    &amp;&amp; apt-get clean &amp;&amp; rm -rf /var/lib/apt/lists/* /tmp/nia.deb
+
+# Verify installation
+RUN nia --version
+</code></pre>
+<h4 id="optimize-the-image-with-a-multi-stage-build"><a class="header" href="#optimize-the-image-with-a-multi-stage-build">Optimize the Image with a Multi-Stage Build</a></h4>
+<p>For production deployments, use multi-stage builds to reduce final image size:</p>
+<h5 id="rhel-based-image"><a class="header" href="#rhel-based-image">RHEL-Based Image</a></h5>
+<pre><code class="language-dockerfile"># Build stage - download package
+FROM fedora:latest as builder
+RUN dnf install -y curl jq
+RUN curl -fsSL -o /tmp/nia.rpm \
+   $(curl -s https://api.github.com/repos/telerik/project-nia/releases/latest \
+    | jq -r '.assets[] | select(.name | contains("aarch64.rpm")) | .browser_download_url')
+
+# Runtime stage - minimal image
+FROM fedora:latest
+COPY --from=builder /tmp/nia.rpm /tmp/nia.rpm
+RUN dnf install -y /tmp/nia.rpm &amp;&amp; dnf clean all &amp;&amp; rm /tmp/nia.rpm
+RUN nia --version
+</code></pre>
+<h5 id="debian-based-image"><a class="header" href="#debian-based-image">Debian-Based Image</a></h5>
+<pre><code class="language-dockerfile"># Build stage - download package
+FROM ubuntu:latest as builder
+RUN apt-get update &amp;&amp; apt-get install -y curl jq
+RUN curl -fsSL -o /tmp/nia.deb \
+   $(curl -s https://api.github.com/repos/telerik/project-nia/releases/latest \
+    | jq -r '.assets[] | select(.name | contains("arm64.deb")) | .browser_download_url')
+
+# Runtime stage - minimal image
+FROM ubuntu:latest
+COPY --from=builder /tmp/nia.deb /tmp/nia.deb
+RUN apt-get update &amp;&amp; apt-get install -y /tmp/nia.deb &amp;&amp; apt-get clean &amp;&amp; rm -rf /var/lib/apt/lists/* /tmp/nia.deb
+RUN nia --version
+</code></pre>
+<blockquote>
+<p><strong>Tip</strong>: Multi-stage builds eliminate curl and jq from the final image, reducing size and attack surface.</p>
+</blockquote>
+<h3 id="choose-the-container-binary"><a class="header" href="#choose-the-container-binary">Choose the Container Binary</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Host System</th><th>Container Type</th><th>Use This Binary</th></tr>
+</thead>
+<tbody>
+<tr><td>Apple Silicon Mac (native)</td><td>-</td><td><code>nia-*-aarch64-darwin</code></td></tr>
+<tr><td>Apple Silicon Mac</td><td>Linux ARM64 container</td><td><code>nia-*-aarch64-linux</code> or ARM64 packages</td></tr>
+<tr><td>Intel Mac</td><td>Linux x86_64 container</td><td><code>nia-*-x86_64-linux</code> or x86_64 packages</td></tr>
+<tr><td>AWS Graviton (ARM64)</td><td>Linux ARM64</td><td><code>nia-*-aarch64-linux</code> or ARM64 packages</td></tr>
+<tr><td>Standard x86_64 Linux</td><td>-</td><td><code>nia-*-x86_64-linux</code> or x86_64 packages</td></tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<p><strong>Important</strong>: The macOS aarch64 binary (<code>aarch64-darwin</code>) is for native macOS execution only. It will <strong>not</strong> work inside Linux containers, even on Apple Silicon Macs. Use the Linux aarch64 binary or packages for container deployments.</p>
+</blockquote>
+<h2 id="next-steps"><a class="header" href="#next-steps">Next Steps</a></h2>
+<ul>
+<li><a href="quick-start.html">Quick Start Guide</a> - Get started with Nia in 5 minutes</li>
+</ul>
+<h2 id="troubleshoot-installation-problems"><a class="header" href="#troubleshoot-installation-problems">Troubleshoot Installation Problems</a></h2>
+<p>Start with these checks when installation does not complete successfully:</p>
+<ul>
+<li><strong>Command not found</strong>: Ensure the binary is in your PATH or use the full path to execute</li>
+<li><strong>Permission denied</strong>: Run with appropriate permissions (e.g., <code>sudo</code> on Linux/macOS)</li>
+<li><strong>Binary won’t execute</strong>: Verify file permissions (<code>chmod +x nia</code> on Unix systems)</li>
+</ul>
+<h3 id="troubleshoot-macos"><a class="header" href="#troubleshoot-macos">Troubleshoot macOS</a></h3>
+<h4 id="gatekeeper-blocks-the-binary"><a class="header" href="#gatekeeper-blocks-the-binary">Gatekeeper Blocks the Binary</a></h4>
+<p><strong>Problem</strong>: “cannot be opened because it is from an unidentified developer”</p>
+<p><strong>Solution</strong>:</p>
+<p>Method 1 - Remove quarantine attribute (recommended):</p>
+<pre><code class="language-bash">xattr -d com.apple.quarantine /usr/local/bin/nia
+# Or for the downloaded file:
+xattr -d com.apple.quarantine nia-*-darwin
+</code></pre>
+<p>Method 2 - Control-click bypass:</p>
+<ol>
+<li>Locate the file in Finder</li>
+<li>Control-click (or right-click) the file</li>
+<li>Select “Open” from the menu</li>
+<li>Click “Open” in the warning dialog</li>
+<li>The file will now run without warnings</li>
+</ol>
+<p>Method 3 - System Settings (macOS 13+):</p>
+<ol>
+<li>Try to run the binary (it will be blocked)</li>
+<li>Go to System Settings → Privacy &amp; Security</li>
+<li>Scroll to “Security” section</li>
+<li>Click “Open Anyway” next to the blocked app message</li>
+<li>Re-run the binary</li>
+</ol>
+<p><strong>Why this happens</strong>: macOS applies Gatekeeper checks to downloaded applications. Nia release assets include signatures and checksums for authenticity verification.</p>
+<hr>
+<h4 id="binary-not-in-path"><a class="header" href="#binary-not-in-path">Binary Not in PATH</a></h4>
+<p><strong>Problem</strong>: <code>nia: command not found</code></p>
+<p><strong>Solution</strong>:</p>
+<p>Check if <code>/usr/local/bin</code> is in your PATH:</p>
+<pre><code class="language-bash">echo $PATH | grep /usr/local/bin
+</code></pre>
+<p>If not present, add to your shell configuration:</p>
+<p><strong>For Zsh</strong> (default on macOS 10.15+):</p>
+<pre><code class="language-bash">echo 'export PATH="/usr/local/bin:$PATH"' &gt;&gt; ~/.zshrc
+source ~/.zshrc
+</code></pre>
+<p><strong>For Bash</strong>:</p>
+<pre><code class="language-bash">echo 'export PATH="/usr/local/bin:$PATH"' &gt;&gt; ~/.bash_profile
+source ~/.bash_profile
+</code></pre>
+<p><strong>For Fish</strong>:</p>
+<pre><code class="language-bash">fish_add_path /usr/local/bin
+</code></pre>
+<hr>
+<h4 id="permission-denied"><a class="header" href="#permission-denied">Permission Denied</a></h4>
+<p><strong>Problem</strong>: <code>Permission denied</code> when running <code>nia</code></p>
+<p><strong>Solution</strong>:</p>
+<p>Ensure the binary is executable:</p>
+<pre><code class="language-bash">chmod +x /usr/local/bin/nia
+</code></pre>
+<p>If you moved the file without <code>sudo</code>, you might not have write permissions:</p>
+<pre><code class="language-bash">ls -la /usr/local/bin/nia
+# Should show: -rwxr-xr-x
+
+# Fix if needed:
+sudo chmod 755 /usr/local/bin/nia
+</code></pre>
+<hr>
+<h4 id="wrong-architecture-downloaded"><a class="header" href="#wrong-architecture-downloaded">Wrong Architecture Downloaded</a></h4>
+<p><strong>Problem</strong>: Binary doesn’t run or shows architecture errors</p>
+<p><strong>Solution</strong>:</p>
+<ol>
+<li>
+<p>Check your Mac’s architecture:</p>
+<pre><code class="language-bash">uname -m
+# x86_64 = Intel → Download x86_64-darwin binary
+# arm64 = Apple Silicon → Download aarch64-darwin binary
+</code></pre>
+</li>
+<li>
+<p>Check downloaded binary architecture:</p>
+<pre><code class="language-bash">file /usr/local/bin/nia
+# Should show: Mach-O 64-bit executable x86_64 (for Intel)
+# Or: Mach-O 64-bit executable arm64 (for Apple Silicon)
+</code></pre>
+</li>
+<li>
+<p>Download the correct version for your architecture.</p>
+</li>
+</ol>
+<hr>
+<h4 id="terminal-colors-not-working"><a class="header" href="#terminal-colors-not-working">Terminal Colors Not Working</a></h4>
+<p><strong>Problem</strong>: Colors appear broken or don’t display</p>
+<p><strong>Solution</strong>:</p>
+<ol>
+<li>
+<p>Verify terminal supports colors:</p>
+<pre><code class="language-bash">echo $TERM
+# Should be: xterm-256color or similar
+</code></pre>
+</li>
+<li>
+<p>Enable colors in Terminal.app:</p>
+<ul>
+<li>Terminal → Settings → Profiles → Advanced</li>
+<li>Ensure “Declare terminal as” is set to <code>xterm-256color</code></li>
+</ul>
+</li>
+<li>
+<p>For iTerm2, colors should work by default.</p>
+</li>
+<li>
+<p>Force color output:</p>
+<pre><code class="language-bash">export CLICOLOR_FORCE=1
+nia --help
+</code></pre>
+</li>
+</ol>
+<hr>
+<h4 id="unicode-characters-not-displaying"><a class="header" href="#unicode-characters-not-displaying">Unicode Characters Not Displaying</a></h4>
+<p><strong>Problem</strong>: Progress bars or special characters show as <code>?</code> or boxes</p>
+<p><strong>Solution</strong>:</p>
+<ol>
+<li>
+<p>Verify terminal encoding:</p>
+<pre><code class="language-bash">locale
+# LANG should end with UTF-8 (e.g., en_US.UTF-8)
+</code></pre>
+</li>
+<li>
+<p>Set UTF-8 encoding:</p>
+<pre><code class="language-bash">export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+</code></pre>
+</li>
+<li>
+<p>Add to shell profile to make permanent:</p>
+<pre><code class="language-bash">echo 'export LANG=en_US.UTF-8' &gt;&gt; ~/.zshrc
+source ~/.zshrc
+</code></pre>
+</li>
+</ol>
+<hr>
+<h4 id="slow-performance-on-apple-silicon"><a class="header" href="#slow-performance-on-apple-silicon">Slow Performance on Apple Silicon</a></h4>
+<p><strong>Problem</strong>: Nia runs slower than expected on M1/M2/M3/M4</p>
+<p><strong>Possible Cause</strong>: Running Intel binary via Rosetta 2 instead of native aarch64 binary.</p>
+<p><strong>Solution</strong>:</p>
+<ol>
+<li>
+<p>Check what you’re running:</p>
+<pre><code class="language-bash">file $(which nia)
+# Should show: Mach-O 64-bit executable arm64
+# If shows x86_64, you're running the Intel version via Rosetta
+</code></pre>
+</li>
+<li>
+<p>Download and install the aarch64-darwin binary:</p>
+<pre><code class="language-bash">gh release download --repo telerik/project-nia --pattern 'nia-*-aarch64-darwin'
+# Follow installation instructions above
+</code></pre>
+</li>
+</ol>
+<hr>
+<h4 id="gpg-verification-fails"><a class="header" href="#gpg-verification-fails">GPG Verification Fails</a></h4>
+<p><strong>Problem</strong>: GPG signature verification fails</p>
+<p><strong>Solution</strong>:</p>
+<ol>
+<li>
+<p>Import the public GPG key:</p>
+<pre><code class="language-bash"># Download public key from release
+gh release download --repo telerik/project-nia --pattern 'public-key.asc'
+gpg --import public-key.asc
+</code></pre>
+</li>
+<li>
+<p>Verify signature:</p>
+<pre><code class="language-bash">gpg --verify nia-*-darwin.asc nia-*-darwin
+</code></pre>
+</li>
+<li>
+<p>If verification still fails, re-download both the binary and signature.</p>
+</li>
+</ol>
+<hr>
+<h4 id="quick-install-script-issues"><a class="header" href="#quick-install-script-issues">Quick Install Script Issues</a></h4>
+<p><strong>Problem</strong>: Installation script fails with authentication error</p>
+<p><strong>Solution</strong>:</p>
+<ol>
+<li>
+<p>Authenticate using GitHub CLI:</p>
+<pre><code class="language-bash">gh auth login
+</code></pre>
+</li>
+<li>
+<p>Verify authentication works:</p>
+<pre><code class="language-bash">gh auth status
+</code></pre>
+</li>
+</ol>
+<p><strong>Problem</strong>: Installation script fails with “Unsupported platform” error</p>
+<p><strong>Solution</strong>:</p>
+<ol>
+<li>
+<p>Check your platform and architecture:</p>
+<pre><code class="language-bash"># Linux/macOS
+uname -s -m
+</code></pre>
+<pre><code class="language-powershell"># Windows
+$env:PROCESSOR_ARCHITECTURE
+</code></pre>
+</li>
+<li>
+<p>Supported platforms are:</p>
+<ul>
+<li>Linux: x86_64, aarch64</li>
+<li>macOS: x86_64, aarch64 (Apple Silicon)</li>
+<li>Windows: x86_64 (AMD64) only</li>
+</ul>
+</li>
+<li>
+<p>If your platform is not supported, use the manual binary installation method above.</p>
+</li>
+</ol>
+<p><strong>Problem</strong>: Checksum verification fails</p>
+<p><strong>Solution</strong>:</p>
+<ol>
+<li>
+<p>Try re-running the installation (transient network issues):</p>
+<pre><code class="language-bash">curl -fsSL https://.../ install.sh | sh
+</code></pre>
+</li>
+<li>
+<p>If it continues to fail, skip verification (not recommended):</p>
+<pre><code class="language-bash">curl -fsSL https://.../ install.sh | sh -s -- --skip-verify
+</code></pre>
+</li>
+<li>
+<p>Report persistent checksum issues to the Nia CLI team.</p>
+</li>
+</ol>
+<p><strong>Problem</strong>: Windows PowerShell version error</p>
+<p><strong>Solution</strong>:</p>
+<p>The installation script requires PowerShell 6 or later. Windows includes PowerShell 5.1 by default.</p>
+<ol>
+<li>
+<p>Install PowerShell 7:</p>
+<pre><code class="language-powershell"># Using winget
+winget install Microsoft.PowerShell
+
+# Or download from: https://github.com/PowerShell/PowerShell/releases
+</code></pre>
+</li>
+<li>
+<p>Open a new PowerShell 7 terminal and retry installation.</p>
+</li>
+</ol>
+<p><strong>Problem</strong>: macOS Gatekeeper blocks the binary</p>
+<p><strong>Solution</strong>:</p>
+<p>The installation script automatically removes the quarantine attribute. If you still see a warning:</p>
+<ol>
+<li>Open System Preferences → Security &amp; Privacy</li>
+<li>Click “Open Anyway” next to the nia warning</li>
+<li>Or manually remove the quarantine attribute:
+<pre><code class="language-bash">sudo xattr -d com.apple.quarantine /usr/local/bin/nia
+</code></pre>
+</li>
+</ol>
+<hr>
+<h4 id="github-cli-authentication-fails"><a class="header" href="#github-cli-authentication-fails">GitHub CLI Authentication Fails</a></h4>
+<p><strong>Problem</strong>: <code>gh</code> command fails with authentication error</p>
+<p><strong>Solution</strong>:</p>
+<ol>
+<li>
+<p>Authenticate with GitHub:</p>
+<pre><code class="language-bash">gh auth login
+</code></pre>
+</li>
+<li>
+<p>Select “GitHub.com” and follow the prompts to authenticate.</p>
+</li>
+<li>
+<p>Verify authentication:</p>
+<pre><code class="language-bash">gh auth status
+</code></pre>
+</li>
+</ol>
+<p>For more help, see the <a href="../troubleshooting/common-issues.html">Troubleshooting Guide</a>.</p>
+<hr>
+<h2 id="uninstall-nia-cli"><a class="header" href="#uninstall-nia-cli">Uninstall Nia CLI</a></h2>
+<p>Remove the Nia executable from the location where you installed it. The commands below cover the default and custom installation locations.</p>
+<h3 id="remove-nia-on-linux-or-macos"><a class="header" href="#remove-nia-on-linux-or-macos">Remove Nia on Linux or macOS</a></h3>
+<pre><code class="language-bash"># If installed to default location
+sudo rm -f /usr/local/bin/nia
+
+# If installed to custom location
+rm -f /path/to/custom/dir/nia
+</code></pre>
+<h3 id="remove-nia-on-windows"><a class="header" href="#remove-nia-on-windows">Remove Nia on Windows</a></h3>
+<pre><code class="language-powershell"># If installed to default location
+Remove-Item "C:\Program Files\Nia\nia.exe" -Force
+
+# If installed to custom location
+Remove-Item "C:\Path\To\Custom\Dir\nia.exe" -Force
+</code></pre>
+<blockquote>
+<p><strong>Note</strong>: You may need administrator/sudo privileges depending on the installation location.</p>
+</blockquote>
+<p>To also remove Nia’s configuration and data directories, run the matching command:</p>
+<pre><code class="language-bash"># Linux/macOS
+rm -rf ~/.nia
+
+# Windows
+Remove-Item "$env:USERPROFILE\.nia" -Recurse -Force
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../quick-start.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../getting-started/completions.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../quick-start.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../getting-started/completions.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-c2a407aa.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../user-docs/theme/custom-aab95659.js"></script>
+
+
+
+    </div>
+    </body>
+</html>
