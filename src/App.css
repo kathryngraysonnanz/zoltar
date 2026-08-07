@@ -79,6 +79,71 @@
   --kendo-card-border: rgba(181, 166, 66, 0.3);
 }
 
+/* ─── Light Theme ──────────────────────────────────────────────── */
+[data-theme="light"] {
+  /* Background colors - warm cream/ivory */
+  --bg: #f5f2eb;
+  --bg-deep: #ebe6db;
+  --surface: #ffffff;
+  --surface-raised: #faf8f4;
+  
+  /* Metal accents - slightly muted for light theme */
+  --brass: #8b7d32;
+  --brass-light: #a89940;
+  --brass-dark: #6b5f28;
+  --gold: #9a7b1a;
+  --gold-glow: rgba(154, 123, 26, 0.3);
+  
+  /* Fabric colors - lighter versions */
+  --velvet: #8b4a4a;
+  --velvet-deep: #6b3333;
+  --crimson: #a04545;
+  
+  /* Parchment for cards - pure white in light mode */
+  --parchment: #ffffff;
+  --parchment-dark: #f5f2eb;
+  
+  /* Accent colors */
+  --emerald: #3d7a50;
+  --midnight: #2a2a4e;
+  
+  /* Text colors - dark for readability */
+  --text: #2d1810;
+  --text-muted: #5c4033;
+  --text-dark: #2d1810;
+  --text-gold: #8b6914;
+  
+  /* Effects */
+  --amber-glow: rgba(139, 125, 50, 0.15);
+  --warm-shadow: 0 8px 40px rgba(45, 24, 16, 0.15);
+  --brass-glow: 0 0 20px var(--gold-glow);
+  
+  /* Kendo component backgrounds */
+  --kendo-component-bg: var(--surface);
+  --kendo-component-text: var(--text);
+  --kendo-component-border: rgba(139, 125, 50, 0.4);
+  
+  /* Primary button colors */
+  --kendo-button-solid-primary-bg: var(--brass);
+  --kendo-button-solid-primary-text: #ffffff;
+  --kendo-button-solid-primary-border: var(--brass);
+  --kendo-button-solid-primary-hover-bg: var(--brass-dark);
+  --kendo-button-solid-primary-active-bg: var(--brass-dark);
+  
+  /* Secondary/flat button colors */
+  --kendo-button-flat-text: var(--text);
+  --kendo-button-flat-hover-bg: rgba(139, 125, 50, 0.1);
+  
+  /* Progress bar */
+  --kendo-progressbar-bg: #e8e4dc;
+  --kendo-progressbar-value-bg: var(--brass);
+  
+  /* Card */
+  --kendo-card-bg: var(--surface);
+  --kendo-card-text: var(--text);
+  --kendo-card-border: rgba(139, 125, 50, 0.4);
+}
+
 html, body, #root {
   height: 100%;
   background: var(--bg);
