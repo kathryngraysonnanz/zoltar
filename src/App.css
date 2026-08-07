@@ -60,7 +60,7 @@
   
   /* Primary button colors */
   --kendo-button-solid-primary-bg: var(--brass-dark);
-  --kendo-button-solid-primary-text: var(--text);
+  --kendo-button-solid-primary-text: #1a0f0a;
   --kendo-button-solid-primary-border: var(--brass-dark);
   --kendo-button-solid-primary-hover-bg: var(--brass);
   --kendo-button-solid-primary-active-bg: var(--brass-light);
@@ -422,13 +422,13 @@ html, body, #root {
 
 .fortune-btn-secondary.k-button {
   background: var(--surface-raised);
-  color: var(--text-muted);
+  color: #ffffff;
   border: 2px solid rgba(181, 166, 66, 0.3);
 }
 
 .fortune-btn-secondary.k-button:hover {
   border-color: var(--brass);
-  color: var(--text);
+  color: #ffffff;
   transform: translateY(-2px);
 }
 
