@@ -7,9 +7,10 @@ interface Props {
   onPrint: () => void;
   onRestart: () => void;
   isPrinting: boolean;
+  sessionId: string | null;
 }
 
-export function FortuneCard({ fortune, onPrint, onRestart, isPrinting }: Props) {
+export function FortuneCard({ fortune, onPrint, onRestart, isPrinting, sessionId }: Props) {
   return (
     <Card className="fortune-card screen-card">
       <CardBody className="screen-card-body">

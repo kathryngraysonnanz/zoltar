@@ -6,6 +6,7 @@ import { WelcomeScreen } from "./components/WelcomeScreen";
 import { QuestionCard } from "./components/QuestionCard";
 import { FortuneCard } from "./components/FortuneCard";
 import { ThemeToggle } from "./components/ThemeToggle";
+import { QRCode } from "./components/QRCode";
 import "./App.css";
 
 type Screen = "welcome" | "quiz" | "fortune";
@@ -24,12 +25,14 @@ function App() {
   const [answers, setAnswers] = useState<AnswerRecord[]>([]);
   const [fortune, setFortune] = useState<Fortune | null>(null);
   const [isPrinting, setIsPrinting] = useState(false);
+  const [sessionId, setSessionId] = useState<string | null>(null);
 
   const handleStart = useCallback(() => {
     setScreen("quiz");
     setCurrentIndex(0);
     setAnswers([]);
     setFortune(null);
+    setSessionId(null);
   }, []);
 
   const handleAnswer = useCallback(
@@ -56,7 +59,7 @@ function App() {
         setFortune(selectedFortune);
         setScreen("fortune");
 
-        // Persist to Firebase (fire-and-forget; errors are non-blocking)
+        // Persist to Firebase and capture session ID for sharing
         saveSession({
           answers: newAnswers.map(({ questionId, questionText, answerId, answerText }) => ({
             questionId,
@@ -67,6 +70,8 @@ function App() {
           fortuneId: selectedFortune.id,
           fortuneTitle: selectedFortune.title,
           fortuneText: selectedFortune.text,
+        }).then((id) => {
+          setSessionId(id);
         }).catch((err) => {
           console.error("Failed to save session:", err);
         });
@@ -107,6 +112,7 @@ function App() {
             onPrint={handlePrint}
             onRestart={handleRestart}
             isPrinting={isPrinting}
+            sessionId={sessionId}
           />
         )}
       </div>
@@ -120,6 +126,16 @@ function App() {
           <>
             <div className="receipt-title">{fortune.title}</div>
             <div className="receipt-text">{fortune.text}</div>
+            {sessionId && (
+              <div className="receipt-qr">
+                <QRCode 
+                  url={`${window.location.origin}/fortune/${sessionId}`} 
+                  size={100}
+                  className="receipt-qr-image"
+                />
+                <div className="receipt-qr-label">Scan to share</div>
+              </div>
+            )}
             <div className="receipt-footer">
               <div>✦ ✦ ✦</div>
               <div>Keep this fortune close.</div>
