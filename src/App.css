@@ -665,9 +665,26 @@ html, body, #root {
     border-bottom: 1px dashed #000;
   }
 
+  .receipt-qr,
+  .receipt-qr * {
+    visibility: visible !important;
+    display: block !important;
+  }
+
   .receipt-qr-image {
-    display: block;
+    display: block !important;
     margin: 0 auto;
+    width: 100px;
+    height: 100px;
+  }
+
+  .receipt-qr-image > div,
+  .receipt-qr-image svg,
+  .receipt-qr-image canvas {
+    display: block !important;
+    width: 100px !important;
+    height: 100px !important;
+    margin: 0 auto !important;
   }
 
   .receipt-qr-label {
@@ -675,6 +692,7 @@ html, body, #root {
     margin-top: 2mm;
     letter-spacing: 0.1em;
     text-transform: uppercase;
+    display: block !important;
   }
 }
 

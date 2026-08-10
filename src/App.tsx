@@ -74,6 +74,21 @@ function App() {
           setSessionId(id);
         }).catch((err) => {
           console.error("Failed to save session:", err);
+          // Fallback: generate a local session ID if Firebase fails
+          const localId = `local-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+          setSessionId(localId);
+          // Store in localStorage as fallback
+          try {
+            localStorage.setItem(`zoltar-session-${localId}`, JSON.stringify({
+              answers: newAnswers,
+              fortuneId: selectedFortune.id,
+              fortuneTitle: selectedFortune.title,
+              fortuneText: selectedFortune.text,
+              createdAt: new Date().toISOString(),
+            }));
+          } catch (e) {
+            console.error("Failed to save to localStorage:", e);
+          }
         });
       }
     },
@@ -81,13 +96,13 @@ function App() {
   );
 
   const handlePrint = useCallback(() => {
-    if (!fortune) return;
+    if (!fortune || !sessionId) return;
     setIsPrinting(true);
     setTimeout(() => {
       window.print();
       setIsPrinting(false);
     }, 100);
-  }, [fortune]);
+  }, [fortune, sessionId]);
 
   const handleRestart = useCallback(() => {
     setScreen("welcome");

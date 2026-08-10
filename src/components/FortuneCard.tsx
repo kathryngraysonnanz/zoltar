@@ -1,7 +1,6 @@
 import { Button } from "@progress/kendo-react-buttons";
 import { Card, CardBody } from "@progress/kendo-react-layout";
 import type { Fortune } from "../data/fortunes";
-import { ShareButtons } from "./ShareButtons";
 
 interface Props {
   fortune: Fortune;
@@ -26,22 +25,14 @@ export function FortuneCard({ fortune, onPrint, onRestart, isPrinting, sessionId
         <h2 className="fortune-title">{fortune.title}</h2>
         <p className="fortune-text">{fortune.text}</p>
         
-        {shareUrl && (
-          <ShareButtons 
-            url={shareUrl}
-            title={shareTitle}
-            text={shareText}
-          />
-        )}
-        
         <div className="fortune-actions" style={{ marginTop: shareUrl ? '1rem' : '0' }}>
           <Button
             themeColor="primary"
             className="fortune-btn"
             onClick={onPrint}
-            disabled={isPrinting}
+            disabled={isPrinting || !sessionId}
           >
-            {isPrinting ? "Printing…" : "🖨 Print My Fortune"}
+            {isPrinting ? "Printing…" : !sessionId ? "Preparing…" : "🖨 Print My Fortune"}
           </Button>
           <Button
             themeColor="primary"

@@ -12,7 +12,10 @@
     "test:run": "vitest run"
   },
   "dependencies": {
+    "@progress/kendo-charts": "^2.12.2",
+    "@progress/kendo-drawing": "^1.25.3",
     "@progress/kendo-licensing": "^1.11.2",
+    "@progress/kendo-react-barcodes": "^15.1.0",
     "@progress/kendo-react-buttons": "^15.1.0",
     "@progress/kendo-react-layout": "^15.1.0",
     "@progress/kendo-react-progressbars": "^15.1.0",

@@ -26,3 +26,5 @@ dist-ssr
 .nia/work/*
 
 telerik-license.txt
+
+.env

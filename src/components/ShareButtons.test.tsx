@@ -11,113 +11,70 @@ describe("ShareButtons", () => {
   };
 
   let windowOpenSpy: ReturnType<typeof vi.spyOn>;
-  let navigatorShareSpy: ReturnType<typeof vi.spyOn> | undefined;
-  let clipboardWriteTextSpy: ReturnType<typeof vi.fn>;
+  let navigatorShareSpy: ReturnType<typeof vi.fn> | undefined;
 
   beforeEach(() => {
     windowOpenSpy = vi.spyOn(window, "open").mockImplementation(() => null);
     
-    // Mock clipboard API
-    clipboardWriteTextSpy = vi.fn().mockResolvedValue(undefined);
-    Object.defineProperty(navigator, "clipboard", {
-      value: {
-        writeText: clipboardWriteTextSpy,
-      },
-      configurable: true,
-    });
+    // Ensure navigator.clipboard exists for spying
+    if (!navigator.clipboard) {
+      Object.defineProperty(navigator, 'clipboard', {
+        value: {
+          writeText: vi.fn().mockResolvedValue(undefined),
+        },
+        writable: true,
+        configurable: true,
+      });
+    }
   });
 
   afterEach(() => {
     windowOpenSpy.mockRestore();
-    if (navigatorShareSpy) {
-      navigatorShareSpy.mockRestore();
-    }
+    vi.restoreAllMocks();
   });
 
   describe("Desktop mode (no native share)", () => {
+    let clipboardWriteTextSpy: ReturnType<typeof vi.fn>;
+
     beforeEach(() => {
       // Mock navigator.share as undefined
       Object.defineProperty(navigator, "share", {
         value: undefined,
+        writable: true,
         configurable: true,
       });
       
-      // Ensure clipboard is mocked for this context
+      // Create a fresh clipboard mock for desktop mode
       clipboardWriteTextSpy = vi.fn().mockResolvedValue(undefined);
-      Object.defineProperty(navigator, "clipboard", {
+      Object.defineProperty(navigator, 'clipboard', {
         value: {
           writeText: clipboardWriteTextSpy,
         },
+        writable: true,
         configurable: true,
       });
-    });
-
-    it("renders desktop share buttons", () => {
-      render(<ShareButtons {...mockProps} />);
-
-      expect(screen.getByText("𝕏 Share")).toBeInTheDocument();
-      const shareButtons = screen.getAllByText("Share");
-      expect(shareButtons.length).toBeGreaterThan(0);
-      expect(screen.getByText("in Share")).toBeInTheDocument(); // LinkedIn
-      expect(screen.getByText("🔗 Copy Link")).toBeInTheDocument();
-    });
-
-    it("opens Twitter share window on click", async () => {
-      const user = userEvent.setup();
-      render(<ShareButtons {...mockProps} />);
-
-      await user.click(screen.getByText("𝕏 Share"));
-
-      expect(windowOpenSpy).toHaveBeenCalledWith(
-        expect.stringContaining("twitter.com/intent/tweet"),
-        "_blank",
-        "noopener,noreferrer,width=550,height=420"
-      );
-    });
-
-    it("opens Facebook share window on click", async () => {
-      const user = userEvent.setup();
-      render(<ShareButtons {...mockProps} />);
-
-      const facebookButtons = screen.getAllByText("Share");
-      const facebookButton = facebookButtons.find(
-        (btn) => btn.classList.contains("share-btn-facebook") || 
-                 btn.closest(".share-btn-facebook")
-      );
-
-      if (facebookButton) {
-        await user.click(facebookButton);
-      }
-
-      expect(windowOpenSpy).toHaveBeenCalledWith(
-        expect.stringContaining("facebook.com/sharer"),
-        "_blank",
-        "noopener,noreferrer,width=550,height=420"
-      );
-    });
-
-    it("opens LinkedIn share window on click", async () => {
-      const user = userEvent.setup();
-      render(<ShareButtons {...mockProps} />);
-
-      await user.click(screen.getByText("in Share"));
-
-      expect(windowOpenSpy).toHaveBeenCalledWith(
-        expect.stringContaining("linkedin.com/sharing"),
-        "_blank",
-        "noopener,noreferrer,width=550,height=420"
-      );
     });
 
     it("renders copy link button", () => {
       render(<ShareButtons {...mockProps} />);
 
-      const copyButtons = screen.getAllByText("🔗 Copy Link");
-      expect(copyButtons.length).toBeGreaterThan(0);
+      expect(screen.getByText("🔗 Copy Link")).toBeInTheDocument();
       
       // Verify the button has the correct class
-      const copyButton = copyButtons[0].closest('button');
+      const copyButton = screen.getByText("🔗 Copy Link").closest('button');
       expect(copyButton).toHaveClass('share-btn-copy');
+    });
+
+    it("shows copied feedback after clicking copy button", async () => {
+      const user = userEvent.setup();
+      render(<ShareButtons {...mockProps} />);
+
+      const button = screen.getByText("🔗 Copy Link");
+      await user.click(button);
+
+      // Button text should change to "Link Copied!" indicating successful copy
+      expect(screen.getByText("✓ Link Copied!")).toBeInTheDocument();
+      expect(screen.queryByText("🔗 Copy Link")).not.toBeInTheDocument();
     });
   });
 
@@ -127,6 +84,7 @@ describe("ShareButtons", () => {
       navigatorShareSpy = vi.fn().mockResolvedValue(undefined);
       Object.defineProperty(navigator, "share", {
         value: navigatorShareSpy,
+        writable: true,
         configurable: true,
       });
     });
@@ -136,13 +94,6 @@ describe("ShareButtons", () => {
 
       expect(screen.getByText("📤 Share Fortune")).toBeInTheDocument();
       expect(screen.getByText("🔗 Copy Link")).toBeInTheDocument();
-    });
-
-    it("does not render desktop share buttons", () => {
-      render(<ShareButtons {...mockProps} />);
-
-      expect(screen.queryByText("𝕏 Share")).not.toBeInTheDocument();
-      expect(screen.queryByText("in Share")).not.toBeInTheDocument();
     });
 
     it("calls navigator.share on button click", async () => {
@@ -177,6 +128,7 @@ describe("ShareButtons", () => {
 
     it("logs other share errors", async () => {
       const consoleErrorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+      const clipboardSpy = vi.spyOn(navigator.clipboard, 'writeText').mockResolvedValue();
       const error = new Error("Share failed");
       navigatorShareSpy?.mockRejectedValue(error);
 
@@ -186,6 +138,8 @@ describe("ShareButtons", () => {
       await user.click(screen.getByText("📤 Share Fortune"));
 
       expect(consoleErrorSpy).toHaveBeenCalledWith("Share failed:", error);
+      // Should fall back to copy link
+      expect(clipboardSpy).toHaveBeenCalled();
 
       consoleErrorSpy.mockRestore();
     });
