@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { Card, CardBody } from '@progress/kendo-react-layout';
 import { Button } from '@progress/kendo-react-buttons';
 import { ThemeToggle } from '../components/ThemeToggle';
+import { ShareButtons } from '../components/ShareButtons';
 import { getSession, type StoredSession } from '../firebase/sessions';
 import '../App.css';
 
@@ -117,6 +118,10 @@ interface FortuneDisplayProps {
 }
 
 function FortuneDisplay({ session }: FortuneDisplayProps) {
+  const shareUrl = window.location.href;
+  const shareTitle = `My Zoltar Fortune: ${session.fortuneTitle}`;
+  const shareText = session.fortuneText.slice(0, 100) + '...';
+
   return (
     <Card className="fortune-card screen-card">
       <CardBody className="screen-card-body">
@@ -124,6 +129,19 @@ function FortuneDisplay({ session }: FortuneDisplayProps) {
         <p className="fortune-eyebrow">Your Fortune</p>
         <h2 className="fortune-title">{session.fortuneTitle}</h2>
         <p className="fortune-text">{session.fortuneText}</p>
+        
+        <ShareButtons 
+          url={shareUrl}
+          title={shareTitle}
+          text={shareText}
+        />
+        
+        <div className="decorative-divider" style={{ marginTop: '1.5rem' }}>
+          <span className="divider-line"></span>
+          <span className="divider-star">✦</span>
+          <span className="divider-line"></span>
+        </div>
+        
         <div className="fortune-actions">
           <Link to="/">
             <Button themeColor="primary" className="fortune-btn">
