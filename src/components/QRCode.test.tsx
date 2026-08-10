@@ -29,7 +29,7 @@ describe("QRCode", () => {
 
   it("renders QR code image when generation succeeds", async () => {
     const mockDataUrl = "data:image/png;base64,mock-qr-code-data";
-    vi.mocked(QRCodeLib.toDataURL).mockResolvedValue(mockDataUrl);
+    (vi.mocked(QRCodeLib.toDataURL) as any).mockResolvedValue(mockDataUrl);
 
     render(<QRCode url="https://example.com/test" />);
 
@@ -41,7 +41,7 @@ describe("QRCode", () => {
   });
 
   it("calls toDataURL with correct parameters", async () => {
-    vi.mocked(QRCodeLib.toDataURL).mockResolvedValue("data:image/png;base64,test");
+    (vi.mocked(QRCodeLib.toDataURL) as any).mockResolvedValue("data:image/png;base64,test");
 
     render(<QRCode url="https://example.com/fortune/abc123" size={100} />);
 
@@ -62,7 +62,7 @@ describe("QRCode", () => {
   });
 
   it("applies custom className", async () => {
-    vi.mocked(QRCodeLib.toDataURL).mockResolvedValue("data:image/png;base64,test");
+    (vi.mocked(QRCodeLib.toDataURL) as any).mockResolvedValue("data:image/png;base64,test");
 
     render(<QRCode url="https://example.com/test" className="custom-class" />);
 
@@ -72,7 +72,7 @@ describe("QRCode", () => {
 
   it("hides component on generation error", async () => {
     const consoleErrorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
-    vi.mocked(QRCodeLib.toDataURL).mockRejectedValue(new Error("Generation failed"));
+    (vi.mocked(QRCodeLib.toDataURL) as any).mockRejectedValue(new Error("Generation failed"));
 
     const { container } = render(<QRCode url="https://example.com/test" />);
 
@@ -89,7 +89,7 @@ describe("QRCode", () => {
   });
 
   it("uses default size of 120 when not specified", async () => {
-    vi.mocked(QRCodeLib.toDataURL).mockResolvedValue("data:image/png;base64,test");
+    (vi.mocked(QRCodeLib.toDataURL) as any).mockResolvedValue("data:image/png;base64,test");
 
     render(<QRCode url="https://example.com/test" />);
 
