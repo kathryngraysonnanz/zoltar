@@ -10,9 +10,9 @@ export function WelcomeScreen({ onStart }: Props) {
     <Card className="welcome-screen screen-card">
       <CardBody className="screen-card-body">
         <div className="crystal-ball large" aria-hidden="true">🔮</div>
-        <h1 className="welcome-title">Zoltar Speaks</h1>
+        <h1 className="welcome-title">AI Oracle</h1>
         <p className="welcome-subtitle">
-          Answer five questions and discover what the future holds for you.
+          What awaits you in the world of AI software engineering? <br/> Answer these questions and the Oracle will analyze your AI habits to reveal your developer destiny.
         </p>
         <div className="decorative-divider" aria-hidden="true">
           <span className="divider-star">✦</span>
