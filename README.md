@@ -1,90 +1,67 @@
-# Zoltar 🔮
+# Epson TM-m30III Web Printer Demo
 
-A React-based fortune-telling kiosk application built for trade show booths. Users answer five multiple-choice questions and receive a personalised fortune, which can be printed on a thermal receipt printer. All responses are saved to Firebase Firestore for later analysis.
+This project is a small Node.js web app that prints a sample receipt to an Epson TM-m30III over Wi-Fi.
 
-## Features
+## How it works
 
-- 🔮 Multi-step multiple-choice questionnaire
-- ✨ Fortune generation based on answers
-- 🗄 Firebase Firestore persistence
-- 🖨 Thermal receipt printer support (via browser print API)
-- 📱 Touch-screen optimised UI
+- The browser loads a simple action panel for a fixed printer target.
+- A small Node HTTP server accepts the print request.
+- The server can either open a raw TCP socket to the printer on port `9100` or send an Epson ePOS-Print request to the printer's HTTP service.
+- Raw TCP sends ESC/POS bytes directly. Epson ePOS-Print sends a SOAP XML print request.
 
-## Getting Started
+This project is currently locked to:
 
-### 1. Clone & install
+- Printer IP: `192.168.1.121`
+- Printer port: `9100`
+- ePOS device ID: `local_printer`
+
+## Requirements
+
+- Node.js 18 or newer
+- Epson TM-m30III reachable on your local network
+- The printer configured to accept raw TCP print jobs on port `9100`
+
+## Install
+
+This starter currently runs on the built-in Node.js runtime and does not require any packages.
+
+If you add dependencies later, this project is already configured to install from the Harness npm registry via `.npmrc`.
 
 ```bash
 npm install
 ```
 
-### 2. Configure Firebase
-
-Create a `.env` file by copying `.env.example` and filling in your Firebase project values:
+## Run
 
 ```bash
-cp .env.example .env
+npm start
 ```
 
-You can find these values in the Firebase console under **Project Settings → Your apps**.
+The app runs at `http://localhost:3000`.
 
-Make sure Firestore is enabled in your Firebase project. The app writes to a `sessions` collection with the following shape:
+## Optional environment variables
 
-```json
-{
-  "answers": [
-    {
-      "questionId": "q1",
-      "questionText": "When facing a challenge, you typically…",
-      "answerId": "a",
-      "answerText": "Charge in headfirst"
-    }
-  ],
-  "fortuneId": "f5",
-  "fortuneTitle": "The Catalyst",
-  "fortuneText": "…",
-  "createdAt": "<server timestamp>"
-}
-```
+- `PORT`: web server port
+- `EPOS_TIMEOUT`: ePOS request timeout in milliseconds, default `60000`
 
-### 3. Run locally
+## Using the app
 
-```bash
-npm run dev
-```
+1. Open the app in your browser.
+2. Click **Test connection** to verify the locked printer target is reachable.
+3. Click **Print via Epson ePOS** to print the sample receipt.
+4. Optionally adjust only the ePOS timeout value if needed.
 
-### 4. Build for production
+## Troubleshooting
 
-```bash
-npm run build
-npm run preview
-```
+- If **Test connection** fails, confirm the printer IP address and verify that Epson raw TCP printing is enabled on port `9100`.
+- If **Test connection** succeeds but no receipt prints, the next most likely issue is the printer interface mode on the TM-m30III.
+- Print the printer network status sheet and confirm the current IP address and enabled protocols.
+- Try **Print via Epson ePOS** with device ID `local_printer`. If that fails, the response usually includes an Epson error code that is more actionable than a silent raw TCP failure.
+- If `local_printer` fails, check the printer's WebConfig for the configured ePOS device ID.
+- On this printer, the ePOS service accepts SOAP-wrapped requests for `local_printer`. If you see `EX_TIMEOUT`, the request shape was accepted but the printer did not complete the job, which usually points to printer state or ePOS configuration rather than network reachability.
 
-## Thermal Receipt Printing
+## Notes
 
-The app uses the browser's built-in `window.print()` API. The print stylesheet targets an 80 mm receipt width (standard for most thermal printers).
-
-To configure the receipt printer:
-
-1. Connect the thermal printer and install its driver.
-2. In the browser, set the printer as the default or select it in the print dialog.
-3. Set **Paper size** to match your receipt roll (e.g. 80 mm × continuous).
-4. Disable headers and footers in the browser print settings.
-
-## Project Structure
-
-```
-src/
-├── components/
-│   ├── WelcomeScreen.tsx   # Opening screen
-│   ├── QuestionCard.tsx    # Multiple-choice question step
-│   └── FortuneCard.tsx     # Fortune reveal + print/restart
-├── data/
-│   ├── questions.ts        # Questions & answers
-│   └── fortunes.ts         # Fortune pool & selection logic
-├── firebase/
-│   ├── config.ts           # Firebase initialisation
-│   └── sessions.ts         # Firestore write helper
-├── App.tsx
-└── App.css                 # Kiosk UI + print receipt styles
-```
+- This starter uses plain ASCII text for the sample receipt to avoid code page issues.
+- If your printer does not accept raw TCP on `9100`, you may need to enable it in the Epson network settings.
+- If you want browser-side direct printing later, the next step would be Epson ePOS-Print support instead of raw TCP.

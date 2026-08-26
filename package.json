@@ -1,45 +1,15 @@
 {
-  "name": "zoltar",
+  "name": "epson-tm-m30iii-webapp",
+  "version": "1.0.0",
   "private": true,
-  "version": "0.0.0",
   "type": "module",
+  "description": "Web app for printing sample receipts to an Epson TM-m30III over Wi-Fi.",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "oxlint",
-    "preview": "vite preview",
-    "test": "vitest",
-    "test:run": "vitest run"
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "check": "node --check src/server.js && node --check src/receipt.js"
   },
-  "dependencies": {
-    "@progress/kendo-charts": "^2.12.2",
-    "@progress/kendo-drawing": "^1.25.3",
-    "@progress/kendo-licensing": "^1.11.2",
-    "@progress/kendo-react-barcodes": "^15.1.0",
-    "@progress/kendo-react-buttons": "^15.1.0",
-    "@progress/kendo-react-layout": "^15.1.0",
-    "@progress/kendo-react-progressbars": "^15.1.0",
-    "@progress/kendo-svg-icons": "^5.4.0",
-    "@progress/kendo-theme-default": "^14.4.0",
-    "firebase": "^12.16.0",
-    "qrcode": "^1.5.4",
-    "react": "^19.2.8",
-    "react-dom": "^19.2.8",
-    "react-router-dom": "^7.18.2"
-  },
-  "devDependencies": {
-    "@testing-library/jest-dom": "^7.0.0",
-    "@testing-library/react": "^16.3.2",
-    "@testing-library/user-event": "^14.6.1",
-    "@types/node": "^24.13.3",
-    "@types/qrcode": "^1.5.6",
-    "@types/react": "^19.2.17",
-    "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^6.0.4",
-    "jsdom": "^30.0.1",
-    "oxlint": "^1.75.0",
-    "typescript": "~6.0.2",
-    "vite": "^8.1.0",
-    "vitest": "^4.1.10"
+  "engines": {
+    "node": ">=18"
   }
 }
