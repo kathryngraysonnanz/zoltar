@@ -7,7 +7,7 @@ import { buildSampleReceipt } from "./receipt.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const publicDir = path.join(__dirname, "..", "public");
+const publicDir = path.join(__dirname, "..", "dist");
 const defaultPrinterHost = "192.168.1.121";
 const defaultPrinterPort = 9100;
 const defaultEposDeviceId = "local_printer";

@@ -4,7 +4,7 @@ This project is a small Node.js web app that prints a sample receipt to an Epson
 
 ## How it works
 
-- The browser loads a simple action panel for a fixed printer target.
+- The browser loads a React UI for a fixed printer target.
 - A small Node HTTP server accepts the print request.
 - The server can either open a raw TCP socket to the printer on port `9100` or send an Epson ePOS-Print request to the printer's HTTP service.
 - Raw TCP sends ESC/POS bytes directly. Epson ePOS-Print sends a SOAP XML print request.
@@ -23,9 +23,7 @@ This project is currently locked to:
 
 ## Install
 
-This starter currently runs on the built-in Node.js runtime and does not require any packages.
-
-If you add dependencies later, this project is already configured to install from the Harness npm registry via `.npmrc`.
+Install the app and frontend tooling:
 
 ```bash
 npm install
@@ -37,7 +35,15 @@ npm install
 npm start
 ```
 
-The app runs at `http://localhost:3000`.
+`npm start` builds the React frontend and then runs the Node server at `http://localhost:3000`.
+
+For local development, run:
+
+```bash
+npm run dev
+```
+
+That starts Vite on `http://localhost:5173` and proxies `/api` calls to the Node server.
 
 ## Optional environment variables
 
@@ -64,5 +70,6 @@ The app runs at `http://localhost:3000`.
 
 - This starter uses plain ASCII text for the sample receipt to avoid code page issues.
 - The **Print via Epson ePOS** sample includes a QR code that points to `https://www.telerik.com/devcraft`.
+- The React UI source lives in [index.html](index.html) and [src/client/App.jsx](src/client/App.jsx).
 - If your printer does not accept raw TCP on `9100`, you may need to enable it in the Epson network settings.
 - If you want browser-side direct printing later, the next step would be Epson ePOS-Print support instead of raw TCP.
