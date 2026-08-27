@@ -63,5 +63,6 @@ The app runs at `http://localhost:3000`.
 ## Notes
 
 - This starter uses plain ASCII text for the sample receipt to avoid code page issues.
+- The **Print via Epson ePOS** sample includes a QR code that points to `https://www.telerik.com/devcraft`.
 - If your printer does not accept raw TCP on `9100`, you may need to enable it in the Epson network settings.
 - If you want browser-side direct printing later, the next step would be Epson ePOS-Print support instead of raw TCP.

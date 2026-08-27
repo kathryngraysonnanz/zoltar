@@ -12,6 +12,7 @@ const defaultPrinterHost = "192.168.1.121";
 const defaultPrinterPort = 9100;
 const defaultEposDeviceId = "local_printer";
 const defaultEposTimeout = Number.parseInt(process.env.EPOS_TIMEOUT ?? "60000", 10);
+const sampleReceiptQrUrl = "https://www.telerik.com/devcraft";
 const port = Number.parseInt(process.env.PORT ?? "3000", 10);
 
 const server = http.createServer(async (req, res) => {
@@ -357,26 +358,42 @@ function wrapEposEnvelope(receiptXml) {
 
 function buildSampleReceiptEposXml() {
   return [
-    '<text align="center" smooth="true" width="2" height="2">NANZ CAFE&#10;</text>',
-    '<text align="center">Sample Receipt via Epson ePOS&#10;</text>',
-    '<feed line="1"/>',
-    '<text>--------------------------------&#10;</text>',
-    '<text>Order: #1042&#10;</text>',
-    '<text>Server: Web Demo&#10;</text>',
-    '<text>Date: 2026-08-26&#10;</text>',
-    '<text>--------------------------------&#10;</text>',
-    '<text>1  Drip Coffee         $3.50&#10;</text>',
-    '<text>1  Blueberry Muffin    $4.25&#10;</text>',
-    '<text>1  Orange Juice        $3.00&#10;</text>',
-    '<text>--------------------------------&#10;</text>',
-    '<text>Subtotal             $10.75&#10;</text>',
-    '<text>Tax                   $0.97&#10;</text>',
-    '<text width="2" height="2">TOTAL: $11.72&#10;</text>',
+    '<text align="center" smooth="true" width="2" height="2">* THE AI ORACLE SPEAKS *&#10;</text>',
+    '<text align="center" font="font_b">+----------------------+&#10;</text>',
+    '<text align="center">| YOUR AI DEV ARCHTYPE |&#10;</text>',
+    '<text align="center">+----------------------+&#10;</text>', 
+    '<text align="center">You are: &#10;</text>',
+    '<text align="center">THE PRODUCTION GUARDIAN&#10;</text>',
+        '<feed line="1"/>',
+    '<text align="left">AUTOMATION:  ▓▓▓▓▓░░░░░░░ 25&#10;</text>',
+        '<feed line="1"/>',
+    '<text align="left">AI TRUST:    ▓▓▓░░░░░░░░░ 10&#10;</text>',
+        '<feed line="1"/>',
+    '<text align="left">ROI CLARITY: ▓▓▓▓▓▓▓▓▓░░░ 75&#10;</text>',
+    '<text align="center">+----------------------+&#10;</text>',  
+    '<text align="center">|     YOUR FORTUNE     |&#10;</text>',
+    '<text align="center">+----------------------+&#10;</text>',   
+    '<text align="center">A tireless agent will soon&#10;</text>',
+    '<text align="center">resolve a problem that has&#10;</text>',
+    '<text align="center">haunted your backlog.&#10;</text>',
+    '<text align="center"> &#10;</text>',
+    '<text align="center">Before celebrating, make&#10;</text>',
+    '<text align="center">sure it solved the problem&#10;</text>',
+    '<text align="center">you actually had.&#10;</text>',
     '<feed line="1"/>',
     '<text align="center">+----------------------+&#10;</text>',
-    '<text align="center">|      THANK YOU!      |&#10;</text>',
-    '<text align="center">|   VISIT AGAIN SOON   |&#10;</text>',
+    '<text align="center">|     LUCKY COMMAND    |&#10;</text>',
     '<text align="center">+----------------------+&#10;</text>',
+    '<text align="center">     git diff --stat    &#10;</text>',
+    '<feed line="1"/>',
+    '<text align="center">+----------------------+&#10;</text>',
+    '<text align="center">|   PROGRESS SOFTWARE  |&#10;</text>',
+    '<text align="center">+----------------------+&#10;</text>',
+    '<text align="center">Your partner through&#10;</text>',
+    '<text align="center">whatever the future&#10;</text>',
+    '<text align="center">of development brings.&#10;</text>',
+       '<feed line="1"/>',
+    `<symbol type="qrcode_model_2" level="level_q" width="8">${sampleReceiptQrUrl}</symbol>`,
     '<feed line="2"/>',
     '<cut type="feed"/>'
   ].join("");
