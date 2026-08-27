@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { ProgressBar } from '@progress/kendo-react-progressbars';
+
 
 const STORAGE_KEY = "epson-epos-timeout";
 
@@ -101,82 +103,157 @@ export default function App() {
     localStorage.setItem(STORAGE_KEY, nextTimeout);
   }
 
+  const [intro, setIntro] = useState(true);
+  const [q1, setQ1] = useState(false);
+  const [q2, setQ2] = useState(false);
+  const [q3, setQ3] = useState(false);
+  const [q4, setQ4] = useState(false);
+  const [q5, setQ5] = useState(false);
+  const [result, setResult] = useState(false);
+
+  function logResult(answer, question) {
+    console.log(`Answer: ${answer}`);
+    
+    if (question === 'q1') {
+      setQ1(false);
+      setQ2(true);
+    }
+    if (question === 'q2') {
+      setQ2(false);
+      setQ3(true);
+    }
+    if (question === 'q3') {
+      setQ3(false);
+      setQ4(true);
+    }
+    if (question === 'q4') {
+      setQ4(false);
+      setQ5(true);
+    }
+    if (question === 'q5') {
+      setQ5(false);
+      setResult(true);
+    }
+  }
+
+
   return (
     <main className="shell">
+
+      { intro && 
       <section className="panel hero">
-        <p className="eyebrow">Epson TM-m30III</p>
-        <h1>Print a sample receipt from the browser.</h1>
+        <h1>The AI Developer Oracle</h1>
         <p className="lede">
-          This React app sends a sample ESC/POS receipt through a Node server to your printer over Wi-Fi.
+         What kind of AI engineer are you? What does the future hold for your projects? 
+         Answer five questions and let the Oracle reveal your fortune.
         </p>
+        <button onClick={() => setIntro(false) || setQ1(true)}>Discover Your Future</button>
       </section>
+      }
 
-      <section className="panel form-panel">
-        <form
-          className="stack"
-          onSubmit={(event) => {
-            event.preventDefault();
-            runPrinterRequest({
-              endpoint: "/api/print-sample",
-              pendingMessage: "Sending sample receipt...",
-              failureMessage: "Printing failed."
-            });
-          }}
-        >
-          <p className="target">
-            Locked printer target: <strong>{printerTarget.host}:{printerTarget.port}</strong> and ePOS device
-            <strong> {printerTarget.deviceId}</strong>.
+       { q1 && 
+        <section className="panel hero">
+          <h1>Question 1</h1>
+          <ProgressBar value={20} />
+          <p>
+          On a scale of 0 to 100, how much of your development process is AI-automated?
           </p>
+          <button className='response' onClick={() => logResult('a', 'q1')}>0% – No AI use here</button>
+          <button className='response' onClick={() => logResult('b', 'q1')}>25% – It handles some specific tasks, but most things are still human-generated. </button>
+          <button className='response' onClick={() => logResult('c', 'q1')}>50% – It's a full partner</button>
+          <button className='response' onClick={() => logResult('d', 'q1')}>75% – It owns most of the process, and I double-check what's generated</button>
+          <button className='response' onClick={() => logResult('e', 'q1')}>100% – It's completely automated, and I rarely intervene</button>
+        </section>
+      }
 
-          <label>
-            <span>ePOS timeout (ms)</span>
-            <input
-              name="timeout"
-              type="number"
-              min="1"
-              max="300000"
-              value={timeout}
-              onChange={handleTimeoutChange}
-            />
-          </label>
-
-          <div className="actions">
-            <button
-              type="button"
-              disabled={busy}
-              onClick={() => {
-                runPrinterRequest({
-                  endpoint: "/api/test-connection",
-                  pendingMessage: "Testing printer connection...",
-                  failureMessage: "Connection test failed."
-                });
-              }}
-            >
-              Test connection
-            </button>
-            <button type="submit" disabled={busy}>
-              Print sample receipt
-            </button>
-            <button
-              type="button"
-              disabled={busy}
-              onClick={() => {
-                runPrinterRequest({
-                  endpoint: "/api/print-epos",
-                  pendingMessage: "Sending Epson ePOS print job...",
-                  failureMessage: "Epson ePOS print failed."
-                });
-              }}
-            >
-              Print via Epson ePOS
-            </button>
-          </div>
-        </form>
-
-        <p className="status" role="status" aria-live="polite" data-state={statusState}>
-          {status}
+       { q2 && 
+      <section className="panel hero">
+        <h1>The AI Developer Oracle</h1>
+        <p className="lede">
+         What kind of AI engineer are you? What does the future hold for your projects? 
+         Answer five questions and let the Oracle reveal your fortune.
         </p>
       </section>
+      }
+
+       { q3 && 
+      <section className="panel hero">
+        <h1>The AI Developer Oracle</h1>
+        <p className="lede">
+         What kind of AI engineer are you? What does the future hold for your projects? 
+         Answer five questions and let the Oracle reveal your fortune.
+        </p>
+      </section>
+      }
+
+       { q4 && 
+      <section className="panel hero">
+        <h1>The AI Developer Oracle</h1>
+        <p className="lede">
+         What kind of AI engineer are you? What does the future hold for your projects? 
+         Answer five questions and let the Oracle reveal your fortune.
+        </p>
+      </section>
+      }
+
+       { q5 && 
+      <section className="panel hero">
+        <h1>The AI Developer Oracle</h1>
+        <p className="lede">
+         What kind of AI engineer are you? What does the future hold for your projects? 
+         Answer five questions and let the Oracle reveal your fortune.
+        </p>
+      </section>
+      }
+
+    { result && 
+        <section className="panel form-panel">
+          <form
+            className="stack"
+            onSubmit={(event) => {
+              event.preventDefault();
+              runPrinterRequest({
+                endpoint: "/api/print-sample",
+                pendingMessage: "Sending sample receipt...",
+                failureMessage: "Printing failed."
+              });
+            }}
+          >
+          <div className="actions">
+                <button
+                  type="button"
+                  disabled={busy}
+                  onClick={() => {
+                    runPrinterRequest({
+                      endpoint: "/api/test-connection",
+                      pendingMessage: "Testing printer connection...",
+                      failureMessage: "Connection test failed."
+                    });
+                  }}
+                >
+                  Test connection
+                </button>
+                <button
+                  type="button"
+                  disabled={busy}
+                  onClick={() => {
+                    runPrinterRequest({
+                      endpoint: "/api/print-epos",
+                      pendingMessage: "Sending Epson ePOS print job...",
+                      failureMessage: "Epson ePOS print failed."
+                    });
+                  }}
+                >
+                  Print via Epson ePOS
+                </button>
+            </div>
+          </form>
+
+          <p className="status" role="status" aria-live="polite" data-state={statusState}>
+            {status}
+          </p>
+        </section>
+        }
     </main>
   );
 }
