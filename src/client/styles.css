@@ -1,6 +1,4 @@
 
-@use "@progress/kendo-theme-default/scss/all.scss" as *;
-
 :root {
   color-scheme: light;
   --bg: #f2eadf;

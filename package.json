@@ -16,6 +16,7 @@
   "dependencies": {
     "@progress/kendo-react-progressbars": "^16.0.0",
     "@progress/kendo-theme-default": "^14.5.0",
+    "firebase": "^12.18.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8"
   },

@@ -4,11 +4,12 @@ import net from "node:net";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { buildSampleReceipt } from "./receipt.js";
+import { buildFortune } from "./fortune.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const publicDir = path.join(__dirname, "..", "dist");
-const defaultPrinterHost = "192.168.1.121";
+const defaultPrinterHost = "192.168.1.123";
 const defaultPrinterPort = 9100;
 const defaultEposDeviceId = "local_printer";
 const defaultEposTimeout = Number.parseInt(process.env.EPOS_TIMEOUT ?? "60000", 10);
@@ -113,7 +114,7 @@ const server = http.createServer(async (req, res) => {
           host: printerHost,
           deviceId,
           timeout,
-          receiptXml: buildSampleReceiptEposXml()
+          receiptXml: await buildReceiptEposXml(body?.answers)
         });
 
         sendJson(res, 200, {
@@ -356,35 +357,47 @@ function wrapEposEnvelope(receiptXml) {
   ].join("");
 }
 
-function buildSampleReceiptEposXml() {
+function renderBar(score) {
+  const clamped = Math.max(0, Math.min(100, score));
+  const filled = Math.round((clamped / 100) * 12);
+  return `${"▓".repeat(filled)}${"░".repeat(12 - filled)} ${clamped}`;
+}
+
+function escapeXml(value) {
+  return `${value}`
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+async function buildReceiptEposXml(answers) {
+  const fortune = await buildFortune(answers ?? {});
+  const fortuneLines = fortune.fortuneLines
+    .map((line) => `<text align="center">${escapeXml(line)}&#10;</text>`)
+    .join("");
+
   return [
     '<text align="center" smooth="true" width="2" height="2">* THE AI ORACLE SPEAKS *&#10;</text>',
     '<text align="center" font="font_b">+----------------------+&#10;</text>',
     '<text align="center">| YOUR AI DEV ARCHTYPE |&#10;</text>',
     '<text align="center">+----------------------+&#10;</text>', 
     '<text align="center">You are: &#10;</text>',
-    '<text align="center">THE PRODUCTION GUARDIAN&#10;</text>',
+    `<text align="center">${escapeXml(fortune.archetypeName)}&#10;</text>`,
         '<feed line="1"/>',
-    '<text align="left">AUTOMATION:  ▓▓▓▓▓░░░░░░░ 25&#10;</text>',
+    `<text align="left">AI AUTOMATION:  ${renderBar(fortune.automation)}&#10;</text>`,
         '<feed line="1"/>',
-    '<text align="left">AI TRUST:    ▓▓▓░░░░░░░░░ 10&#10;</text>',
+    `<text align="left">AI TRUST:       ${renderBar(fortune.aiTrust)}&#10;</text>`,
         '<feed line="1"/>',
-    '<text align="left">ROI CLARITY: ▓▓▓▓▓▓▓▓▓░░░ 75&#10;</text>',
+    `<text align="left">AI ROI CLARITY: ${renderBar(fortune.roiClarity)}&#10;</text>`,
     '<text align="center">+----------------------+&#10;</text>',  
     '<text align="center">|     YOUR FORTUNE     |&#10;</text>',
     '<text align="center">+----------------------+&#10;</text>',   
-    '<text align="center">A tireless agent will soon&#10;</text>',
-    '<text align="center">resolve a problem that has&#10;</text>',
-    '<text align="center">haunted your backlog.&#10;</text>',
-    '<text align="center"> &#10;</text>',
-    '<text align="center">Before celebrating, make&#10;</text>',
-    '<text align="center">sure it solved the problem&#10;</text>',
-    '<text align="center">you actually had.&#10;</text>',
+    fortuneLines,
     '<feed line="1"/>',
     '<text align="center">+----------------------+&#10;</text>',
     '<text align="center">|     LUCKY COMMAND    |&#10;</text>',
     '<text align="center">+----------------------+&#10;</text>',
-    '<text align="center">     git diff --stat    &#10;</text>',
+    `<text align="center">${escapeXml(fortune.luckyCommand)}&#10;</text>`,
     '<feed line="1"/>',
     '<text align="center">+----------------------+&#10;</text>',
     '<text align="center">|   PROGRESS SOFTWARE  |&#10;</text>',

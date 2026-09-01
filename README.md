@@ -11,7 +11,7 @@ This project is a small Node.js web app that prints a sample receipt to an Epson
 
 This project is currently locked to:
 
-- Printer IP: `192.168.1.121`
+- Printer IP: `192.168.1.123`
 - Printer port: `9100`
 - ePOS device ID: `local_printer`
 
