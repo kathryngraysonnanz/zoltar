@@ -301,7 +301,7 @@ export default function App() {
                   themeColor="primary"
                   disabled={busy}
                 >
-                  {busy ? <Loader size="small" type="pulsing" /> : "Print My Fortune"}
+                  {busy ? <Loader size="small" type="pulsing" /> : "Reveal My Fortune"}
                 </Button>
             </div>
           </form>
