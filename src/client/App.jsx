@@ -280,7 +280,7 @@ export default function App() {
           <h1>Your Fortune Awaits</h1>
           <p className="lede">
            The Oracle has weighed your answers and divined your AI developer archetype. 
-           Press the button below to print your personalized fortune receipt.
+           Press the button below to print your personalized fortune.
           </p>
           <form
             className="stack"
@@ -301,7 +301,7 @@ export default function App() {
                   themeColor="primary"
                   disabled={busy}
                 >
-                  {busy ? <Loader size="small" type="pulsing" /> : "Reveal My Fortune"}
+                  {busy ? <Loader size="small" type="pulsing" /> : "Reveal My Future"}
                 </Button>
             </div>
           </form>
