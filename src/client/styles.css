@@ -1,14 +1,19 @@
 
 :root {
-  color-scheme: light;
-  --bg: #f2eadf;
-  --panel: rgba(255, 250, 243, 0.86);
-  --ink: #1e1b18;
-  --muted: #685f57;
-  --accent: #c05a2b;
-  --accent-dark: #8f3f1c;
-  --line: rgba(30, 27, 24, 0.12);
-  --shadow: 0 24px 60px rgba(63, 36, 17, 0.12);
+  color-scheme: dark;
+  --bg: #170406;
+  --panel: rgba(43, 10, 16, 0.88);
+  --panel-inset: rgba(74, 20, 26, 0.55);
+  --ink: #f7e9c9;
+  --muted: #d9b98f;
+  --gold: #e9c46a;
+  --gold-bright: #f7dd8f;
+  --gold-dark: #a9791f;
+  --accent: #b3232f;
+  --accent-dark: #7c1520;
+  --line: rgba(233, 196, 106, 0.35);
+  --shadow: 0 30px 70px rgba(0, 0, 0, 0.55);
+  --glow: 0 0 18px rgba(233, 196, 106, 0.35);
 }
 
 * {
@@ -22,151 +27,222 @@
 body {
   margin: 0;
   min-height: 100vh;
-  font-family: "Avenir Next", "Segoe UI", sans-serif;
+  font-family: "Alegreya", "Segoe UI", serif;
+  font-size: 21px;
   color: var(--ink);
   background:
-    radial-gradient(circle at top left, rgba(192, 90, 43, 0.22), transparent 28%),
-    radial-gradient(circle at bottom right, rgba(111, 140, 103, 0.18), transparent 30%),
-    linear-gradient(160deg, #f7f2eb 0%, var(--bg) 100%);
+    radial-gradient(ellipse at top, rgba(179, 35, 47, 0.35), transparent 55%),
+    radial-gradient(circle at bottom right, rgba(233, 196, 106, 0.12), transparent 45%),
+    linear-gradient(180deg, #0e0203 0%, var(--bg) 55%, #0a0102 100%);
 }
 
 .shell {
-  width: min(960px, calc(100vw - 32px));
+  width: min(1040px, calc(100vw - 32px));
   margin: 0 auto;
-  padding: 48px 0;
+  padding: 56px 0;
   display: grid;
-  gap: 20px;
+  gap: 28px;
 }
 
 .panel {
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: 28px;
-  box-shadow: var(--shadow);
-  backdrop-filter: blur(18px);
+  position: relative;
 }
 
 .hero {
-  padding: 40px;
+  padding: 48px;
 }
 
 .eyebrow {
   margin: 0 0 12px;
   text-transform: uppercase;
-  letter-spacing: 0.2em;
-  font-size: 0.76rem;
-  color: var(--accent-dark);
+  letter-spacing: 0.28em;
+  font-size: 1rem;
+  color: var(--gold);
 }
 
 h1 {
   margin: 0;
-  max-width: 12ch;
-  font-family: Georgia, serif;
-  font-size: clamp(2.5rem, 6vw, 4.8rem);
-  line-height: 0.95;
+  max-width: 14ch;
+  font-family: "Cinzel Decorative", "Cinzel", Georgia, serif;
+  font-weight: 900;
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  line-height: 1.05;
+  color: var(--gold-bright);
+  text-shadow: var(--glow), 0 4px 0 rgba(0, 0, 0, 0.5);
+  letter-spacing: 0.02em;
 }
 
-.lede {
-  max-width: 56ch;
-  margin: 18px 0 0;
-  color: var(--muted);
-  font-size: 1.05rem;
-  line-height: 1.6;
+.lede,
+.hero p {
+  max-width: 60ch;
+  margin: 22px 0 32px;
+  color: var(--ink);
+  font-size: clamp(1.3rem, 1.8vw, 1.55rem);
+  line-height: 1.7;
 }
 
 .form-panel {
-  padding: 28px;
+  padding: 32px;
 }
 
 .stack {
   display: grid;
-  gap: 16px;
-}
-
-.target {
-  margin: 0;
-  padding: 12px 14px;
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.62);
-  color: var(--muted);
+  gap: 18px;
 }
 
 .actions {
   display: flex;
-  gap: 12px;
+  gap: 16px;
   flex-wrap: wrap;
 }
 
-label {
-  display: grid;
-  gap: 8px;
+.restart-actions {
+  margin-top: 16px;
 }
 
-label span {
-  font-size: 0.92rem;
-  color: var(--muted);
+/* Kendo Card is now just an unstyled layout wrapper */
+.k-card {
+  background: transparent;
+  border: none;
+  color: inherit;
+  border-radius: inherit;
 }
 
-input,
-button {
-  width: 100%;
+.k-card-body {
+  padding: 0;
+}
+
+/* Kendo Button overrides: bigger touch targets, Zoltar gold-on-maroon styling */
+.k-button {
+  min-height: 64px;
+  padding: 18px 22px;
   border-radius: 16px;
-  border: 1px solid var(--line);
+  border: 2px solid var(--gold-dark);
   font: inherit;
-}
-
-input {
-  padding: 14px 16px;
-  background: rgba(255, 255, 255, 0.78);
-}
-
-button {
-  padding: 16px 18px;
-  background: linear-gradient(135deg, var(--accent) 0%, #d48a41 100%);
-  color: white;
+  font-size: 1.25rem;
   font-weight: 700;
-  cursor: pointer;
-  transition: transform 160ms ease, box-shadow 160ms ease;
-  box-shadow: 0 16px 28px rgba(192, 90, 43, 0.22);
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  background: linear-gradient(160deg, var(--accent) 0%, var(--accent-dark) 100%);
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.4);
+  transition: filter 120ms ease;
 }
 
-button:hover {
-  transform: translateY(-1px);
+.k-button:focus-visible {
+  outline: 3px solid var(--gold-bright);
+  outline-offset: 3px;
 }
 
-button:disabled {
+.k-button:active,
+.k-button.k-focus,
+.k-button:focus {
+  color: var(--gold-bright);
+}
+
+.k-button:disabled {
   cursor: wait;
   opacity: 0.72;
-  transform: none;
 }
 
-.actions button {
-  flex: 1 1 12rem;
+.primary-action.k-button {
+  background: linear-gradient(160deg, var(--gold) 0%, var(--gold-dark) 100%);
+  color: #2a1204;
+  border-color: var(--gold-bright);
 }
 
-.status {
-  min-height: 1.5rem;
-  margin: 16px 2px 0;
-  color: var(--muted);
+.primary-action.k-button:active,
+.primary-action.k-button.k-focus,
+.primary-action.k-button:focus {
+  color: #140800;
 }
 
-.status[data-state="error"] {
-  color: #8f241f;
+.intro-cta.k-button {
+  width: 100%;
+  min-height: 92px;
+  padding: 26px 48px;
+  font-size: 1.7rem;
+  border-radius: 20px;
+  margin-top: 12px;
 }
 
-.status[data-state="success"] {
-  color: #245b31;
+.print-cta.k-button {
+  width: 100%;
+  min-height: 92px;
+  padding: 26px 48px;
+  font-size: 1.7rem;
+  border-radius: 20px;
+}
+
+.restart-cta.k-button {
+  width: 100%;
+  background: transparent;
+  box-shadow: none;
+}
+
+.response.k-button {
+  width: 100%;
+  text-align: left;
+  justify-content: flex-start;
+  white-space: normal;
+}
+
+.response.k-button + .response.k-button {
+  margin-top: 16px;
+}
+
+.actions .k-button {
+  flex: 1 1 14rem;
+}
+
+/* Kendo ProgressBar recolor */
+.k-progressbar {
+  height: 16px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--line);
+}
+
+.k-progressbar .k-selected {
+  background: linear-gradient(90deg, var(--gold-dark), var(--gold-bright));
+}
+
+/* Kendo Loader recolor */
+.k-loader .k-loader-segment {
+  background-color: var(--ink);
+}
+
+.status-group {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  max-width: 320px;
+  z-index: 20;
+}
+
+.k-notification {
+  font-size: 0.9rem;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border-width: 1px;
+  opacity: 0.92;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+.k-notification-error {
+  background: rgba(43, 10, 16, 0.9);
+  border-color: #e0616c;
+  color: #f3c3c8;
 }
 
 @media (max-width: 640px) {
   .shell {
     width: min(100vw - 20px, 960px);
-    padding: 20px 0;
+    padding: 24px 0;
   }
 
   .hero,
   .form-panel {
-    padding: 22px;
+    padding: 24px;
   }
 }
+

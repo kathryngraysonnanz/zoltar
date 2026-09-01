@@ -14,6 +14,10 @@
     "node": ">=18"
   },
   "dependencies": {
+    "@progress/kendo-react-buttons": "^16.0.0",
+    "@progress/kendo-react-indicators": "^16.0.0",
+    "@progress/kendo-react-layout": "^16.0.0",
+    "@progress/kendo-react-notification": "^16.0.0",
     "@progress/kendo-react-progressbars": "^16.0.0",
     "@progress/kendo-theme-default": "^14.5.0",
     "firebase": "^12.18.0",

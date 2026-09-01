@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
 import { ProgressBar } from '@progress/kendo-react-progressbars';
+import { Button } from '@progress/kendo-react-buttons';
+import { Card, CardBody } from '@progress/kendo-react-layout';
+import { Notification, NotificationGroup } from '@progress/kendo-react-notification';
+import { Loader } from '@progress/kendo-react-indicators';
 import { addDoc, collection } from "firebase/firestore";
 import { db, firebaseEnabled } from "./firebase.js";
 
@@ -156,143 +160,172 @@ export default function App() {
     }
   }
 
+  function restartQuiz() {
+    setIntro(true);
+    setQ1(false);
+    setQ2(false);
+    setQ3(false);
+    setQ4(false);
+    setQ5(false);
+    setResult(false);
+    setAnswers({});
+    setStatus("");
+    setStatusState("idle");
+  }
+
   return (
     <main className="shell">
 
       { intro && 
-      <section className="panel hero">
-        <h1>The AI Developer Oracle</h1>
-        <p className="lede">
-         What kind of AI engineer are you? What does the future hold for your projects? 
-         Answer five questions and let the Oracle reveal your fortune.
-        </p>
-        <button onClick={() => setIntro(false) || setQ1(true)}>Discover Your Future</button>
-      </section>
+      <Card className="panel hero">
+        <CardBody>
+          <h1>The AI Developer Oracle</h1>
+          <p className="lede">
+           What kind of AI engineer are you? What does the future hold for your projects? 
+           Answer five questions and let the Oracle reveal your fortune.
+          </p>
+          <Button className="primary-action intro-cta" themeColor="primary" size="large" onClick={() => setIntro(false) || setQ1(true)}>Discover Your Future</Button>
+        </CardBody>
+      </Card>
       }
 
        { q1 && 
-        <section className="panel hero">
-          <h1>Question 1</h1>
-          <ProgressBar value={20} />
-          <p>
-          What best describes your current use of AI? 
-          </p>
-          <button className='response' onClick={() => logResult('a', 'q1')}>AI is essential to how I work</button>
-          <button className='response' onClick={() => logResult('b', 'q1')}>AI saves significant time but I could work without it</button>
-          <button className='response' onClick={() => logResult('c', 'q1')}>AI helps occasionally for specific tasks</button>
-          <button className='response' onClick={() => logResult('d', 'q1')}>I play around with AI sometimes, but don't use it for real work</button>
-          <button className='response' onClick={() => logResult('e', 'q1')}>I don't use AI</button>
-        </section>
+        <Card className="panel hero">
+          <CardBody>
+            <h1>Question 1</h1>
+            <ProgressBar value={20} />
+            <p>
+            What best describes your current use of AI? 
+            </p>
+            <Button className="response" onClick={() => logResult('a', 'q1')}>AI is essential to how I work</Button>
+            <Button className="response" onClick={() => logResult('b', 'q1')}>AI saves significant time but I could work without it</Button>
+            <Button className="response" onClick={() => logResult('c', 'q1')}>AI helps occasionally for specific tasks</Button>
+            <Button className="response" onClick={() => logResult('d', 'q1')}>I play around with AI sometimes, but don't use it for real work</Button>
+            <Button className="response" onClick={() => logResult('e', 'q1')}>I don't use AI</Button>
+          </CardBody>
+        </Card>
       }
 
        { q2 && 
-      <section className="panel hero">
-          <h1>Question 2</h1>
-          <ProgressBar value={40} />
-          <p>
-          When handling AI-generated output, how often do you verify the response yourself?
-          </p>
-          <button className='response' onClick={() => logResult('a', 'q2')}>Every time</button>
-          <button className='response' onClick={() => logResult('b', 'q2')}>Most of the time</button>
-          <button className='response' onClick={() => logResult('c', 'q2')}>About half the time</button>
-          <button className='response' onClick={() => logResult('d', 'q2')}>Rarely</button>
-          <button className='response' onClick={() => logResult('e', 'q2')}>Never</button>
-        </section>
+      <Card className="panel hero">
+          <CardBody>
+            <h1>Question 2</h1>
+            <ProgressBar value={40} />
+            <p>
+            When handling AI-generated output, how often do you verify the response yourself?
+            </p>
+            <Button className="response" onClick={() => logResult('a', 'q2')}>Every time</Button>
+            <Button className="response" onClick={() => logResult('b', 'q2')}>Most of the time</Button>
+            <Button className="response" onClick={() => logResult('c', 'q2')}>About half the time</Button>
+            <Button className="response" onClick={() => logResult('d', 'q2')}>Rarely</Button>
+            <Button className="response" onClick={() => logResult('e', 'q2')}>Never</Button>
+          </CardBody>
+      </Card>
       }
 
        { q3 && 
-      <section className="panel hero">
-          <h1>Question 3</h1>
-          <ProgressBar value={60} />
-          <p>
-          What's your biggest concern about AI governance? 
-          </p>
-          <button className='response' onClick={() => logResult('a', 'q3')}>Allowing AI to handle sensitive or proprietary data</button>
-          <button className='response' onClick={() => logResult('b', 'q3')}>Lack of visibility into how AI outputs are generated</button>
-          <button className='response' onClick={() => logResult('c', 'q3')}>Complying with legal or regulatory requirements</button>
-          <button className='response' onClick={() => logResult('d', 'q3')}>Inconsistent quality or accuracy of AI outputs</button>
-          <button className='response' onClick={() => logResult('e', 'q3')}>I'm not worried about it!</button>
-        </section>
+      <Card className="panel hero">
+          <CardBody>
+            <h1>Question 3</h1>
+            <ProgressBar value={60} />
+            <p>
+            What's your biggest concern about AI governance? 
+            </p>
+            <Button className="response" onClick={() => logResult('a', 'q3')}>Allowing AI to handle sensitive or proprietary data</Button>
+            <Button className="response" onClick={() => logResult('b', 'q3')}>Lack of visibility into how AI outputs are generated</Button>
+            <Button className="response" onClick={() => logResult('c', 'q3')}>Complying with legal or regulatory requirements</Button>
+            <Button className="response" onClick={() => logResult('d', 'q3')}>Inconsistent quality or accuracy of AI outputs</Button>
+            <Button className="response" onClick={() => logResult('e', 'q3')}>I'm not worried about it!</Button>
+          </CardBody>
+      </Card>
       }
 
        { q4 && 
-     <section className="panel hero">
-          <h1>Question 4</h1>
-          <ProgressBar value={80} />
-          <p>
-          What's your most common next step after receiving AI-generated output?
-          </p>
-          <button className='response' onClick={() => logResult('a', 'q4')}>I accept it with little or no modification</button>
-          <button className='response' onClick={() => logResult('b', 'q4')}>I lightly edit it before using it</button>
-          <button className='response' onClick={() => logResult('c', 'q4')}>I substantially rewrite it</button>
-          <button className='response' onClick={() => logResult('d', 'q4')}>I use it for ideas, but discard the direct output</button>
-          <button className='response' onClick={() => logResult('e', 'q4')}>I frequently throw it out and start over (or just do it myself)</button>
-        </section>
+     <Card className="panel hero">
+          <CardBody>
+            <h1>Question 4</h1>
+            <ProgressBar value={80} />
+            <p>
+            What's your most common next step after receiving AI-generated output?
+            </p>
+            <Button className="response" onClick={() => logResult('a', 'q4')}>I accept it with little or no modification</Button>
+            <Button className="response" onClick={() => logResult('b', 'q4')}>I lightly edit it before using it</Button>
+            <Button className="response" onClick={() => logResult('c', 'q4')}>I substantially rewrite it</Button>
+            <Button className="response" onClick={() => logResult('d', 'q4')}>I use it for ideas, but discard the direct output</Button>
+            <Button className="response" onClick={() => logResult('e', 'q4')}>I frequently throw it out and start over (or just do it myself)</Button>
+          </CardBody>
+     </Card>
       }
 
        { q5 && 
-     <section className="panel hero">
-          <h1>Question 5</h1>
-          <ProgressBar value={100} />
-          <p>
-          Where does AI deliver the most actual value for you today? 
-          </p>
-          <button className='response' onClick={() => logResult('a', 'q5')}>Reducing time spent on routine tasks</button>
-          <button className='response' onClick={() => logResult('b', 'q5')}>Improving code or work quality</button>
-          <button className='response' onClick={() => logResult('c', 'q5')}>Accelerating learning, research, or onboarding</button>
-          <button className='response' onClick={() => logResult('d', 'q5')}>Helping teams make decisions faster</button>
-          <button className='response' onClick={() => logResult('e', 'q5')}>None of the above: AI has no measurable value</button>
-        </section>
+     <Card className="panel hero">
+          <CardBody>
+            <h1>Question 5</h1>
+            <ProgressBar value={100} />
+            <p>
+            Where does AI deliver the most actual value for you today? 
+            </p>
+            <Button className="response" onClick={() => logResult('a', 'q5')}>Reducing time spent on routine tasks</Button>
+            <Button className="response" onClick={() => logResult('b', 'q5')}>Improving code or work quality</Button>
+            <Button className="response" onClick={() => logResult('c', 'q5')}>Accelerating learning, research, or onboarding</Button>
+            <Button className="response" onClick={() => logResult('d', 'q5')}>Helping teams make decisions faster</Button>
+            <Button className="response" onClick={() => logResult('e', 'q5')}>None of the above: AI has no measurable value</Button>
+          </CardBody>
+     </Card>
       }
 
     { result && 
-        <section className="panel form-panel">
+        <Card className="panel hero">
+          <CardBody>
+          <h1>Your Fortune Awaits</h1>
+          <p className="lede">
+           The Oracle has weighed your answers and divined your AI developer archetype. 
+           Press the button below to print your personalized fortune receipt.
+          </p>
           <form
             className="stack"
             onSubmit={(event) => {
               event.preventDefault();
               runPrinterRequest({
-                endpoint: "/api/print-sample",
-                pendingMessage: "Sending sample receipt...",
-                failureMessage: "Printing failed."
+                endpoint: "/api/print-epos",
+                pendingMessage: "Sending Epson ePOS print job...",
+                failureMessage: "Epson ePOS print failed.",
+                extraData: { answers }
               });
             }}
           >
           <div className="actions">
-                <button
-                  type="button"
+                <Button
+                  type="submit"
+                  className="primary-action print-cta"
+                  themeColor="primary"
                   disabled={busy}
-                  onClick={() => {
-                    runPrinterRequest({
-                      endpoint: "/api/test-connection",
-                      pendingMessage: "Testing printer connection...",
-                      failureMessage: "Connection test failed."
-                    });
-                  }}
                 >
-                  Test connection
-                </button>
-                <button
-                  type="button"
-                  disabled={busy}
-                  onClick={() => {
-                    runPrinterRequest({
-                      endpoint: "/api/print-epos",
-                      pendingMessage: "Sending Epson ePOS print job...",
-                      failureMessage: "Epson ePOS print failed.",
-                      extraData: { answers }
-                    });
-                  }}
-                >
-                  Print via Epson ePOS
-                </button>
+                  {busy ? <Loader size="small" type="pulsing" /> : "Print My Fortune"}
+                </Button>
             </div>
           </form>
 
-          <p className="status" role="status" aria-live="polite" data-state={statusState}>
-            {status}
-          </p>
-        </section>
+          <div className="actions restart-actions">
+                <Button
+                  type="button"
+                  className="restart-cta"
+                  disabled={busy}
+                  onClick={restartQuiz}
+                >
+                  Start Over
+                </Button>
+          </div>
+
+          <NotificationGroup className="status-group" style={{ position: "fixed", right: 20, bottom: 20 }}>
+            {statusState === "error" && status && (
+              <Notification type={{ style: "error", icon: true }} closable={false}>
+                <span>{status}</span>
+              </Notification>
+            )}
+          </NotificationGroup>
+          </CardBody>
+        </Card>
         }
     </main>
   );
