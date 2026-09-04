@@ -3,7 +3,6 @@ import http from "node:http";
 import net from "node:net";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { buildSampleReceipt } from "./receipt.js";
 import { buildFortune } from "./fortune.js";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -384,11 +383,11 @@ async function buildReceiptEposXml(answers) {
     '<text align="center">You are: &#10;</text>',
     `<text align="center">${escapeXml(fortune.archetypeName)}&#10;</text>`,
         '<feed line="1"/>',
-    `<text align="left">AI AUTOMATION:  ${renderBar(fortune.automation)}&#10;</text>`,
+    `<text align="left">AUTOMATION:${renderBar(fortune.automation)}&#10;</text>`,
         '<feed line="1"/>',
-    `<text align="left">AI TRUST:       ${renderBar(fortune.aiTrust)}&#10;</text>`,
+    `<text align="left">TRUST:     ${renderBar(fortune.aiTrust)}&#10;</text>`,
         '<feed line="1"/>',
-    `<text align="left">AI ROI CLARITY: ${renderBar(fortune.roiClarity)}&#10;</text>`,
+    `<text align="left">ROI CLARITY:${renderBar(fortune.roiClarity)}&#10;</text>`,
     '<text align="center">+----------------------+&#10;</text>',  
     '<text align="center">|     YOUR FORTUNE     |&#10;</text>',
     '<text align="center">+----------------------+&#10;</text>',   

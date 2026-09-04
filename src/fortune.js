@@ -14,25 +14,25 @@ const ARCHETYPE_TIERS = [
   {
     minScore: 60,
     name: "THE PRODUCTION GUARDIAN",
-    fortune: ["An agent stirs soon", "and fixes an old backlog bug."],
+    fortune: ["An agent stirs soon", "fixing a backlog bug."],
     luckyCommand: "git diff --stat"
   },
   {
     minScore: 40,
     name: "THE PRAGMATIC HYBRID",
-    fortune: ["A black box cracks open", "revealing reasoning you missed."],
+    fortune: ["A black box cracks open", "revealing new information."],
     luckyCommand: "git blame --line-porcelain"
   },
   {
     minScore: 20,
     name: "THE QUALITY INQUISITOR",
-    fortune: ["Before celebrating, check", "it solved your actual problem."],
+    fortune: ["Before celebrating, check it", "solved your actual problem."],
     luckyCommand: "npm test -- --watch"
   },
   {
     minScore: -Infinity,
     name: "THE ANALOG PURIST",
-    fortune: ["A shortcut will tempt you", "to hand off work it shouldn't do."],
+    fortune: ["A shortcut may tempt you", "to hand off work you shouldn't."],
     luckyCommand: "chmod 600 secrets.env"
   }
 ];
@@ -41,7 +41,7 @@ const GOVERNANCE_FLAVOR = {
   a: "Guard your data closely.",
   b: "Demand to see the logic.",
   c: "Compliance rewards patience.",
-  d: "Trust, then check.",
+  d: "Trust, but verify.",
   e: "Worry less; back up more."
 };
 
@@ -71,8 +71,8 @@ function buildBaseFortune(answers) {
   };
 }
 
-const AI_TIMEOUT_MS = 6000;
-const MAX_LINE_LENGTH = 32;
+const AI_TIMEOUT_MS = 15000;
+const MAX_LINE_LENGTH = 28;
 const MAX_ARCHETYPE_LENGTH = 24;
 
 // Fast local backstop in case the moderation call fails or is slow; the moderation

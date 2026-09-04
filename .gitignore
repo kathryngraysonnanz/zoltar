@@ -24,6 +24,9 @@ dist-ssr
 *.sln
 *.sw?
 
+.env
+.env.local
+
 .nia/work/*
 
 telerik-license.txt
