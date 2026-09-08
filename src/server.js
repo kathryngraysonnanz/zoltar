@@ -162,7 +162,7 @@ async function readJsonBody(req) {
 }
 
 async function sendStaticFile(res, pathname) {
-  const normalizedPath = pathname === "/" ? "/index.html" : pathname;
+  const normalizedPath = pathname === "/" || pathname === "/admin" ? "/index.html" : pathname;
   const requestedPath = path.normalize(normalizedPath).replace(/^([.][.][\/\\])+/, "");
   const filePath = path.join(publicDir, requestedPath);
 
@@ -360,6 +360,24 @@ function renderBar(score) {
   const clamped = Math.max(0, Math.min(100, score));
   const filled = Math.round((clamped / 100) * 12);
   return `${"▓".repeat(filled)}${"░".repeat(12 - filled)} ${clamped}`;
+}
+
+function buildSampleReceipt() {
+  const ESC = "\x1B";
+  const GS = "\x1D";
+
+  return Buffer.from(
+    [
+      `${ESC}@`, // initialize printer
+      `${ESC}a\x01`, // center align
+      "TEST PRINT\n",
+      "Epson TM-m30III connection check\n",
+      `${new Date().toISOString()}\n`,
+      "\n\n\n",
+      `${GS}V\x42\x00` // full cut
+    ].join(""),
+    "binary"
+  );
 }
 
 function escapeXml(value) {

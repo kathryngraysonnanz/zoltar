@@ -234,6 +234,30 @@ h1 {
   color: #f3c3c8;
 }
 
+.status-error {
+  color: #f3c3c8;
+}
+
+.status-success {
+  color: var(--gold-bright);
+}
+
+dl {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 6px 16px;
+  text-align: left;
+}
+
+dt {
+  color: var(--gold-dark);
+}
+
+dd {
+  margin: 0;
+  word-break: break-word;
+}
+
 @media (max-width: 640px) {
   .shell {
     width: min(100vw - 20px, 960px);
