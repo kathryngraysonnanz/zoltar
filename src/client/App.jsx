@@ -9,6 +9,7 @@ import { db, firebaseEnabled } from "./firebase.js";
 
 
 const STORAGE_KEY = "epson-epos-timeout";
+const staticDeployment = import.meta.env.VITE_STATIC_DEPLOYMENT === "true";
 
 export default function App() {
   const [timeout, setTimeoutValue] = useState("60000");
@@ -29,6 +30,10 @@ export default function App() {
 
       if (savedTimeout) {
         setTimeoutValue(savedTimeout);
+      }
+
+      if (staticDeployment) {
+        return;
       }
 
       try {
@@ -299,9 +304,9 @@ export default function App() {
                   type="submit"
                   className="primary-action print-cta"
                   themeColor="primary"
-                  disabled={busy}
+                  disabled={staticDeployment || busy}
                 >
-                  {busy ? <Loader size="small" type="pulsing" /> : "Reveal My Future"}
+                  {busy ? <Loader size="small" type="pulsing" /> : staticDeployment ? "Run Locally to Print" : "Reveal My Future"}
                 </Button>
             </div>
           </form>

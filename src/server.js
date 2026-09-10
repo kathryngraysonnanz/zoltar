@@ -3,15 +3,18 @@ import http from "node:http";
 import net from "node:net";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { SerialPort } from "serialport";
 import { buildFortune } from "./fortune.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const publicDir = path.join(__dirname, "..", "dist");
-const defaultPrinterHost = process.env.PRINTER_HOST ?? "192.168.1.123";
+const defaultPrinterHost = process.env.PRINTER_HOST ?? "192.168.72.222";
 const defaultPrinterPort = Number.parseInt(process.env.PRINTER_PORT ?? "9100", 10);
 const defaultEposDeviceId = process.env.EPOS_DEVICE_ID ?? "local_printer";
 const defaultEposTimeout = Number.parseInt(process.env.EPOS_TIMEOUT ?? "60000", 10);
+const bluetoothDevice = process.env.BLUETOOTH_DEVICE ?? "";
+const bluetoothBaudRate = Number.parseInt(process.env.BLUETOOTH_BAUD_RATE ?? "115200", 10);
 const sampleReceiptQrUrl = "https://www.telerik.com/devcraft";
 const port = Number.parseInt(process.env.PORT ?? "3000", 10);
 
@@ -25,7 +28,9 @@ const server = http.createServer(async (req, res) => {
         defaultPrinterHost,
         defaultPrinterPort,
         defaultEposDeviceId,
-        defaultEposTimeout
+        defaultEposTimeout,
+        bluetoothDevice,
+        bluetoothBaudRate
       });
       return;
     }
@@ -81,6 +86,37 @@ const server = http.createServer(async (req, res) => {
       } catch (error) {
         sendJson(res, 502, {
           error: error instanceof Error ? error.message : "Unable to reach printer."
+        });
+      }
+
+      return;
+    }
+
+    if (req.method === "POST" && url.pathname === "/api/print-bluetooth") {
+      if (!bluetoothDevice) {
+        sendJson(res, 400, { error: "Bluetooth device is not configured. Set BLUETOOTH_DEVICE in .env." });
+        return;
+      }
+
+      if (!Number.isInteger(bluetoothBaudRate) || bluetoothBaudRate <= 0) {
+        sendJson(res, 400, { error: "Bluetooth baud rate must be a positive integer." });
+        return;
+      }
+
+      try {
+        await printToBluetooth({
+          device: bluetoothDevice,
+          baudRate: bluetoothBaudRate,
+          payload: buildSampleReceipt()
+        });
+
+        sendJson(res, 200, {
+          ok: true,
+          message: `Bluetooth sample receipt sent via ${bluetoothDevice}.`
+        });
+      } catch (error) {
+        sendJson(res, 502, {
+          error: error instanceof Error ? error.message : "Unable to reach the Bluetooth printer."
         });
       }
 
@@ -283,6 +319,47 @@ function printToPrinter({ host, port, payload }) {
     });
 
     socket.connect(port, host);
+  });
+}
+
+function printToBluetooth({ device, baudRate, payload }) {
+  return new Promise((resolve, reject) => {
+    const serialPort = new SerialPort({ path: device, baudRate, autoOpen: false });
+    let settled = false;
+
+    const finish = (error) => {
+      if (settled) {
+        return;
+      }
+
+      settled = true;
+      serialPort.close(() => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve();
+        }
+      });
+    };
+
+    serialPort.open((error) => {
+      if (error) {
+        settled = true;
+        reject(error);
+        return;
+      }
+
+      serialPort.write(payload, (writeError) => {
+        if (writeError) {
+          finish(writeError);
+          return;
+        }
+
+        serialPort.drain((drainError) => finish(drainError ?? null));
+      });
+    });
+
+    serialPort.once("error", (error) => finish(error));
   });
 }
 
